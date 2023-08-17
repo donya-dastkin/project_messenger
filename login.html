@@ -3,32 +3,33 @@
 
 <head>
     <title>Login</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="login_style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style_login.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body dir="rtl">
-
-    <section class="form">
-
+    <section class="main">
         <form action="chat.html" method="post">
-
-            <label>موبایل :</label>
-            <input type="tel" name="mobile" id="mobile" placeholder="phone number" required>
-            <br>
-            <label>رمز عبور :</label>
-            <input type="password" name="password" id="password" placeholder="password" required>
-            <br>
-            <input type="checkbox"><label>مرا بخاطر بسپار!</label>
-            <br>
-            <input type="submit" value="ورود">
-            <br>
-            <a href="sinup.html">ثبت نام</a>
+            <div class="input-container">
+                <input class="input" type="tel" name="phone" id="phone" placeholder=" " required />
+                <div class="cut"></div>
+                <label for="phone" class="placeholder">شماره مویل</label>
+            </div>
+            <div class="input-container">
+                <input class="input" type="password" name="password" id="password" placeholder=" " required />
+                <div class="cut cut-short"></div>
+                <label for="password" class="placeholder">رمز عبور</label>
+            </div>
+            <div class="input-checkbox">
+                <input type="checkbox" name="remember" id="remember" />
+                <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
+            </div>
+            <input type="submit" class="submit" value="ورود" />
+            <button class="submit"><a class="sinup" href="sinup.html">ثبت نام</a></button>
         </form>
-
     </section>
-
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
     <title>Login</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="style_login_singup.css" />
+    <link rel="stylesheet" href="./style/style_login_singup.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -13,12 +13,12 @@
     <section class="main">
         <form action="chat.html" method="post">
             <div class="input-container">
-                <input class="input" type="tel" name="phone" id="phone" placeholder=" " required />
+                <input class="input" type="tel" name="phone" id="phone" placeholder=" " autofocus required />
                 <div class="cut"></div>
                 <label for="phone" class="placeholder">شماره مویل</label>
             </div>
             <div class="input-container">
-                <input class="input" type="password" name="password" id="password" placeholder=" " required />
+                <input class="input" type="password" name="password" id="password" autocomplete="new-password" placeholder=" " required />
                 <div class="cut cut-short"></div>
                 <label for="password" class="placeholder">رمز عبور</label>
             </div>
@@ -27,8 +27,8 @@
                 <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
             </div>
             <input type="submit" class="submit" value="ورود" />
-            <div class="singup-container">
-                <a class="singup" href="singup.html">ثبت نام</a>
+            <div class="moving-pages">
+                <a class="pages" href="singup.html">ثبت نام</a>
             </div>
         </form>
     </section>

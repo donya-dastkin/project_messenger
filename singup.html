@@ -2,7 +2,7 @@
 <html lang="fa">
 
 <head>
-    <title>Login</title>
+    <title>Singup</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style_login_singup.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,7 +10,7 @@
 </head>
 
 <body dir="rtl">
-    <section class="main">
+    <section class="main main-singup">
         <form action="chat.html" method="post">
             <div class="input-container">
                 <input class="input" type="tel" name="phone" id="phone" placeholder=" " required />
@@ -22,14 +22,16 @@
                 <div class="cut cut-short"></div>
                 <label for="password" class="placeholder">رمز عبور</label>
             </div>
+            <div class="input-container">
+                <input class="input" type="password" name="repassword" id="repassword" placeholder=" " required />
+                <div class="cut cut-long"></div>
+                <label for="repassword" class="placeholder">تکرار رمز عبور</label>
+            </div>
             <div class="input-checkbox">
                 <input type="checkbox" name="remember" id="remember" />
                 <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
             </div>
-            <input type="submit" class="submit" value="ورود" />
-            <div class="singup-container">
-                <a class="singup" href="singup.html">ثبت نام</a>
-            </div>
+            <input type="submit" class="submit" value="ثبت نام" />
         </form>
     </section>
 </body>

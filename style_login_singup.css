@@ -1,18 +1,22 @@
 body {
-  background-color: #000;
   display: flex;
   justify-content: center;
+  background-color: #000;
 }
 
 .main {
-  width: 320px;
-  height: 420px;
+  width: 270px;
+  height: 370px;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 20px;
   /*! *** */
   box-sizing: border-box;
   background-color: #15172b;
+}
+
+.main-singup{
+  height: 420px;
 }
 
 .main:hover {
@@ -43,7 +47,7 @@ body {
 
 .cut {
   top: -20px;
-  left: 20px;
+  right: 20px;
   width: 76px;
   height: 20px;
   position: absolute;
@@ -56,6 +60,9 @@ body {
 .cut-short {
   width: 60px;
 }
+.cut-long{
+  width: 85px;
+}
 
 /*! *** */
 .input:focus~.cut,
@@ -65,7 +72,7 @@ body {
 
 .placeholder {
   top: 20px;
-  left: 20px;
+  right: 20px;
   color: #65657b;
   /*! *** */
   line-height: 14px;
@@ -109,17 +116,20 @@ body {
   background-color: #06b;
 }
 
-.checkbox {
-  color: #65657b;
-}
-
 .input-checkbox {
-  width: 100%;
   margin-top: 20px;
+  color: #65657b;
   margin-right: 20px;
 }
 
-.sinup {
-  text-decoration: none;
+.singup-container{
+  width: 98%;
+  font-size: 18px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.singup {
   color: #eee;
+  text-decoration: none;
 }

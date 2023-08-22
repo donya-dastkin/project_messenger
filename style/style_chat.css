@@ -1,0 +1,59 @@
+body {
+    margin: 1px;
+    padding: 2px;
+    color: #B3B6BF;
+    background-color: #0F0E13;
+}
+
+.main {
+    margin: 0px;
+    padding: 3px;
+    border: 3px #17161f solid;
+    background-color: #0F0E13;
+}
+
+.messenger__sidebar {
+    width: 30%;
+    border: 1px #17161f solid;
+    border-radius: 0px 10px 0px 0px;
+    background-color: #0F0E13;
+}
+
+.messenger__content {
+    width: 69.2%;
+    border: 1px #17161f solid;
+    float: left;
+}
+
+.sidebar__header {
+    height: 30px;
+    display: block;
+    padding-top: 3px;
+    padding-right: 4px;
+    background-color: #12141C;
+    border-radius: 0px 10px 0px 0px;
+}
+
+.Contact {
+    display: flex;
+    justify-content: right;
+    padding: 5px;
+    box-sizing: border-box;
+    border-bottom:1px solid #B3B6BF;
+}
+
+.Contact__img {
+    margin-left: 5px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #AC7C2C;
+    border-radius: 50%;
+}
+
+.Contact:hover {
+    background: linear-gradient(70deg, #12141C, #be8e3a);
+    backdrop-filter: blur(30px);
+    border-right: 3px solid #AC7C2C;
+    border-bottom: 0px solid #AC7C2C;
+    color: #d3d6df;
+}

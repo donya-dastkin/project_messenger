@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('https://i.icomoon.io/public/temp/4e4414aae8/UntitledProject/icomoon.eot?shprv1');
+    src: url('https://i.icomoon.io/public/temp/4e4414aae8/UntitledProject/icomoon.eot?shprv1#iefix') format('embedded-opentype'),
+        url('https://i.icomoon.io/public/temp/4e4414aae8/UntitledProject/icomoon.ttf?shprv1') format('truetype'),
+        url('https://i.icomoon.io/public/temp/4e4414aae8/UntitledProject/icomoon.woff?shprv1') format('woff'),
+        url('https://i.icomoon.io/public/temp/4e4414aae8/UntitledProject/icomoon.svg?shprv1#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.icon-spinner9 {
+    font-family: 'icomoon' !important;
+    speak-as: never;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline;
+    float: left;
+    padding-left: 5px;
+    color: #be8e3a;
+}
+
+.icon-spinner9:hover {
+    cursor: pointer;
+}
+
+.icon-spinner9:before {
+    content: "\e982";
+}
+
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('https://i.icomoon.io/public/temp/490ad13c44/UntitledProject/icomoon.eot?rhodjl');
+    src: url('https://i.icomoon.io/public/temp/490ad13c44/UntitledProject/icomoon.eot?rhodjl#iefix') format('embedded-opentype'),
+        url('https://i.icomoon.io/public/temp/490ad13c44/UntitledProject/icomoon.ttf?rhodjl') format('truetype'),
+        url('https://i.icomoon.io/public/temp/490ad13c44/UntitledProject/icomoon.woff?rhodjl') format('woff'),
+        url('https://i.icomoon.io/public/temp/490ad13c44/UntitledProject/icomoon.svg?rhodjl#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.icon-user-plus {
+    font-family: 'icomoon' !important;
+    speak-as: never;
+    font-size: 17px;
+    padding-left: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline;
+    float: left;
+    color: #be8e3a;
+}
+
+.icon-user-plus:before {
+    content: "\e973";
+}
+
+.icon-user-plus:hover {
+    cursor: pointer;
+}

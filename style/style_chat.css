@@ -1,4 +1,5 @@
 body {
+    height: 420px;
     margin: 1px;
     padding: 2px;
     color: #B3B6BF;
@@ -6,38 +7,43 @@ body {
 }
 
 .main {
+    height: 100%;
     margin: 0px;
     padding: 3px;
     border: 3px #17161f solid;
     background-color: #0F0E13;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .messenger__sidebar {
     width: 30%;
-    border: 1px #17161f solid;
-    border-radius: 0px 10px 0px 0px;
+    height: 100%;
     background-color: #0F0E13;
+    border: 1px #17161f solid;
+    border-radius: 0px 10px 10px 0px;
 }
 
-.messenger__content {
+.article__content {
+    float: left;
+    height: 100%;
     width: 69.2%;
     border: 1px #17161f solid;
-    float: left;
+    border-radius: 10px 0px 0px 10px;
 }
 
 .sidebar__header {
-    height: 30px;
+    height: 40px;
     display: block;
-    padding-top: 3px;
+    padding-top: 15px;
     padding-right: 4px;
     background-color: #12141C;
     border-radius: 0px 10px 0px 0px;
 }
 
 .Contact {
+    padding: 5px;
     display: flex;
     justify-content: right;
-    padding: 5px;
     box-sizing: border-box;
     border-bottom:1px solid #B3B6BF;
 }
@@ -51,9 +57,71 @@ body {
 }
 
 .Contact:hover {
+    cursor: pointer;
     background: linear-gradient(70deg, #12141C, #be8e3a);
     backdrop-filter: blur(30px);
     border-right: 3px solid #AC7C2C;
     border-bottom: 0px solid #AC7C2C;
     color: #d3d6df;
+}
+
+.article__header{
+    height: 54px;
+    padding: 3px; 
+    box-sizing: border-box;
+    background-color: #12141C;
+    border-radius: 10px 0px 0px 0px;
+}
+
+.header__Chat {
+    float: right;
+    display: flex;
+    justify-content: right;
+    cursor: pointer;
+}
+
+.div__icon{
+    padding: 10px; 
+    display: flex;
+    justify-content: left;
+}
+
+.input__container {
+    width: 98%;
+    height: 46px;
+    display: block;
+    padding-right: 8px;
+    display: flex;
+    justify-content: center;
+  }
+  
+.input {
+    border: 0;
+    outline: 0;
+    width: 95%;
+    height: 100%;
+    color:#B3B6BF;
+    font-size: 18px;
+    padding: 4px 20px;
+    border-radius:30px 0px 0px 30px;
+    box-sizing: border-box;
+    background-color:#17161f;
+  }
+
+.messenger__content{
+    height:285px;
+}
+
+.icon__container{
+    width: 10%;
+    height: 46px;
+    border: 0;
+    float: right;
+    display: flex;
+    justify-content: right;
+    color:#B3B6BF;
+    padding: 4px 20px;
+    border-radius:0px 30px 30px 0px;
+    box-sizing: border-box;
+    background-color:#17161f;
 }

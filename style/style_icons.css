@@ -18,7 +18,7 @@
     -moz-osx-font-smoothing: grayscale;
     display: inline;
     float: left;
-    padding-left: 5px;
+    padding-left: 10px;
     color: #be8e3a;
 }
 
@@ -29,7 +29,6 @@
 .icon-spinner9:before {
     content: "\e982";
 }
-
 
 @font-face {
     font-family: 'icomoon';
@@ -47,7 +46,7 @@
     font-family: 'icomoon' !important;
     speak-as: never;
     font-size: 17px;
-    padding-left: 10px;
+    padding-left: 5px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: inline;
@@ -60,5 +59,36 @@
 }
 
 .icon-user-plus:hover {
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('https://i.icomoon.io/public/temp/b63370c357/UntitledProject/icomoon.eot?pi9ti7');
+    src:  url('https://i.icomoon.io/public/temp/b63370c357/UntitledProject/icomoon.eot?pi9ti7#iefix') format('embedded-opentype'),
+      url('https://i.icomoon.io/public/temp/b63370c357/UntitledProject/icomoon.ttf?pi9ti7') format('truetype'),
+      url('https://i.icomoon.io/public/temp/b63370c357/UntitledProject/icomoon.woff?pi9ti7') format('woff'),
+      url('https://i.icomoon.io/public/temp/b63370c357/UntitledProject/icomoon.svg?pi9ti7#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  .icon-send{
+    font-family: 'icomoon' !important;
+    speak-as: never;
+    font-size: 17px;
+    display: inline;
+    padding: 10px 5px;
+    color: #be8e3a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+  }
+  
+  .icon-send:before {
+    content: "\e900";
+  }
+  .icon-send:hover {
     cursor: pointer;
 }

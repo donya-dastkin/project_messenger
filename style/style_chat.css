@@ -58,10 +58,10 @@ body {
 
 .Contact:hover {
     cursor: pointer;
-    background: linear-gradient(70deg, #12141C, #be8e3a);
+    background: linear-gradient(70deg, #12141C, #e7af4d);
     backdrop-filter: blur(30px);
     border-right: 3px solid #AC7C2C;
-    border-bottom: 0px solid #AC7C2C;
+    border-bottom: 0px;
     color: #d3d6df;
 }
 

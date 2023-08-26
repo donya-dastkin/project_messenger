@@ -1,9 +1,9 @@
 body {
-    height: 420px;
+    height: 500px;
     margin: 1px;
     padding: 2px;
     color: #B3B6BF;
-    background-color: #0F0E13;
+    background-color:#131517;
 }
 
 .main {
@@ -11,14 +11,14 @@ body {
     margin: 0px;
     padding: 3px;
     border: 3px #17161f solid;
-    background-color: #0F0E13;
+    background-color:#131517;
     border-radius: 10px 10px 10px 10px;
 }
 
 .messenger__sidebar {
     width: 30%;
     height: 100%;
-    background-color: #0F0E13;
+    background-color: #212229;
     border: 1px #17161f solid;
     border-radius: 0px 10px 10px 0px;
 }
@@ -26,50 +26,46 @@ body {
 .article__content {
     float: left;
     height: 100%;
-    width: 69.2%;
-    border: 1px #17161f solid;
+    width: 70%;
     border-radius: 10px 0px 0px 10px;
 }
 
 .sidebar__header {
-    height: 40px;
+    height: 22%;
     display: block;
-    padding-top: 15px;
-    padding-right: 4px;
-    background-color: #12141C;
+    padding:10px 10px 0px;
     border-radius: 0px 10px 0px 0px;
 }
 
 .Contact {
-    padding: 5px;
+    padding:5px 15px;
     display: flex;
     justify-content: right;
     box-sizing: border-box;
-    border-bottom:1px solid #B3B6BF;
+    border-radius: 5px;
 }
 
 .Contact__img {
-    margin-left: 5px;
+    margin-left: 10px;
     width: 40px;
     height: 40px;
-    border: 2px solid #AC7C2C;
     border-radius: 50%;
+    border: 2px solid #3a76f7;
 }
 
-.Contact:hover {
+.Contact:hover ,.Contact:hover .Contact__img{
+    margin: 5px;
+    border: 0px;
     cursor: pointer;
-    background: linear-gradient(70deg, #12141C, #e7af4d);
-    backdrop-filter: blur(30px);
-    border-right: 3px solid #AC7C2C;
-    border-bottom: 0px;
-    color: #d3d6df;
+    color: #f7f8fd;
+    background: linear-gradient(80deg, #12141C, #296eff);
 }
 
 .article__header{
-    height: 54px;
-    padding: 3px; 
+    height: 13%;
+    padding:5px 10px; 
     box-sizing: border-box;
-    background-color: #12141C;
+    background-color: #212229;
     border-radius: 10px 0px 0px 0px;
 }
 
@@ -88,11 +84,12 @@ body {
 
 .input__container {
     width: 98%;
-    height: 46px;
+    height: 10%;
     display: block;
-    padding-right: 8px;
     display: flex;
     justify-content: center;
+    position: relative;
+    right: 8px;
   }
   
 .input {
@@ -105,16 +102,18 @@ body {
     padding: 4px 20px;
     border-radius:30px 0px 0px 30px;
     box-sizing: border-box;
-    background-color:#17161f;
+    background-color:#1e1f25;
   }
 
 .messenger__content{
-    height:285px;
+    height:76%;
+    background-color:#131517;
+    overflow:auto
 }
 
 .icon__container{
     width: 10%;
-    height: 46px;
+    height: 100%;
     border: 0;
     float: right;
     display: flex;
@@ -123,5 +122,47 @@ body {
     padding: 4px 20px;
     border-radius:0px 30px 30px 0px;
     box-sizing: border-box;
+    background-color:#1e1f25;
+}
+
+.input_search{
+    border: 0;
+    direction:ltr;
+    display: inline-block;
+    outline: 0;
+    width: 100%;
+    height: 40px;
+    color:#e2e2d6;
+    font-size: 18px;
+    padding: 4px 20px;
+    margin-top: 5px;
+    border-radius:10px;
+    box-sizing: border-box;
     background-color:#17161f;
+}
+
+.text-me {
+    background-color:#3a76f7;
+    border-radius:15px 2px 15px 15px;
+    padding: 5px;
+    margin: 5px;
+    text-align: right;
+    color:#F2F2F2;
+    width: 250px;
+    /* float:right; */
+}
+.text-you {
+    float:left;
+    background-color:#1e1f25;
+    border-radius:1px 15px 15px 15px;
+    padding: 5px;
+    margin: 5px;
+    text-align: right;
+    width: 313px;
+    color:#F2F2F2;
+}
+
+.all_contact{
+    height: 76%;
+    overflow:auto;
 }

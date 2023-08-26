@@ -18,12 +18,16 @@
     -moz-osx-font-smoothing: grayscale;
     display: inline;
     float: left;
-    padding-left: 10px;
-    color: #be8e3a;
+    padding: 5px 10px;
+    margin: 2px;
+    color: #555878;
 }
 
 .icon-spinner9:hover {
     cursor: pointer;
+    color: #f7f8fd;
+    background-color: #296eff;
+    border-radius: 3px;
 }
 
 .icon-spinner9:before {
@@ -46,12 +50,13 @@
     font-family: 'icomoon' !important;
     speak-as: never;
     font-size: 17px;
-    padding-left: 5px;
+    padding: 5px 10px;
+    margin: 2px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: inline;
     float: left;
-    color: #be8e3a;
+    color: #555878;
 }
 
 .icon-user-plus:before {
@@ -60,6 +65,9 @@
 
 .icon-user-plus:hover {
     cursor: pointer;
+    color: #f7f8fd;
+    background-color: #296eff;
+    border-radius: 3px;
 }
 
 @font-face {
@@ -80,7 +88,7 @@
     font-size: 17px;
     display: inline;
     padding: 10px 5px;
-    color: #be8e3a;
+    color: #555878;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -91,4 +99,5 @@
   }
   .icon-send:hover {
     cursor: pointer;
+    color: #f7f8fd;
 }

@@ -4,6 +4,10 @@ body {
   background: #15161a;
   box-sizing: border-box;
   direction: rtl;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: -20px 0;
 }
 
 * {
@@ -58,8 +62,8 @@ body {
   font-size: 18px;
   padding: 4px 20px 0;
   border-radius: 12px;
-  box-sizing: border-box;
   background:#18171d;
+  box-sizing: border-box;
 }
 
 .cut {

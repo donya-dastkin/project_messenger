@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" href="./style/style-login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="Chat.html">
+                <h1>ساخت حساب کاربری</h1>
+                <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" required />
+                <input class="input" type="password" name="password" id="password" autocomplete="new-password" placeholder="رمز عبور" required />
+                <input class="input" type="password" name="repassword" id="repassword" autocomplete="new-password" placeholder="تکرار رمز عبور" required />
+                <div class="input-checkbox">
+                    <input type="checkbox" name="remember" id="remember" />
+                    <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
+                </div>
+                <button class="submit">ثبت نام</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>ورود به حساب</h1>
+                <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" required />
+                <input class="input" type="password" name="password" id="password" autocomplete="new-password" placeholder="رمز عبور" required />
+                <div class="input-checkbox">
+                    <input type="checkbox" name="remember" id="remember" />
+                    <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
+                </div>
+                <button class="submit">ورود</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>خوش اومدی</h1>
+                    <p>برای استفاده از خدمات ما ابتدا باید وارد حسابت بشی!</p>
+                    <button class="submit" id="signIn">ورود</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>سلام دوست من</h1>
+                    <p>اگر هنوز نمیدونی چطور از خدمات ما استفاده کنی، فقط کافیه ثبت نام کنی!</p>
+                    <button class="submit" id="signUp">ثبت نام</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/login2.js"></script>
+</body></html>

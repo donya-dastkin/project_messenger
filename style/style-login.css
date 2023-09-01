@@ -157,9 +157,9 @@ form {
     overflow: hidden;
     transition: transform 0.6s ease-in-out;
     z-index: 100;
-    border: 1px #0c2929 solid;
+    border: 0.5px #0c2929 solid;
     border-radius: 15px;
-    box-shadow: 0 2px 5px 1px #0c2929;
+    /* box-shadow: 0 2px 5px 1px #0c2929; */
 }
 
 .container.right-panel-active .overlay-container {

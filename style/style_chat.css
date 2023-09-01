@@ -198,10 +198,11 @@ a, span, label {
     cursor: pointer;
     margin: 5px;
 }
-/* 
-.chatlist__addcontact:hover{
+
+/* .chatlist__addcontact:hover{
     color: #3ca0df;
 } */
+
 .chatlist__refresh::before {
     content: '\f021';
     color: #4a4e51;
@@ -227,10 +228,11 @@ a, span, label {
 
 .chatlist__card:hover,.chatlist--is--active{
     background: #15161a;
-    padding:5px 5px;
+    padding:5px;
     cursor: pointer;
     border-radius: 15px;
-    box-shadow: 0 0 3px 0.5px #4a4e51;
+    margin:10px 0px 5px;
+    transition: all 0.2s;
 }
 
 .chatlist__img {
@@ -330,6 +332,7 @@ a, span, label {
     color: #fff;
     font-size: 13px;
     padding-right: 5px;
+    cursor: pointer;
 }
 
 .dialog__status {
@@ -351,17 +354,25 @@ a, span, label {
     font-size: 11px;
 }
 
+.dialog__header-left{
+    cursor: pointer;
+}
+
 .dialog__search::before,
 .dialog__edit::before,
 .dialog__showprofile::before,
 .dialog__refresh::before,
 .dialog__options::before {
-    color: #4a4e51;
     padding: 20px 10px;
     font-size: 18px;
 }
 
+.dialog__header-left--is--active::before {
+    color: #2798c4;
+}
+
 .dialog__search::before {
+    color: #4a4e51;
     content: '\e089';
     cursor: pointer;
 }
@@ -369,35 +380,40 @@ a, span, label {
 .dialog__showprofile::before {
     content: '\f007';
     cursor: pointer;
+    color: #4a4e51;
 }
 
 /* .dialog__options::before{
     content: '\e11e';
     cursor: pointer;
+    color: #4a4e51;
 } */
 
 .dialog__refresh::before {
+    color: #4a4e51;
     content: '\f021';
     cursor: pointer;
 }
 
 .dialog__edit::before {
     content: '\f4ff';
+    color: #4a4e51;
     cursor: pointer;
-}
-
-.dialog__header-left--is--active::before {
-    color: #2798c4;
 }
 
 .dialog__footer {
     display: flex;
     align-items: center;
     background: #1c1c24;
-    border: 2px #1b2932 solid;
+    border: 1px #1e1e26 solid;
     border-radius: 20px;
     margin: 10px 5px 8px;
 }
+
+/* .dialog__message--input:focus{
+    border: 2px #1e1e26 solid;
+    box-shadow: 0 0 5px 2px #40a0e554;
+} */
 
 .dialog__attach {
     height: 30px;

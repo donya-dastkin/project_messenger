@@ -9,29 +9,29 @@
 
 <body>
     <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="./chat.html">
+        <div onchange="ValidationSignup()"  class="form-container sign-up-container">
+            <form name="Signup" id="Signup" action="./chat.html">
                 <h1>ساخت حساب کاربری</h1>
-                <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" required />
-                <input class="input" type="password" name="password" id="password" autocomplete="new-password" placeholder="رمز عبور" required />
-                <input class="input" type="password" name="repassword" id="repassword" autocomplete="new-password" placeholder="تکرار رمز عبور" required />
+                <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" pattern="[0-9]{11}" required />
+                <input class="input" type="password" name="password" id="password"  placeholder="رمز عبور" minlength="8" required />
+                <input class="input" type="password" name="repassword" id="repassword" placeholder="تکرار رمز عبور" minlength="8" required />
                 <div class="input-checkbox">
                     <input type="checkbox" name="remember" id="remember" />
                     <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
                 </div>
-                <button class="submit">ثبت نام</button>
+                <button type="submit" disabled id="signupBtn" class="submit_disabled">ثبت نام</button>
             </form>
         </div>
-        <div class="form-container sign-in-container">
-            <form action="./chat.html">
+        <div onchange="ValidationLogin()"  class="form-container sign-in-container">
+            <form name="Login" id="Login" action="./chat.html">
                 <h1>ورود به حساب</h1>
-                <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" required />
-                <input class="input" type="password" name="password" id="password" autocomplete="new-password" placeholder="رمز عبور" required />
+                <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" pattern="[0-9]{11}" required />
+                <input class="input" type="password" name="password" id="password" placeholder="رمز عبور" minlength="8" required />
                 <div class="input-checkbox">
                     <input type="checkbox" name="remember" id="remember" />
                     <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
                 </div>
-                <button class="submit">ورود</button>
+                <button type="submit" disabled id="loginBtn" class="submit_disabled">ورود</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -49,5 +49,6 @@
             </div>
         </div>
     </div>
-    <script src="./js/login2.js"></script>
+    <script src="./js/validationLogin.js"></script>
+    <script src="./js/styleLogin.js"></script>
 </body></html>

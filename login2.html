@@ -10,7 +10,7 @@
 <body>
     <div class="container" id="container">
         <div onchange="ValidationSignup()"  class="form-container sign-up-container">
-            <form name="Signup" id="Signup" action="./chat.html">
+            <form name="Signup" id="Signup" action="./chat.html" method="post">
                 <h1>ساخت حساب کاربری</h1>
                 <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" pattern="[0-9]{11}" required />
                 <input class="input" type="password" name="password" id="password"  placeholder="رمز عبور" minlength="8" required />
@@ -23,7 +23,7 @@
             </form>
         </div>
         <div onchange="ValidationLogin()"  class="form-container sign-in-container">
-            <form name="Login" id="Login" action="./chat.html">
+            <form name="Login" id="Login" action="./chat.html" method="post">
                 <h1>ورود به حساب</h1>
                 <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" pattern="[0-9]{11}" required />
                 <input class="input" type="password" name="password" id="password" placeholder="رمز عبور" minlength="8" required />

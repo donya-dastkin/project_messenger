@@ -142,15 +142,24 @@ a, span, label {
 }
 
 .chatlist {
-    width: 25%;
-    min-width: 290px;
     height: 100vh;
-    padding: 0 12px;
     color: #fefefe;
     background: #1c1c24;
     overflow-y: scroll;
     border-right: 0 solid #2f3235;
     box-shadow: 0 0 5px 1px #2f3235;
+}
+
+.chatlist__Open{
+    width: 25%;
+    min-width: 290px;
+    padding: 0 12px;
+    transition: width 1s;
+}
+
+.chatlist__Closed{
+    width:0px;
+    transition: all 1s;
 }
 
 .search {
@@ -260,6 +269,15 @@ a, span, label {
 .chatlist__name--group::after {
     /* نکته اگر نام لاتین باشد باید after گذاشت */
     content: '\f500';
+    margin: 6px;
+    font-size: 12px;
+    vertical-align: middle;
+    color: #716f79;
+}
+
+.chatlist__name--channel::after {
+    /* نکته اگر نام لاتین باشد باید after گذاشت */
+    content: '\f0a1';
     margin: 6px;
     font-size: 12px;
     vertical-align: middle;
@@ -410,11 +428,6 @@ a, span, label {
     margin: 10px 5px 8px;
 }
 
-/* .dialog__message--input:focus{
-    border: 2px #1e1e26 solid;
-    box-shadow: 0 0 5px 2px #40a0e554;
-} */
-
 .dialog__attach {
     height: 30px;
     flex-shrink: 0;
@@ -429,7 +442,7 @@ a, span, label {
 
 .dialog__attach--input {
     opacity: 0;
-    width: 17px;
+    width: 2px;
 }
 
 .dialog__message {
@@ -462,7 +475,16 @@ a, span, label {
     color: #4a4e51;
     font-size: 20px;
     cursor: pointer;
-    padding-right: 5px;
+    padding-left: 10px;
+}
+
+.dialog__send::before{
+    content: '\e20a';
+    /* content: '\f1d8'; */
+    color: #0f8ca6;
+    font-size: 20px;
+    cursor: pointer;
+    padding-left: 10px;
 }
 
 .dialog__header,

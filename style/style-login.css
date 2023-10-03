@@ -233,3 +233,11 @@ form {
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
 }
+
+.Error__Message{
+    color: #ef1f35;
+    font-size: 14px;
+    height: 20px;
+    padding: 1px;
+    margin: 1px;
+}

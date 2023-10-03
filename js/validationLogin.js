@@ -1,5 +1,7 @@
 const signupBtn = document.getElementById("signupBtn");
 const loginBtn = document.getElementById("loginBtn");
+let ErrorMessageS=document.getElementById("ErrorMessageSignup");
+let ErrorMessageL=document.getElementById("ErrorMessageLogin");
 
 const ValidationSignup = () => {
 
@@ -52,10 +54,27 @@ const PasswordLength = validationPasswordLength()
 const Password = validationPassword()
 const Filde = validationFilde()
 
+if(Phone === false){
+    ErrorMessageS.textContent="شماره موبایل را به درستی وارد کنید!!"
+}
+
+if(PasswordLength === false){
+    ErrorMessageS.textContent="تعداد ارقام های پسورد باید 8 رقم باشد"
+}
+
+if(Password === false){
+    ErrorMessageS.textContent="پسورد و تکرار ان با یک دیگر مطابقت ندارند!!"
+}
+
+if(Filde === false){
+    ErrorMessageS.textContent="لطفا فیلد را پرکنید!!"
+}
+
 if (Phone === false && PasswordLength === false && Password === false && Filde === false) {
     signupBtn.disabled = false;
     signupBtn.setAttribute("class", "submit_disabled");
 } else if(Phone !== false && PasswordLength !== false && Password !== false && Filde !== false) {
+    ErrorMessageS.textContent=""
     signupBtn.disabled = true;
     signupBtn.setAttribute("class", "submit");
 }
@@ -111,13 +130,32 @@ const ValidationLogin = () => {
     const PasswordLength = validationPasswordLength()
     // const Password = validationPassword()
     const Filde = validationFilde()
+    if(Phone === false){
+
+        ErrorMessageL.textContent="شماره موبایل را به درستی وارد کنید!!"
+    }
+
+    if(PasswordLength === false){
+
+        ErrorMessageL.textContent="تعداد ارقام های پسورد باید 8 رقم باشد"
+    }
     
+    if(Filde === false){
+
+        ErrorMessageL.textContent="لطفا فیلد را پرکنید!!"
+    }
+
     if (Phone === false && PasswordLength === false && Filde === false) {
         loginBtn.disabled = false;
         loginBtn.setAttribute("class", "submit_disabled");
     } else if(Phone !== false && PasswordLength !== false && Filde !== false) {
+        ErrorMessageL.textContent=""
         loginBtn.disabled = true;
         loginBtn.setAttribute("class", "submit");
     }
     
     }
+
+const SubmitForm=()=>{
+    document.getElementById("Signup").submit();
+}

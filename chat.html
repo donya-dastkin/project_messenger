@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="fa">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Chat</title>
-        <link rel="stylesheet" href="./style/style_chat.css" />
-        <link rel="stylesheet" href="./style/style_icons_and_fonts.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chat</title>
+    <link rel="stylesheet" href="./style/style_chat.css" />
+    <link rel="stylesheet" href="./style/style_icons_and_fonts.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
   <body>
     <section class="Messenger">
       <div class="folders">
-        <span class="folders__menu menu"></span>
+        <span onclick="ChatList()" class="folders__menu menu"></span>
         <span class="folders__allchat folders--is--active" data-badge="+99"
           >همه پیام ها</span
         >
@@ -22,267 +22,30 @@
         <span class="folders__screenmode folders__light">حالت روشنایی</span>
       </div>
 
-      <div class="chatlist">
+      <div id="chatlist" class="chatlist chatlist__Open">
         <div class="chatlist__icon--sticky">
-        <div class="chatlist__icon">
-          <span class="chatlist__title">messenger</span>
-          <span class="chatlist__addcontact"> </span>
-          <span class="chatlist__refresh"> </span>
-        </div>
-        <div class="search search__sticky">
-          <input
-            type="search"
-            name="search_input"
-            id="search_input"
-            class="search__input"
-            placeholder="search"
-          />
-        </div>
-        </div>
-
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <!--        content: '\f2bd';-->
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
+          <div class="chatlist__icon">
+            <span class="chatlist__title">messenger</span>
+            <span onclick="addContact()" class="chatlist__addcontact"> </span>
+            <span
+              onclick="refreshChatlist()"
+              id="refreshIcon"
+              class="chatlist__refresh"
+            >
+            </span>
           </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
+          <div class="search search__sticky">
+            <input
+              type="search"
+              name="search_input"
+              id="search_input"
+              class="search__input"
+              placeholder="search"
+            />
           </div>
         </div>
-        <div class="chatlist__card chatlist--is--active">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
-        <div class="chatlist__card">
-          <div class="chatlist__photo">
-            <img src="./image/user.png" class="chatlist__img" alt="profile" />
-          </div>
-          <div class="chatlist__info">
-            <div class="chatlist__details">
-              <span class="chatlist__name chatlist__name--group">name</span>
-              <span class="chatlist__date"> 9:00 ب.ظ </span>
-            </div>
-            <div class="chatlist__more">
-              <span class="chatlist__sender">Donya :</span>
-              <p class="chatlist__message">Hi my name is Donya</p>
-              <span class="chatlist__badge">10</span>
-            </div>
-          </div>
-        </div>
+        <div id="Contacts"></div>
       </div>
-
       <div class="dialog">
         <div class="dialog__wrapper">
           <div class="dialog__header">
@@ -308,10 +71,14 @@
             </div>
           </div>
 
-          <div class="dialog__body">
+          <div id="dialogBody" class="dialog__body">
             <div class="message message__other">
               <div class="message__photo">
-                <img src="./image/user.png" alt="profile" class="message__img" />
+                <img
+                  src="./image/user.png"
+                  alt="profile"
+                  class="message__img"
+                />
                 <!-- <div class="message__datalist">
                   <div class="message__datalist--name">name</div>
                   <span>09:50</span>
@@ -324,31 +91,43 @@
 
             <div class="message message__self">
               <div class="message__photo">
-                <img src="./image/user.png" alt="profile" class="message__img" />
+                <img
+                  src="./image/user.png"
+                  alt="profile"
+                  class="message__img"
+                />
                 <!-- <div class="message__datalist">
                   <div class="message__datalist--name">name</div>
                   <span>09:50</span>
                 </div> -->
               </div>
               <div class="message__card message__card--self">
-                <span class="message__text">hey !!</span>
+                <span id="message__text__self" class="message__text"
+                  >hey !!</span
+                >
               </div>
             </div>
           </div>
-          <div class="dialog__footer">
-            <div class="dialog__attach">
+
+          <div class="dialog__footer" onkeyup="IconChanger()">
+            <div id="dialog__attach" class="dialog__attach">
               <input
                 type="file"
                 name="dialog__input--attach"
                 id="dialog__input--attach"
                 class="dialog__attach--input"
               />
+              <span
+                onclick="sendmesseg()"
+                id="dialog__icon"
+                class="dialog__voice"
+              ></span>
             </div>
 
             <div class="dialog__message">
               <textarea
                 name="dialog__message"
-                name="dialog__message"
+                id="dialog__message"
                 class="dialog__message--input"
                 placeholder="message..."
               ></textarea>
@@ -356,11 +135,12 @@
 
             <div class="dialog__tools">
               <span class="dialog__emoji"></span>
-              <span class="dialog__voice"></span>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <script src="./js/sendMesseg.js"></script>
+    <script src="./js/pageReaction.js"></script>
   </body>
 </html>

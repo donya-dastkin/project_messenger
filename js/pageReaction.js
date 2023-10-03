@@ -1,6 +1,7 @@
 let chatlist = document.getElementById("chatlist");
 
-ChatList = () => {
+const ChatList = () => {
+
   let ClosedChatList = () => {
     chatlist.classList.remove("chatlist", "chatlist__Open");
     chatlist.classList.add("chatlist", "chatlist__Closed");
@@ -18,7 +19,7 @@ ChatList = () => {
   }
 };
 
-refreshChatlist = () => {
+const refreshChatlist = () => {
   let chatlist = document.getElementById("Contacts");
   let Contacts = chatlist.getElementsByClassName("chatlist__card");
   if (Contacts.length > 0) {
@@ -60,19 +61,20 @@ refreshChatlist = () => {
         chatlistImg.src = Contacts[i].profile;
         chatlistName.textContent = Contacts[i].name;
         chatlistDate.textContent = Contacts[i].date;
-        chatlistSender.textContent = Contacts[i].sender+" : ";
+        chatlistSender.textContent = `${Contacts[i].sender} : `;
         chatlistMessage.textContent = Contacts[i].lastMessage;
+
         if(Contacts[i].numberMessages !== ""){
           chatlistBadge.textContent = Contacts[i].numberMessages;
           chatlistBadge.classList.add("chatlist__badge");
         }
-
 
         if (Contacts[i].chatType === "group") {
           chatlistName.classList.add("chatlist__name--group");
         } else if (Contacts[i].chatType === "channel") {
           chatlistName.classList.add("chatlist__name--channel");
         }
+
         chatlistPhoto.appendChild(chatlistImg);
         chatlistCard.appendChild(chatlistPhoto);
         chatlistDetails.appendChild(chatlistName);
@@ -86,12 +88,9 @@ refreshChatlist = () => {
         chatlist.appendChild(chatlistCard);
       
       chatlistCard.addEventListener("click", () => {
-        let chatlistisActive = document.getElementsByClassName(
-          "chatlist--is--active"
-        );
+        let chatlistisActive = document.getElementsByClassName("chatlist--is--active");
         let dialog = document.getElementById("dialog");
         let nameDialog= document.getElementById("dialog__name")
-        nameDialog.textContent=""
         nameDialog.textContent=chatlistName.textContent
         dialog.setAttribute("style", "display:block;");
         if (chatlistisActive.length >= 1) {
@@ -103,7 +102,7 @@ refreshChatlist = () => {
     });
 };
 
-addContact = () => {
+const addContact = () => {
   let addContact = document.getElementById("addContact");
   addContact.style = "display: block;";
   let Messenger = document.getElementById("Messenger");
@@ -114,6 +113,7 @@ addContact = () => {
     addContact.style = "display: none;";
     Messenger.removeAttribute("style", "display:block;");
   };
+
   let addbtn = document.getElementById("submitbtn");
   addbtn.onclick = () => {
     const phone = document.forms["contact"]["phone"].value;
@@ -125,12 +125,9 @@ addContact = () => {
     let chatlistCard = document.createElement("div");
     chatlistCard.classList.add("chatlist__card","chatlist--is--active");
     chatlistCard.addEventListener("click", () => {
-      let chatlistisActive = document.getElementsByClassName(
-        "chatlist--is--active"
-      );
+      let chatlistisActive = document.getElementsByClassName("chatlist--is--active");
       let dialog = document.getElementById("dialog");
       let nameDialog= document.getElementById("dialog__name")
-      nameDialog.textContent=""
       nameDialog.textContent=chatlistName.textContent
       dialog.setAttribute("style", "display:block;");
       if (chatlistisActive.length >= 1) {
@@ -192,7 +189,7 @@ const IconChanger=()=>{
     let full
 if(dialog.value.length>0 && dialog.value !==""){
     dialogIcon.setAttribute('class','dialog__send')
-    dialogIconattach.style="::before { content : '1'}"
+    dialogIconattach.style=".dialog__attach::before { content : '1'}"
     full=true
 }else{
     dialogIcon.setAttribute('class','dialog__voice')
@@ -231,7 +228,5 @@ dialog.addEventListener("keydown",(event)=>{
     if(event.key === "Enter"){
         sendmesseg()
         dialog.value=null
-    }else if (event.key ==="Enter + Shift"){
-        dialog.value="</br>"
     }
 })

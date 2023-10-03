@@ -155,7 +155,7 @@ a, span, label {
     width: 25%;
     min-width: 290px;
     padding: 0 12px;
-    transition: width 1s;
+    transition: width 0.2s;
 }
 
 .chatlist__Closed{

@@ -13,9 +13,7 @@
     <section id="Messenger" class="Messenger">
       <div class="folders">
         <span onclick="ChatList()" class="folders__menu menu"></span>
-        <span class="folders__allchat folders--is--active" data-badge="+99"
-          >همه پیام ها</span
-        >
+        <span class="folders__allchat folders--is--active" data-badge="+99">همه پیام ها</span>
         <span class="folders__group">گروه ها</span>
         <span class="folders__channel">کانال ها</span>
         <span class="folders__pv">گفتگو ها</span>
@@ -27,13 +25,8 @@
         <div class="chatlist__icon--sticky">
           <div class="chatlist__icon">
             <span class="chatlist__title">messenger</span>
-            <span onclick="addContact()" class="chatlist__addcontact"> </span>
-            <span
-              onclick="refreshChatlist()"
-              id="refreshIcon"
-              class="chatlist__refresh"
-            >
-            </span>
+            <span onclick="addContact()" class="chatlist__addcontact"></span>
+            <span onclick="refreshChatlist()" id="refreshIcon" class="chatlist__refresh"></span>
           </div>
           <div class="search search__sticky">
             <input
@@ -45,6 +38,7 @@
             />
           </div>
         </div>
+
         <div id="Contacts"></div>
       </div>
 
@@ -55,10 +49,7 @@
               <img src="./image/user.png" alt="profile" class="message__img" />
               <div class="dialog__user">
                 <div id="dialog__name" class="dialog__name">name</div>
-                <span
-                  class="dialog__status dialog__header-right--channel"
-                  data-sub="1000Sub ."
-                  >Online</span
+                <span class="dialog__status dialog__header-right--channel" data-sub="1000Sub .">Online</span
                 >
               </div>
             </div>

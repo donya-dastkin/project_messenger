@@ -4,6 +4,7 @@ html {
 
 html, body {
     direction: rtl;
+    background-color: #15161a;
 }
 
 * {
@@ -174,6 +175,7 @@ a, span, label {
     border-radius: 10px;
     background: #18171d;
     font-size: 15px;
+    color: #ddd;
 }
 
 .search__input:focus {

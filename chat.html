@@ -5,11 +5,12 @@
     <title>Chat</title>
     <link rel="stylesheet" href="./style/style_chat.css" />
     <link rel="stylesheet" href="./style/style_icons_and_fonts.css" />
+    <link rel="stylesheet" href="./style/style_add_contacts.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
   <body>
-    <section class="Messenger">
+    <section id="Messenger" class="Messenger">
       <div class="folders">
         <span onclick="ChatList()" class="folders__menu menu"></span>
         <span class="folders__allchat folders--is--active" data-badge="+99"
@@ -46,13 +47,14 @@
         </div>
         <div id="Contacts"></div>
       </div>
-      <div class="dialog">
+
+      <div id="dialog" class="dialog" style="display: none;">
         <div class="dialog__wrapper">
           <div class="dialog__header">
             <div class="dialog__header-right">
               <img src="./image/user.png" alt="profile" class="message__img" />
               <div class="dialog__user">
-                <div class="dialog__name">name</div>
+                <div id="dialog__name" class="dialog__name">name</div>
                 <span
                   class="dialog__status dialog__header-right--channel"
                   data-sub="1000Sub ."
@@ -140,7 +142,40 @@
         </div>
       </div>
     </section>
-    <script src="./js/sendMesseg.js"></script>
+    
+    <section id="addContact" class="section" style="display: none;">
+      <button id="close" class="close"></button>
+      <form name="contact" id="contact" method="post">
+      <h3 class="title">اضافه کردن مخاطب</h3>
+      <div class="main-input">
+        <input
+          class="inputt"
+          type="tel"
+          name="phone"
+          id="phone"
+          placeholder=" "
+          autofocus
+          required
+        />
+        <div class="cut"></div>
+        <label for="phone" class="placeholder">شماره موبایل مخاطب</label>
+      </div>
+      <div class="main-input">
+        <input
+          class="inputt"
+          type="text"
+          name="name"
+          id="name"
+          placeholder=" "
+          required
+        />
+        <div class="cut cut-long"></div>
+        <label for="password" class="placeholder">نام مخاطب</label>
+      </div>
+      <input id="submitbtn" type="button" class="submitbtn" value="افزودن مخاطب" />
+    </form>
+  </section>
+
     <script src="./js/pageReaction.js"></script>
   </body>
 </html>

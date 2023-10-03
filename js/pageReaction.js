@@ -128,7 +128,11 @@ addContact = () => {
       let chatlistisActive = document.getElementsByClassName(
         "chatlist--is--active"
       );
-      console.log(chatlistisActive);
+      let dialog = document.getElementById("dialog");
+      let nameDialog= document.getElementById("dialog__name")
+      nameDialog.textContent=""
+      nameDialog.textContent=chatlistName.textContent
+      dialog.setAttribute("style", "display:block;");
       if (chatlistisActive.length >= 1) {
         chatlistisActive[0].classList.remove("chatlist--is--active");
       }
@@ -202,7 +206,7 @@ const sendmesseg=()=>{
     if(full===true){
         let dialogBody=document.getElementById("dialogBody");
         let messageSelf=document.createElement("div");
-        messageSelf.classList.add('message',`message__${self}`)
+        messageSelf.classList.add('message','message__self')
         dialogBody.appendChild(messageSelf);
         let messagePhoto = document.createElement("div")
         messagePhoto.setAttribute("class", "message__photo");

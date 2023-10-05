@@ -1,18 +1,21 @@
 @font-face {
-    font-family: fonticon;  font-family: fonticon;
+    font-family: fonticon;
+    font-family: fonticon;
     src: url('../fonts/fonticon.eot');
     src: url('../fonts/fonticon.eot?#iefix') format('embedded-opentype'),
-     url('../fonts/fonticon.woff2') format('woff2'), url('../fonts/fonticon.woff') format('woff'),
-     url('../fonts/fonticon.ttf') format('truetype')
+        url('../fonts/fonticon.woff2') format('woff2'), url('../fonts/fonticon.woff') format('woff'),
+        url('../fonts/fonticon.ttf') format('truetype')
 }
 
 @font-face {
-    font-family: fonticon2;  font-family: fonticon2;
+    font-family: fonticon2;
+    font-family: fonticon2;
     src: url('../fonts/fonticon2.woff2');
 }
 
 @font-face {
-    font-family: Arial;  font-family:Arial;
+    font-family: Arial;
+    font-family: Arial;
     src: url('../fonts/Arial.ttf');
 }
 

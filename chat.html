@@ -16,7 +16,9 @@
     <section id="Messenger" class="Messenger">
       <div class="folders">
         <span onclick="ChatList()" class="folders__menu menu"></span>
-        <span class="folders__allchat folders--is--active" data-badge="+99">همه پیام ها</span>
+        <span class="folders__allchat folders--is--active" data-badge="+99"
+          >همه پیام ها</span
+        >
         <span class="folders__group">گروه ها</span>
         <span class="folders__channel">کانال ها</span>
         <span class="folders__pv">گفتگو ها</span>
@@ -29,7 +31,11 @@
           <div class="chatlist__icon">
             <span class="chatlist__title">Messenger</span>
             <span onclick="addContact()" class="chatlist__addcontact"></span>
-            <span onclick="refreshChatlist()" id="refreshIcon" class="chatlist__refresh"></span>
+            <span
+              onclick="refreshChatlist()"
+              id="refreshIcon"
+              class="chatlist__refresh"
+            ></span>
           </div>
           <div class="search__box">
             <input
@@ -42,18 +48,21 @@
           </div>
         </div>
 
-        <div id="Contacts">
-        </div>
+        <div id="Contacts"></div>
       </div>
 
-      <div id="dialog" class="dialog" style="display: none;">
+      <div id="dialog" class="dialog" style="display: none">
         <div class="dialog__wrapper">
           <div class="dialog__header">
             <div class="dialog__header-right">
               <img src="./image/user.png" alt="profile" class="message__img" />
               <div class="dialog__user">
                 <div id="dialog__name" class="dialog__name">name</div>
-                <span class="dialog__status dialog__header-right--channel" data-sub="1000Sub .">Online</span>
+                <span
+                  class="dialog__status dialog__header-right--channel"
+                  data-sub="1000Sub ."
+                  >Online</span
+                >
               </div>
             </div>
             <div class="dialog__header-left">
@@ -134,39 +143,46 @@
         </div>
       </div>
     </section>
-    
-    <section id="addContact" class="section-Contact" style="display: none;">
+
+    <section id="addContact" class="section-Contact" style="display: none">
       <button id="close" class="close-btn"></button>
       <form name="form-contact" id="form-contact" method="post">
-      <h3 class="chatlist__title">اضافه کردن مخاطب</h3>
-      <div class="main-input">
+        <h3 class="chatlist__title">اضافه کردن مخاطب</h3>
+        <div class="main-input">
+          <input
+            class="input-add"
+            type="tel"
+            name="phone-Contact"
+            id="phone-Contact"
+            placeholder=" "
+            autofocus
+            required
+          />
+          <div class="cut"></div>
+          <label for="phone-Contact" class="placeholder"
+            >شماره موبایل مخاطب</label
+          >
+        </div>
+        <div class="main-input">
+          <input
+            class="input-add"
+            type="text"
+            name="name-Contact"
+            id="name-Contact"
+            placeholder=" "
+            required
+          />
+          <div class="cut cut-long"></div>
+          <label for="Contact" class="placeholder">نام مخاطب</label>
+        </div>
         <input
-          class="input-add"
-          type="tel"
-          name="phone-Contact"
-          id="phone-Contact"
-          placeholder=" "
-          autofocus
-          required
+          id="submitbtn"
+          type="button"
+          class="submit-add"
+          value="افزودن مخاطب"
         />
-        <div class="cut"></div>
-        <label for="phone-Contact" class="placeholder">شماره موبایل مخاطب</label>
-      </div>
-      <div class="main-input">
-        <input
-          class="input-add"
-          type="text"
-          name="name-Contact"
-          id="name-Contact"
-          placeholder=" "
-          required
-        />
-        <div class="cut cut-long"></div>
-        <label for="Contact" class="placeholder">نام مخاطب</label>
-      </div>
-      <input id="submitbtn" type="button" class="submit-add" value="افزودن مخاطب" />
-    </form>
-  </section>
+      </form>
+    </section>
 
     <script src="./js/pageReaction.js"></script>
   </body>

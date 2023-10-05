@@ -143,11 +143,11 @@ form {
     border-radius: 5px;
 }
 
-.ui-checkbox-input:checked ~ .ui-checkbox-mark{
+.ui-checkbox-input:checked~.ui-checkbox-mark {
     background: #40a0e5;
 }
 
-.ui-checkbox-mark::after{
+.ui-checkbox-mark::after {
     content: '';
     display: inline-block;
     width: 4px;
@@ -156,7 +156,7 @@ form {
     right: 6px;
     top: -1px;
     border: solid white;
-    border-width: 0 3px 3px 0; 
+    border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
 

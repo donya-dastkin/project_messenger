@@ -50,7 +50,7 @@
     font-size: 11px;
 }
 
-.dialog__header-left{
+.dialog__header-left {
     cursor: pointer;
 }
 
@@ -156,7 +156,7 @@
     padding-left: 10px;
 }
 
-.dialog__send::before{
+.dialog__send::before {
     content: '\e20a';
     /* content: '\f1d8'; */
     color: #0f8ca6;
@@ -243,6 +243,18 @@
 .message__other {
     display: flex;
     flex-direction: row-reverse;
+}
+
+.dialog__body::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background: #1c1c24;
+}
+
+.dialog__body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #46b1ef;
+    min-height: max-content;
 }
 
 /* .information {

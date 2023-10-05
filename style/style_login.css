@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'shabnam';
-    src: url("../fonts/Shabnam.eot") format('eot'), url("../fonts/Shabnam.ttf") format('truetype'), url("../fonts/Shabnam.woff2") format('woff2');
-}
-
 * {
     outline: 0;
     border: 0;
@@ -10,6 +5,7 @@
     padding: 0;
     box-sizing: inherit;
     font-size: 18px;
+    user-select: none;
 }
 
 body {
@@ -28,7 +24,7 @@ h1 {
     font-weight: bold;
     margin: 0;
     color: #fff;
-    padding:5px 5px 30px;
+    padding: 5px 5px 30px;
 }
 
 p {
@@ -58,7 +54,7 @@ p {
     text-align: center;
 }
 
-.submit_disabled {
+.submit-disabled {
     border-radius: 20px;
     border: 1px solid #40a0e55e;
     background: linear-gradient(45deg, #0f8ca65e, #40a0e55e);
@@ -116,7 +112,52 @@ form {
 
 .input-checkbox {
     color: #65657b;
-    margin:20px 20px 0 0;
+    margin: 10px 20px 5px;
+}
+
+.ui-checkbox {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+}
+
+.ui-checkbox-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.ui-checkbox-mark {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1px solid #40a0e5;
+    vertical-align: middle;
+    margin-left: 5px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.ui-checkbox-input:checked ~ .ui-checkbox-mark{
+    background: #40a0e5;
+}
+
+.ui-checkbox-mark::after{
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 12px;
+    position: absolute;
+    right: 6px;
+    top: -1px;
+    border: solid white;
+    border-width: 0 3px 3px 0; 
+    transform: rotate(45deg);
 }
 
 .container {
@@ -136,7 +177,7 @@ form {
     box-shadow: 0 0 15px 4px #0c2929
 }
 
-.form-container {
+.form-main {
     position: absolute;
     top: 0;
     height: 100%;
@@ -186,7 +227,7 @@ form {
 }
 
 .overlay {
-    background-image:url(../image/back.jpg);
+    background-image: url(../image/back_login.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     color: #FFF;
@@ -234,7 +275,7 @@ form {
     transform: translateX(20%);
 }
 
-.Error__Message{
+.Error__Message {
     color: #ef1f35;
     font-size: 14px;
     height: 20px;

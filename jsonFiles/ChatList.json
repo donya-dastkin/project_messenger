@@ -1,0 +1,24 @@
+[
+    {
+        "id":"Go Channel",
+        "chatlist":[
+        {"type":"other","text":"hey"},
+        {"type":"other","text":"hi"}
+    ]
+    },
+    {
+        "id":"Ali",
+        "chatlist":[
+            {"type":"other","text":"Ooh"},
+            {"type":"self","text":"yehh"},
+            {"type":"other","text":"nop"}
+        ]
+    },
+    {
+        "id":"HTML-- group",
+        "chatlist":[
+        {"type":"other","text":"hoooyy"},
+        {"type":"other","text":"heyyyy"}
+    ]
+    }
+]

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Form</title>
+    <title>Sign In & Sign Up</title>
     <link rel="stylesheet" type="text/css" href="./style/style_login.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
     <div class="container" id="container">
-        <div onchange="ValidationSignup()"  class="form-container sign-up-container">
+        <div onkeydown="ValidationSignup()" onchange="ValidationSignup()"  class="form-main sign-up-container">
             <form name="Signup" id="Signup" action="./chat.html" method="post">
                 <h1>ساخت حساب کاربری</h1>
                 <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" pattern="[0-9]{11}" required />
@@ -16,23 +16,29 @@
                 <input class="input" type="password" name="repassword" id="repassword" placeholder="تکرار رمز عبور" minlength="8" required />
                 <p id="ErrorMessageSignup" class="Error__Message"></p>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="remember" checked />
-                    <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
+                    <label for="remember" class="ui-checkbox">
+                        <input type="checkbox" id="remember" class="ui-checkbox-input" checked />
+                        <span class="ui-checkbox-mark"></span>
+                        مرا بخاطر بسپار!
+                    </label>
                 </div>
-                <button type="submit" disabled id="signupBtn" class="submit_disabled">ثبت نام</button>
+                <button type="submit" disabled id="signupBtn" class="submit-disabled">ثبت نام</button>
             </form>
         </div>
-        <div onchange="ValidationLogin()"  class="form-container sign-in-container">
-            <form name="Login" id="Login" action="./chat.html" method="post">
+        <div onkeydown="ValidationSignin()" onchange="ValidationSignin()"  class="form-main sign-in-container">
+            <form name="Signin" id="Signin" action="./chat.html" method="post">
                 <h1>ورود به حساب</h1>
                 <input class="input" type="tel" name="phone" id="phone" placeholder="شماره مویل" pattern="[0-9]{11}" required />
                 <input class="input" type="password" name="password" id="password" placeholder="رمز عبور" minlength="8" required />
-                <p id="ErrorMessageLogin" class="Error__Message"></p>
+                <p id="ErrorMessageSignin" class="Error__Message"></p>
                 <div class="input-checkbox">
-                    <input type="checkbox" checked id="remember" />
-                    <label for="remember" class="checkbox">مرا بخاطر بسپار!</label>
+                    <label for="remember" class="ui-checkbox">
+                        <input type="checkbox" id="remember" class="ui-checkbox-input" checked />
+                        <span class="ui-checkbox-mark"></span>
+                        مرا بخاطر بسپار!
+                    </label>
                 </div>
-                <button type="submit" disabled id="loginBtn" class="submit_disabled">ورود</button>
+                <button type="submit" disabled id="SigninBtn" class="submit-disabled">ورود</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -50,6 +56,5 @@
             </div>
         </div>
     </div>
-    <script src="./js/validationLogin.js"></script>
-    <script src="./js/styleLogin.js"></script>
+    <script src="./js/validationSignin.js"></script>
 </body></html>

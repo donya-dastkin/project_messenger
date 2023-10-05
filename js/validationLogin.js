@@ -11,7 +11,7 @@ signInButton.addEventListener("click", () =>
 );
 
 const signupBtn = document.getElementById("signupBtn");
-const loginBtn = document.getElementById("loginBtn");
+const signinBtn = document.getElementById("igninBtn");
 
 const ValidationSignup = () => {
   let ErrorMessageS = document.getElementById("ErrorMessageSignup");
@@ -100,10 +100,10 @@ const ValidationSignup = () => {
   }
 };
 
-const ValidationLogin = () => {
-  let ErrorMessageL = document.getElementById("ErrorMessageLogin");
-  const phone = document.forms["Login"]["phone"].value;
-  const password = document.forms["Login"]["password"].value;
+const ValidationSignin = () => {
+  let ErrorMessageL = document.getElementById("ErrorMessageSignin");
+  const phone = document.forms["Signin"]["phone"].value;
+  const password = document.forms["Signin"]["password"].value;
 
   const validationPhone = () => {
     let valid = false;
@@ -162,12 +162,12 @@ const ValidationLogin = () => {
   }
 
   if (Phone === false && PasswordLength === false && Filde === false) {
-    loginBtn.disabled = false;
-    loginBtn.setAttribute("class", "submit_disabled");
+    signinBtn.disabled = false;
+    signinBtn.setAttribute("class", "submit_disabled");
   } else if (Phone !== false && PasswordLength !== false && Filde !== false) {
     ErrorMessageL.textContent = "";
-    loginBtn.disabled = true;
-    loginBtn.setAttribute("class", "submit");
+    signinBtn.disabled = true;
+    signinBtn.setAttribute("class", "submit");
   }
 };
 

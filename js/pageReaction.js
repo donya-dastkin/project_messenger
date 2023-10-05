@@ -93,6 +93,22 @@ const refreshChatlist = () => {
         let nameDialog= document.getElementById("dialog__name")
         nameDialog.textContent=chatlistName.textContent
         dialog.setAttribute("style", "display:block;");
+        fetch("./jsonFiles/ChatList.json")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (Contacts) {
+          for (let i = 0; i < Contacts.length; i++) {
+            if(Contacts[i].id === chatlistName.textContent){
+              let dialogBody=document.getElementById("dialogBody");
+              dialogBody.innerHTML=''
+              for(let j =0; j< Contacts[i].chatlist.length;j++){
+                let type =Contacts[i].chatlist[j].type
+                sendmesseg(Contacts[i].chatlist[j].text,type)
+              }
+            }
+          }
+        })
         if (chatlistisActive.length >= 1) {
           chatlistisActive[0].classList.remove("chatlist--is--active");
         }
@@ -189,7 +205,7 @@ const IconChanger=()=>{
     let full
 if(dialog.value.length>0 && dialog.value !==""){
     dialogIcon.setAttribute('class','dialog__send')
-    dialogIconattach.style=".dialog__attach::before { content : '1'}"
+    // dialogIconattach.style=".dialog__attach::before { content : '1'}"
     full=true
 }else{
     dialogIcon.setAttribute('class','dialog__voice')
@@ -198,12 +214,21 @@ if(dialog.value.length>0 && dialog.value !==""){
 return full
 }
 
-const sendmesseg=()=>{
-    const full=IconChanger()
-    if(full===true){
+const sendmesseg=(dialogg=dialog.value,type="self")=>{
         let dialogBody=document.getElementById("dialogBody");
         let messageSelf=document.createElement("div");
-        messageSelf.classList.add('message','message__self')
+        let messageCard = document.createElement("div")
+        if(type="other"){
+          messageCard.classList.remove("message__card", "message__card--self");
+          messageSelf.classList.remove('message','message__self')
+          messageSelf.classList.add('message','message__other')
+          messageCard.classList.add("message__card", "message__card--other");
+        }else if(type="self"){
+          messageSelf.classList.remove('message','message__other')
+          messageCard.classList.remove("message__card", "message__card--other");
+          messageCard.classList.add("message__card", "message__card--self");
+          messageSelf.classList.add('message','message__self')
+        }
         dialogBody.appendChild(messageSelf);
         let messagePhoto = document.createElement("div")
         messagePhoto.setAttribute("class", "message__photo");
@@ -212,16 +237,14 @@ const sendmesseg=()=>{
         messageImg.setAttribute("class", "message__img");
         messagePhoto.appendChild(messageImg);
         messageSelf.appendChild(messagePhoto);
-        let messageCard = document.createElement("div")
-        messageCard.classList.add("message__card", "message__card--self");
+
         let messageText = document.createElement("span")
         messageText.setAttribute("class", "message__text");
-        messageText.setAttribute("id", "message__text__self");
-        messageText.textContent=dialog.value
+        messageText.textContent=dialogg
         messageCard.appendChild(messageText);
         messageSelf.appendChild(messageCard);
         dialog.value=null
-    }
+    // }
 }
 
 dialog.addEventListener("keydown",(event)=>{

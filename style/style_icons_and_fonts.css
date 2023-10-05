@@ -15,3 +15,8 @@
     font-family: Arial;  font-family:Arial;
     src: url('../fonts/Arial.ttf');
 }
+
+@font-face {
+    font-family: 'shabnam';
+    src: url("../fonts/Shabnam.eot") format('eot'), url("../fonts/Shabnam.ttf") format('truetype'), url("../fonts/Shabnam.woff2") format('woff2');
+}

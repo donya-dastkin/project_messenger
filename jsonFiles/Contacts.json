@@ -1,31 +1,29 @@
-[{
-    "profile":"./image/user.png",
-    "name":"Go Channel",
-    "chatType":"channel",
-    "date":"10:00 ب.ط",
-    "numberMessages":"10",
-    "sender":"Donya",
-    "lastMessage":"Hi my name is Donya"
-}
-,
-{
-    "profile":"./image/user.png",
-    "name":"HTML-- group",
-    "chatType":"group",
-    "date":"09:00 ب.ط",
-    "numberMessages":"15",
-    "sender":"Darya",
-    "lastMessage":"Hi my name is Darya"
-}
-,
-{
-    "profile":"./image/user.png",
-    "name":"Ali",
-    "chatType":"",
-    "date":"19:00 ب.ط",
-    "numberMessages":"",
-    "sender":"ali",
-    "lastMessage":"Hi my name is ali"
-}
-
+[
+    {
+        "profile": "./image/user.png",
+        "name": "Go Channel",
+        "chatType": "channel",
+        "date": "10:00 ب.ط",
+        "numberMessages": "10",
+        "sender": "Donya",
+        "lastMessage": "Hi my name is Donya"
+    },
+    {
+        "profile": "./image/user.png",
+        "name": "HTML-- group",
+        "chatType": "group",
+        "date": "09:00 ب.ط",
+        "numberMessages": "15",
+        "sender": "Darya",
+        "lastMessage": "Hi my name is Darya"
+    },
+    {
+        "profile": "./image/user.png",
+        "name": "Ali",
+        "chatType": "",
+        "date": "19:00 ب.ط",
+        "numberMessages": "",
+        "sender": "ali",
+        "lastMessage": "Hi my name is ali"
+    }
 ]

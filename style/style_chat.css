@@ -2,7 +2,8 @@ html {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     direction: rtl;
     background-color: #15161a;
 }
@@ -16,12 +17,15 @@ html, body {
     font-family: 'Arial';
 }
 
-*::before, *::after {
+*::before,
+*::after {
     box-sizing: inherit;
-    font-family: 'fonticon','fonticon2','Arial';
+    font-family: 'fonticon', 'fonticon2', 'Arial';
 }
 
-a, span, label {
+a,
+span,
+label {
     display: inline-block;
 }
 

@@ -6,15 +6,15 @@
     border-right: 0 solid #2f3235;
 }
 
-.chatlist__Open{
+.chatlist__Open {
     width: 25%;
     min-width: 290px;
     padding: 0 12px;
     transition: width 0.2s;
 }
 
-.chatlist__Closed{
-    width:0px;
+.chatlist__Closed {
+    width: 0px;
     transition: all 1s;
 }
 
@@ -46,7 +46,7 @@
     color: #4a4e51;
 }
 
-.chatlist__icon--sticky{
+.chatlist__icon--sticky {
     position: sticky;
     top: 0;
     background: #1c1c24;
@@ -66,7 +66,7 @@
     margin: 5px;
 }
 
-.chatlist__addcontact:hover{
+.chatlist__addcontact:hover {
     color: #3ca0df;
 }
 
@@ -77,7 +77,7 @@
     margin: 5px;
 }
 
-.chatlist__refresh:hover{
+.chatlist__refresh:hover {
     color: #3ca0df;
 }
 
@@ -96,12 +96,13 @@
     flex-shrink: 0;
 }
 
-.chatlist__cadre:hover,.chatlist--is--active{
+.chatlist__cadre:hover,
+.chatlist--is--active {
     background: #15161a;
-    padding:5px;
+    padding: 5px;
     cursor: pointer;
     border-radius: 15px;
-    margin:10px 0px 5px;
+    margin: 10px 0px 5px;
     transition: all 0.2s;
 }
 
@@ -181,7 +182,14 @@
     text-align: center;
 }
 
-.chatlist::-webkit-scrollbar{
+.chatlist::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
     background: #2f3235;
-    width: 5px;
+}
+
+.chatlist::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #46b1ef;
+    min-height: max-content;
 }

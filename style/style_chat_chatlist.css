@@ -4,7 +4,6 @@
     background: #1c1c24;
     overflow-y: scroll;
     border-right: 0 solid #2f3235;
-    box-shadow: 0 0 5px 1px #2f3235;
 }
 
 .chatlist__Open{
@@ -19,7 +18,7 @@
     transition: all 1s;
 }
 
-.search {
+.search__box {
     padding: 5px 0;
     width: 100%;
 }
@@ -44,6 +43,7 @@
     text-align: center;
     justify-content: center;
     padding-top: 5px;
+    color: #4a4e51;
 }
 
 .chatlist__icon--sticky{
@@ -56,11 +56,11 @@
     flex-grow: 1;
     text-align: start;
     padding: 5px;
+    color: #ddd;
 }
 
 .chatlist__addcontact::before {
     content: '\f234';
-    color: #4a4e51;
     font-size: 22px;
     cursor: pointer;
     margin: 5px;
@@ -72,13 +72,16 @@
 
 .chatlist__refresh::before {
     content: '\f021';
-    color: #4a4e51;
     font-size: 22px;
     cursor: pointer;
     margin: 5px;
 }
 
-.chatlist__card {
+.chatlist__refresh:hover{
+    color: #3ca0df;
+}
+
+.chatlist__cadre {
     width: 100%;
     display: flex;
     margin-top: 20px;
@@ -93,7 +96,7 @@
     flex-shrink: 0;
 }
 
-.chatlist__card:hover,.chatlist--is--active{
+.chatlist__cadre:hover,.chatlist--is--active{
     background: #15161a;
     padding:5px;
     cursor: pointer;

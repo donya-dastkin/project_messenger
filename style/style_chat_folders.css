@@ -1,11 +1,12 @@
 .folders {
     height: 100vh;
     display: flex;
-    /* width: 72px; */
-    /* flex-shrink: 0; */
+    width: 72px;
+    flex-shrink: 0;
     min-width: 72px;
     flex-direction: column;
     background: #18171d;
+    box-shadow: 0 0 5px 1px #2f3235;
 }
 
 .folders__allchat,

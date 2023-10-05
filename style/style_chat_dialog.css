@@ -1,0 +1,253 @@
+.dialog {
+    flex-grow: 1;
+    background: #15161a;
+}
+
+.dialog__wrapper {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #18191e;
+    position: sticky;
+}
+
+.dialog__user {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    padding: 2px;
+}
+
+.dialog__name {
+    color: #fff;
+    font-size: 13px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.dialog__status {
+    color: #2798c4;
+    font-size: 12px;
+    padding: 0 5px;
+}
+
+.dialog__header-right {
+    display: flex;
+    flex-direction: row;
+}
+
+.dialog__header-right--channel::before {
+    color: #2798c4;
+    content: attr(data-sub);
+    font-family: 'Arial';
+    padding: 2px;
+    font-size: 11px;
+}
+
+.dialog__header-left{
+    cursor: pointer;
+}
+
+.dialog__search::before,
+.dialog__edit::before,
+.dialog__showprofile::before,
+.dialog__refresh::before,
+.dialog__options::before {
+    padding: 20px 10px;
+    font-size: 18px;
+}
+
+.dialog__header-left--is--active::before {
+    color: #2798c4;
+}
+
+.dialog__search::before {
+    color: #4a4e51;
+    content: '\e089';
+    cursor: pointer;
+}
+
+.dialog__showprofile::before {
+    content: '\f007';
+    cursor: pointer;
+    color: #4a4e51;
+}
+
+/* .dialog__options::before{
+    content: '\e11e';
+    cursor: pointer;
+    color: #4a4e51;
+} */
+
+.dialog__refresh::before {
+    color: #4a4e51;
+    content: '\f021';
+    cursor: pointer;
+}
+
+.dialog__edit::before {
+    content: '\f4ff';
+    color: #4a4e51;
+    cursor: pointer;
+}
+
+.dialog__footer {
+    display: flex;
+    align-items: center;
+    background: #1c1c24;
+    border: 1px #1e1e26 solid;
+    border-radius: 20px;
+    margin: 10px 5px 8px;
+}
+
+.dialog__attach {
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.dialog__attach::before {
+    content: '\f0c6';
+    color: #4a4e51;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.dialog__attach--input {
+    opacity: 0;
+    width: 2px;
+}
+
+.dialog__message {
+    flex-grow: 1;
+}
+
+.dialog__message--input {
+    height: 30px;
+    line-height: 30px;
+    resize: none;
+    width: 97%;
+    font-size: 15px;
+    color: #fff;
+    background: #1c1c24;
+}
+
+.dialog__tools {
+    height: 30px;
+}
+
+.dialog__emoji::before {
+    content: '\e088';
+    color: #4a4e51;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.dialog__voice:before {
+    content: '\f130';
+    color: #4a4e51;
+    font-size: 20px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+.dialog__send::before{
+    content: '\e20a';
+    /* content: '\f1d8'; */
+    color: #0f8ca6;
+    font-size: 20px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+.dialog__header,
+.dialog__footer {
+    padding: 8px 10px;
+}
+
+.dialog__body {
+    flex-grow: 1;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.message {
+    display: flex;
+    padding: 5px 10px;
+}
+
+.message__photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 2px 10px;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.message__datalist {
+    color: #2f3235;
+    font-size: 12px;
+    display: flex;
+    margin-left: 15px;
+    height: 25px;
+}
+
+.message__datalist--name {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.message__card {
+    border-radius: 20px;
+    position: relative;
+    top: 25px;
+}
+
+.message__text {
+    max-width: 350px;
+    font-size: 14px;
+    color: #fff;
+    padding: 5px 10px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.message__card--self {
+    background: linear-gradient(45deg, #0f8ca6, #40a0e5);
+    border-top-right-radius: 0px;
+}
+
+.message__card--other {
+    background: linear-gradient(45deg, #1e212a, #1e1e26);
+    border-top-left-radius: 0px;
+}
+
+.message__img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.message__self {
+    display: flex;
+    flex-direction: row;
+}
+
+.message__other {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* .information {
+    width: 15%;
+    min-width: 200px;
+    background: #fff;
+    border-left: 1px solid #ddd;
+} */

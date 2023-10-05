@@ -3,7 +3,7 @@
     font-family: 'fonticon','fonticon2','Arial';
 }
 
-.section {
+.section-Contact {
 position: absolute;
 width: 280px;
 height: 320px;
@@ -20,7 +20,7 @@ left: 400px;
 border: #4a4e51 solid 1px;
 }
 
-.section:hover {
+.section-Contact:hover {
 box-shadow: 0px 0px 5px 1px #4a4e51;
 }
 
@@ -32,7 +32,7 @@ position: relative;
 font-size: 16px;
 }
 
-.inputt {
+.input-add {
 border: 0;
 outline: 0;
 width: 100%;
@@ -63,8 +63,8 @@ background: #1c1c24;
 width: 60px;
 }
 
-.inputt:focus~.cut,
-.inputt:not(:placeholder-shown)~.cut {
+.input-add:focus~.cut,
+.input-add:not(:placeholder-shown)~.cut {
 transform: translateY(8px);
 cursor: pointer;
 border-radius: 15px;
@@ -82,27 +82,27 @@ transition: transform 200ms, color 200ms;
 font-size: 14px;
 }
 
-.inputt:focus~.placeholder,
-.inputt:not(:placeholder-shown)~.placeholder {
+.input-add:focus~.placeholder,
+.input-add:not(:placeholder-shown)~.placeholder {
 transform: translateY(-30px) translateX(10px) scale(0.75);
 }
 
-.inputt:not(:placeholder-shown)~.placeholder {
+.input-add:not(:placeholder-shown)~.placeholder {
 color: #716f79;
 }
 
-.inputt:focus~.placeholder {
+.input-add:focus~.placeholder {
 color: #ef1f35;
 }
 
-.inputt:focus{
+.input-add:focus{
 padding:5px 5px;
 cursor: pointer;
 border-radius: 15px;
 box-shadow: 0 0 3px 0.5px #4a4e51;
 }
 
-.submitbtn {
+.submit-add {
 background: linear-gradient(45deg, #0f8ca6, #40a0e5);
 border-radius: 12px;
 border: 0;
@@ -117,17 +117,11 @@ text-align: center;
 width: 98%;
 }
 
-.submitbtn:active {
+.submit-add:active {
 background:#0f8ca6
 }
 
-.title{
-text-align: center;
-color: #eee;
-font-size: 18px;
-}
-
-.close{
+.close-btn{
     background: linear-gradient(45deg, #0f8ca6, #40a0e5);
     border-radius: 12px;
     border: 0;
@@ -144,6 +138,6 @@ font-size: 18px;
     height: 25px;
 }
 
-.close::before{
+.close-btn::before{
 content: '\e02d';
 }

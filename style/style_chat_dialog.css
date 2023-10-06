@@ -111,7 +111,7 @@
     flex-shrink: 0;
 }
 
-.dialog__attach::before {
+.dialog__attach--file::before {
     content: '\f0c6';
     color: #4a4e51;
     font-size: 20px;

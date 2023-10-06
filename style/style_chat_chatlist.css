@@ -9,7 +9,7 @@
 
 .chatlist__Open {
     width: 25%;
-    min-width: 300px;
+    min-width: 350px;
     padding: 0 12px;
     transition: width 0.2s;
 }

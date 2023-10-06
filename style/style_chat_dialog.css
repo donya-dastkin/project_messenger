@@ -257,6 +257,18 @@
     min-height: max-content;
 }
 
+.dialog__footer--channels{
+    display: flex;
+    height: 50px;
+    color: #40a0e5;
+    align-items: center;
+    font-size: 18px;
+    text-align: center;
+    justify-content: center;
+    background: #1c1c24;
+    margin: 10px 2px 5px;
+}
+
 /* .information {
     width: 15%;
     min-width: 200px;

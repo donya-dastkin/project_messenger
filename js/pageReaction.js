@@ -1,4 +1,7 @@
+let footer = document.getElementById("footer")
+let content = footer.innerHTML
 const chatlist = document.getElementById("chatlist");
+let dialogSection = document.getElementById("dialog");
 const dialog = document.getElementById("dialog__message");
 const ContactlistSection = document.getElementById("Contacts");
 const dialogIconattach = document.getElementById("dialog__attach");
@@ -108,11 +111,9 @@ const CreateContactBox = (object) => {
     let chatlistisActive = document.getElementsByClassName(
       "chatlist--is--active"
     );
-    let dialog = document.getElementById("dialog");
     let nameDialog = document.getElementById("dialog__name");
-
     nameDialog.textContent = chatlistName.textContent;
-    dialog.setAttribute("style", "display:block;");
+    dialogSection.setAttribute("style", "display:block;");
 
     fetch("./jsonFiles/ChatList.json")
       .then(function (response) {
@@ -121,11 +122,27 @@ const CreateContactBox = (object) => {
       .then(function (Contacts) {
         for (let i = 0; i < Contacts.length; i++) {
           if (Contacts[i].Name === nameDialog.textContent) {
-            console.log(Contacts[i].Name);
             let dialogBody = document.getElementById("dialogBody");
             dialogBody.innerHTML = "";
+            let subChannel = document.getElementsByClassName("dialog__status")
+            let channels = chatlistCard.getElementsByClassName("chatlist__name--channel")
+            let group = chatlistCard.getElementsByClassName("chatlist__name--channel")
+            if (group.length > 0) {
+              subChannel[0].classList.add("dialog__header-right--channel")
+            } else {
+              subChannel[0].classList.remove("dialog__header-right--channel")
+            }
+            if (channels.length > 0) {
+              subChannel[0].classList.add("dialog__header-right--channel")
+              footer.innerHTML = "بی صدا"
+              footer.setAttribute("class", "dialog__footer--channels")
+            } else {
+              footer.setAttribute("class", "dialog__footer")
+              footer.innerHTML = content
+              subChannel[0].classList.remove("dialog__header-right--channel")
+            }
             for (let j = 0; j < Contacts[i].chatlist.length; j++) {
-              sendMesseg(Contacts[i].chatlist[j].text,Contacts[i].chatlist[j].type);
+              sendMesseg(Contacts[i].chatlist[j].text, Contacts[i].chatlist[j].type);
             }
           }
         }

@@ -14,15 +14,15 @@
 
   <body>
     <section id="Messenger" class="Messenger">
-      <div class="folders">
+      <div class="folders" id="folders">
         <span onclick="ChatList()" class="folders__menu menu"></span>
-        <span class="folders__allchat folders--is--active" data-badge="+99"
+        <span onclick="foldersISactive('all')" class="folders__allchat folders--is--active" data-badge="+99"
           >همه پیام ها</span
         >
-        <span class="folders__group">گروه ها</span>
-        <span class="folders__channel">کانال ها</span>
-        <span class="folders__pv">گفتگو ها</span>
-        <span class="folders__setting">تنظیمات</span>
+        <span onclick="foldersISactive('group')" class="folders__group">گروه ها</span>
+        <span onclick="foldersISactive('channel')" class="folders__channel">کانال ها</span>
+        <span onclick="foldersISactive('pv')" class="folders__pv">گفتگو ها</span>
+        <span onclick="foldersISactive('setting')" class="folders__setting">تنظیمات</span>
         <span class="folders__screenmode folders__light">حالت روشنایی</span>
       </div>
 
@@ -113,7 +113,7 @@
           </div>
 
           <div class="dialog__footer" onkeyup="IconChanger()">
-            <div id="dialog__attach" class="dialog__attach">
+            <div id="dialog__attach" class="dialog__attach dialog__attach--file">
               <input
                 type="file"
                 name="dialog__input--attach"
@@ -121,7 +121,7 @@
                 class="dialog__attach--input"
               />
               <span
-                onclick="sendmesseg()"
+                onclick="sendMesseg()"
                 id="dialog__icon"
                 class="dialog__voice"
               ></span>
@@ -145,7 +145,7 @@
     </section>
 
     <section id="addContact" class="section-Contact" style="display: none">
-      <button id="close" class="close-btn"></button>
+      <button id="closed" class="close-btn"></button>
       <form name="form-contact" id="form-contact" method="post">
         <h3 class="chatlist__title">اضافه کردن مخاطب</h3>
         <div class="main-input">
@@ -176,10 +176,22 @@
           <label for="Contact" class="placeholder">نام مخاطب</label>
         </div>
         <input
-          id="submitbtn"
+          id="addition"
           type="button"
           class="submit-add"
           value="افزودن مخاطب"
+        />
+      </form>
+    </section>
+
+    <section id="messengerSettings" class="section-Contact" style="display: none">
+      <button id="closed" class="close-btn"></button>
+      <form name="form-contact" id="form-contact" method="post">
+        <input
+          id="submit"
+          type="button"
+          class="submit-add"
+          value="ثبت تنطیمات"
         />
       </form>
     </section>

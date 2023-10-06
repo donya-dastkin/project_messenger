@@ -1,6 +1,6 @@
 [
     {
-        "id": "Go Channel",
+        "Name": "Go Channel",
         "chatlist": [
             {
                 "type": "other",
@@ -13,7 +13,7 @@
         ]
     },
     {
-        "id": "Ali",
+        "Name": "Fateme Zaka",
         "chatlist": [
             {
                 "type": "other",
@@ -30,7 +30,24 @@
         ]
     },
     {
-        "id": "HTML-- group",
+        "Name": "Donya Dastkin",
+        "chatlist": [
+            {
+                "type": "other",
+                "text": "Donyaaaaa"
+            },
+            {
+                "type": "self",
+                "text": "yehh"
+            },
+            {
+                "type": "other",
+                "text": "nop"
+            }
+        ]
+    },
+    {
+        "Name": "HTML-- group",
         "chatlist": [
             {
                 "type": "other",
@@ -39,6 +56,23 @@
             {
                 "type": "other",
                 "text": "heyyyy"
+            }
+        ]
+    },
+    {
+        "Name": "Arman",
+        "chatlist": [
+            {
+                "type": "other",
+                "text": "Ooh"
+            },
+            {
+                "type": "self",
+                "text": "yehh"
+            },
+            {
+                "type": "other",
+                "text": "nop"
             }
         ]
     }

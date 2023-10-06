@@ -1,8 +1,10 @@
 const chatlist = document.getElementById("chatlist");
+const dialog = document.getElementById("dialog__message");
 const ContactlistSection = document.getElementById("Contacts");
-const Contacts = ContactlistSection.getElementsByClassName("chatlist__cadre");
+const dialogIconattach = document.getElementById("dialog__attach");
+const Contacts = chatlist.getElementsByClassName("chatlist__cadre");
 
-const ChatList = () => {
+const ChatList = function () {
   let ClosedChatList = () => {
     chatlist.classList.remove("chatlist", "chatlist__Open");
     chatlist.classList.add("chatlist", "chatlist__Closed");
@@ -20,36 +22,181 @@ const ChatList = () => {
   }
 };
 
-const CreateContactBox = () => {
-  chatlistCard = document.createElement("div");
-  chatlistCard.classList.add("chatlist__cadre");
+const foldersISactive = function (chatType) {
+  const active = document.getElementsByClassName("folders--is--active");
+  active[0].classList.remove("folders--is--active");
 
-  chatlistPhoto = document.createElement("div");
-  chatlistPhoto.classList.add("chatlist__photo");
+  switch (chatType) {
+    case "all":
+      const activeAll = document.getElementsByClassName("folders__allchat");
+      activeAll[0].classList.add("folders--is--active");
+      for (let i = 0; i < Contacts.length; i++) {
+        Contacts[i].style = "display: flex;";
+      }
 
-  chatlistImg = document.createElement("img");
-  chatlistImg.classList.add("chatlist__img");
+      break;
+    case "pv":
+      const activePv = document.getElementsByClassName("folders__pv");
+      activePv[0].classList.add("folders--is--active");
+      for (let i = 0; i < Contacts.length; i++) {
+        ContactlistSection.appendChild(Contacts[i]);
+      }
+      let datePv;
+      for (let i = 0; i < Contacts.length; i++) {
+        datePv = Contacts[i].querySelector("span[date='pv']");
+        if (datePv !== null) {
+          Contacts[i].style = "display: flex;";
+        } else if (datePv === null) {
+          Contacts[i].style = "display: none;";
+        }
+      }
 
-  chatlistInfo = document.createElement("div");
-  chatlistInfo.classList.add("chatlist__info");
+      break;
+    case "group":
+      const activeGroup = document.getElementsByClassName("folders__group");
+      activeGroup[0].classList.add("folders--is--active");
+      for (let i = 0; i < Contacts.length; i++) {
+        ContactlistSection.appendChild(Contacts[i]);
+      }
+      let dateGroup;
+      for (let i = 0; i < Contacts.length; i++) {
+        dateGroup = Contacts[i].querySelector("span[date='group']");
+        if (dateGroup !== null) {
+          Contacts[i].style = "display: flex;";
+        } else if (dateGroup === null) {
+          Contacts[i].style = "display: none;";
+        }
+      }
 
-  chatlistDetails = document.createElement("div");
-  chatlistDetails.classList.add("chatlist__details");
-  chatlistName = document.createElement("span");
-  chatlistName.classList.add("chatlist__name");
-  chatlistDate = document.createElement("span");
-  chatlistDate.classList.add("chatlist__date");
+      break;
+    case "channel":
+      const activeChannel = document.getElementsByClassName("folders__channel");
+      activeChannel[0].classList.add("folders--is--active");
+      for (let i = 0; i < Contacts.length; i++) {
+        ContactlistSection.appendChild(Contacts[i]);
+      }
+      let dateChannel;
+      for (let i = 0; i < Contacts.length; i++) {
+        dateChannel = Contacts[i].querySelector("span[date='channel']");
+        if (dateChannel !== null) {
+          Contacts[i].style = "display: flex;";
+        } else if (dateChannel === null) {
+          Contacts[i].style = "display: none;";
+        }
+      }
 
-  chatlistMore = document.createElement("div");
-  chatlistMore.classList.add("chatlist__more");
-  chatlistSender = document.createElement("span");
-  chatlistSender.classList.add("chatlist__sender");
-  chatlistMessage = document.createElement("p");
-  chatlistMessage.classList.add("chatlist__message");
-  chatlistBadge = document.createElement("span");
+      break;
+    case "setting":
+      const activeSetting = document.getElementsByClassName("folders__setting");
+      activeSetting[0].classList.add("folders--is--active");
+
+      let sectionAddContact = document.getElementById("messengerSettings");
+      sectionAddContact.style = "display: block;";
+
+      let Messenger = document.getElementById("Messenger");
+      Messenger.setAttribute("style", "display:none;");
+
+      break;
+  }
 };
 
-const CreateContactBoxAppendChild = () => {
+const CreateContactBox = (object) => {
+  let chatlistCard = document.createElement("div");
+  chatlistCard.classList.add("chatlist__cadre");
+
+  chatlistCard.addEventListener("click", () => {
+    let chatlistisActive = document.getElementsByClassName(
+      "chatlist--is--active"
+    );
+    let dialog = document.getElementById("dialog");
+    let nameDialog = document.getElementById("dialog__name");
+
+    nameDialog.textContent = chatlistName.textContent;
+    dialog.setAttribute("style", "display:block;");
+
+    fetch("./jsonFiles/ChatList.json")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (Contacts) {
+        for (let i = 0; i < Contacts.length; i++) {
+          if (Contacts[i].Name === nameDialog.textContent) {
+            console.log(Contacts[i].Name);
+            let dialogBody = document.getElementById("dialogBody");
+            dialogBody.innerHTML = "";
+            for (let j = 0; j < Contacts[i].chatlist.length; j++) {
+              sendMesseg(Contacts[i].chatlist[j].text,Contacts[i].chatlist[j].type);
+            }
+          }
+        }
+      });
+
+    if (chatlistisActive.length >= 1) {
+      chatlistisActive[0].classList.remove("chatlist--is--active");
+    }
+
+    chatlistCard.classList.add("chatlist--is--active");
+  });
+
+  let chatlistPhoto = document.createElement("div");
+  chatlistPhoto.classList.add("chatlist__photo");
+
+  let chatlistImg = document.createElement("img");
+  chatlistImg.classList.add("chatlist__img");
+
+  let chatlistInfo = document.createElement("div");
+  chatlistInfo.classList.add("chatlist__info");
+
+  let chatlistDetails = document.createElement("div");
+  chatlistDetails.classList.add("chatlist__details");
+  let chatlistName = document.createElement("span");
+  chatlistName.classList.add("chatlist__name");
+  let chatlistDate = document.createElement("span");
+  chatlistDate.classList.add("chatlist__date");
+
+  let chatlistMore = document.createElement("div");
+  chatlistMore.classList.add("chatlist__more");
+  let chatlistSender = document.createElement("span");
+  chatlistSender.classList.add("chatlist__sender");
+  let chatlistMessage = document.createElement("p");
+  chatlistMessage.classList.add("chatlist__message");
+
+  if (object.profile === undefined) {
+    chatlistImg.src = "./image/user.png";
+  } else if (object.profile !== "") {
+    chatlistImg.src = object.profile;
+  }
+
+  chatlistName.textContent = object.fullNname;
+
+  if (object.date === undefined) {
+    chatlistDate.textContent = "";
+  } else if (object.date !== "") {
+    chatlistDate.textContent = object.date;
+  }
+
+  if (object.sender === undefined) {
+    chatlistSender.textContent = "";
+  } else if (object.sender !== "") {
+    chatlistSender.textContent = `${object.sender} : `;
+  }
+
+  if (object.lastMessage === undefined) {
+    chatlistMessage.textContent = "";
+  } else if (object.lastMessage !== "") {
+    chatlistMessage.textContent = object.lastMessage;
+  }
+
+  if (object.chatType === "group") {
+    chatlistName.classList.add("chatlist__name--group");
+    chatlistName.setAttribute("date", "group");
+  } else if (object.chatType === "channel") {
+    chatlistName.setAttribute("date", "channel");
+    chatlistName.classList.add("chatlist__name--channel");
+  } else if (object.chatType === "pv") {
+    chatlistName.setAttribute("date", "pv");
+  }
+
   chatlistPhoto.appendChild(chatlistImg);
   chatlistCard.appendChild(chatlistPhoto);
   chatlistDetails.appendChild(chatlistName);
@@ -57,13 +204,54 @@ const CreateContactBoxAppendChild = () => {
   chatlistInfo.appendChild(chatlistDetails);
   chatlistMore.appendChild(chatlistSender);
   chatlistMore.appendChild(chatlistMessage);
-  chatlistMore.appendChild(chatlistBadge);
+  if (object.numberMessages !== "" && object.numberMessages !== undefined) {
+    let chatlistBadge = document.createElement("span");
+    chatlistBadge.classList.add("chatlist__badge");
+    chatlistBadge.textContent = object.numberMessages;
+    chatlistMore.appendChild(chatlistBadge);
+  }
   chatlistInfo.appendChild(chatlistMore);
   chatlistCard.appendChild(chatlistInfo);
-  chatlist.appendChild(chatlistCard);
+  ContactlistSection.appendChild(chatlistCard);
 };
 
-const refreshChatlist = () => {
+const addContact = function () {
+  let sectionAddContact = document.getElementById("addContact");
+  sectionAddContact.style = "display: block;";
+
+  let Messenger = document.getElementById("Messenger");
+  Messenger.setAttribute("style", "display:none;");
+
+  let closebtn = document.getElementById("closed");
+  closebtn.onclick = closeWindow = () => {
+    sectionAddContact.style = "display: none;";
+    Messenger.removeAttribute("style", "display:block;");
+  };
+
+  let addbtn = document.getElementById("addition");
+  addbtn.onclick = AddContact = () => {
+    const phone = document.forms["form-contact"]["phone-Contact"].value;
+    const Name = document.forms["form-contact"]["name-Contact"].value;
+
+    const contactObject = {
+      fName: Name,
+      phone: phone,
+      fullNname: Name,
+      chatType: "pv",
+    };
+
+    CreateContactBox(contactObject);
+
+    alert("مخاطب با موفقیت اضافه شد");
+
+    document.forms["form-contact"]["phone-Contact"].value = null;
+    document.forms["form-contact"]["name-Contact"].value = null;
+
+    closeWindow();
+  };
+};
+
+const refreshChatlist = function () {
   if (Contacts.length > 0) {
     ContactlistSection.innerHTML = "";
   }
@@ -74,180 +262,58 @@ const refreshChatlist = () => {
     })
     .then(function (Contacts) {
       for (let i = 0; i < Contacts.length; i++) {
-        CreateContactBox();
-        chatlistImg.src = Contacts[i].profile;
-        chatlistName.textContent = Contacts[i].name;
-        chatlistDate.textContent = Contacts[i].date;
-        chatlistSender.textContent = `${Contacts[i].sender} : `;
-        chatlistMessage.textContent = Contacts[i].lastMessage;
-        if (Contacts[i].numberMessages !== "") {
-          chatlistBadge.textContent = Contacts[i].numberMessages;
-          chatlistBadge.classList.add("chatlist__badge");
-        }
-        if (Contacts[i].chatType === "group") {
-          chatlistName.classList.add("chatlist__name--group");
-        } else if (Contacts[i].chatType === "channel") {
-          chatlistName.classList.add("chatlist__name--channel");
-        }
-        CreateContactBoxAppendChild();
-
-        chatlistCard.addEventListener("click", function chatlistCardClick() {
-          let chatlistisActive = document.getElementsByClassName(
-            "chatlist--is--active"
-          );
-          let dialog = document.getElementById("dialog");
-          let nameDialog = document.getElementById("dialog__name");
-
-          nameDialog.textContent = chatlistName.textContent;
-          dialog.setAttribute("style", "display:block;");
-
-          fetch("./jsonFiles/ChatList.json")
-            .then(function (response) {
-              return response.json();
-            })
-            .then(function (Contacts) {
-              for (let i = 0; i < Contacts.length; i++) {
-                if (Contacts[i].id === nameDialog.textContent) {
-                  let dialogBody = document.getElementById("dialogBody");
-                  dialogBody.innerHTML = "";
-
-                  for (let j = 0; j < Contacts[i].chatlist.length; j++) {
-                    sendmesseg(
-                      Contacts[i].chatlist[j].text,
-                      Contacts[i].chatlist[j].type
-                    );
-                  }
-                }
-              }
-            });
-
-          if (chatlistisActive.length >= 1) {
-            chatlistisActive[0].classList.remove("chatlist--is--active");
-          }
-          chatlistCard.classList.add("chatlist--is--active");
-        });
+        CreateContactBox(Contacts[i]);
       }
     });
 };
 
-// const addContact = () => {
-//   let addContact = document.getElementById("addContact");
-//   addContact.style = "display: block;";
-//   let Messenger = document.getElementById("Messenger");
-//   Messenger.setAttribute("style", "display:none;");
+const dialogIcon = document.getElementById("dialog__icon");
 
-//   let closebtn = document.getElementById("close");
-//   closebtn.onclick = closedd = () => {
-//     addContact.style = "display: none;";
-//     Messenger.removeAttribute("style", "display:block;");
-//   };
+const IconChanger = function () {
+  if (dialog.value.length > 0 && dialog.value !== "") {
+    dialogIcon.setAttribute("class", "dialog__send");
+    dialogIconattach.classList.remove("dialog__attach--file");
+  } else {
+    dialogIcon.setAttribute("class", "dialog__voice");
+    dialogIconattach.classList.add("dialog__attach--file");
+  }
+};
 
-//   let addbtn = document.getElementById("submitbtn");
-//   addbtn.onclick = () => {
-//     const phone = document.forms["contact"]["phone"].value;
-//     const Name = document.forms["contact"]["name"].value;
-//     const contact = {
-//       Name: Name,
-//       phone: phone,
-//     };
-//     let chatlistCard = document.createElement("div");
-//     chatlistCard.classList.add("chatlist__cadre", "chatlist--is--active");
-//     chatlistCard.addEventListener("click", () => {
-//       let chatlistisActive = document.getElementsByClassName(
-//         "chatlist--is--active"
-//       );
-//       let dialog = document.getElementById("dialog");
-//       let nameDialog = document.getElementById("dialog__name");
-//       nameDialog.textContent = chatlistName.textContent;
-//       dialog.setAttribute("style", "display:block;");
-//       if (chatlistisActive.length >= 1) {
-//         chatlistisActive[0].classList.remove("chatlist--is--active");
-//       }
-//       chatlistCard.classList.add("chatlist--is--active");
-//     });
+dialog.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    sendMesseg();
+    dialog.value = null;
+  }
+});
 
-//     let chatlistPhoto = document.createElement("div");
-//     chatlistPhoto.classList.add("chatlist__photo");
+const sendMesseg = (dialogg = dialog.value, type = "self") => {
 
-//     let chatlistImg = document.createElement("img");
-//     chatlistImg.classList.add("chatlist__img");
-
-//     let chatlistInfo = document.createElement("div");
-//     chatlistInfo.classList.add("chatlist__info");
-
-//     let chatlistDetails = document.createElement("div");
-//     chatlistDetails.classList.add("chatlist__details");
-//     let chatlistName = document.createElement("span");
-//     chatlistName.classList.add("chatlist__name");
-//     let chatlistDate = document.createElement("span");
-//     chatlistDate.classList.add("chatlist__date");
-
-//     let chatlistMore = document.createElement("div");
-//     chatlistMore.classList.add("chatlist__more");
-//     let chatlistSender = document.createElement("span");
-//     chatlistSender.classList.add("chatlist__sender");
-//     let chatlistMessage = document.createElement("p");
-//     chatlistMessage.classList.add("chatlist__message");
-
-//     chatlistImg.src = "./image/user.png";
-//     chatlistName.textContent = contact.Name;
-//     chatlistDate.textContent = "";
-//     chatlistSender.textContent = "";
-//     chatlistMessage.textContent = "";
-
-//     chatlistPhoto.appendChild(chatlistImg);
-//     chatlistCard.appendChild(chatlistPhoto);
-//     chatlistDetails.appendChild(chatlistName);
-//     chatlistDetails.appendChild(chatlistDate);
-//     chatlistInfo.appendChild(chatlistDetails);
-//     chatlistMore.appendChild(chatlistSender);
-//     chatlistMore.appendChild(chatlistMessage);
-//     chatlistInfo.appendChild(chatlistMore);
-//     chatlistCard.appendChild(chatlistInfo);
-//     chatlist.appendChild(chatlistCard);
-//     alert("مخاطب با موفقیت اضافه شد");
-//     closedd();
-//   };
-// };
-
-// const dialog = document.getElementById("dialog__message");
-// const dialogIcon = document.getElementById("dialog__icon");
-// const dialogIconattach = document.getElementById("dialog__attach");
-
-// const IconChanger = () => {
-//   let full;
-//   if (dialog.value.length > 0 && dialog.value !== "") {
-//     dialogIcon.setAttribute("class", "dialog__send");
-//     // dialogIconattach.style=".dialog__attach::before { content : '1'}"
-//     full = true;
-//   } else {
-//     dialogIcon.setAttribute("class", "dialog__voice");
-//     full = false;
-//   }
-//   return full;
-// };
-
-const sendmesseg = (dialogg = dialog.value, type = "self") => {
   let dialogBody = document.getElementById("dialogBody");
+
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
-  if ((type = "other")) {
+
+  if (type === "other") {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
-  } else if ((type = "self")) {
+  } else if (type === "self") {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
     messageCard.classList.add("message__card", "message__card--self");
     messageSelf.classList.add("message", "message__self");
   }
+
   dialogBody.appendChild(messageSelf);
+
   let messagePhoto = document.createElement("div");
   messagePhoto.setAttribute("class", "message__photo");
+
   let messageImg = document.createElement("img");
   messageImg.src = "./image/user.png";
   messageImg.setAttribute("class", "message__img");
+
   messagePhoto.appendChild(messageImg);
   messageSelf.appendChild(messagePhoto);
 
@@ -257,12 +323,4 @@ const sendmesseg = (dialogg = dialog.value, type = "self") => {
   messageCard.appendChild(messageText);
   messageSelf.appendChild(messageCard);
   dialog.value = null;
-  // }
 };
-
-// dialog.addEventListener("keydown", (event) => {
-//   if (event.key === "Enter") {
-//     sendmesseg();
-//     dialog.value = null;
-//   }
-// });

@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
+<body onload="refreshChatlist()">
   <section id="Messenger" class="Messenger">
     <div class="folders" id="folders">
       <span onclick="ChatList()" class="folders__menu menu"></span>
@@ -100,8 +100,11 @@
           </div>
 
           <div class="dialog__tools">
-            <span class="dialog__emoji"></span>
+            <span onclick="EmojiIconActiv()" id="emojiIcon" class="dialog__emoji"></span>
           </div>
+        </div>
+        <div class="emoji__main" id="emojiMain">
+          
         </div>
       </div>
     </div>

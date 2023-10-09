@@ -1,8 +1,9 @@
-let footer = document.getElementById("footer")
-let content = footer.innerHTML
+let footer = document.getElementById("footer");
+// let content = footer
 const chatlist = document.getElementById("chatlist");
 let dialogSection = document.getElementById("dialog");
 const dialog = document.getElementById("dialog__message");
+const dialogIcon = document.getElementById("dialog__icon");
 const ContactlistSection = document.getElementById("Contacts");
 const dialogIconattach = document.getElementById("dialog__attach");
 const Contacts = chatlist.getElementsByClassName("chatlist__cadre");
@@ -103,6 +104,43 @@ const foldersISactive = function (chatType) {
   }
 };
 
+const CreateFooterBox = () => {
+  let dialogAttach = document.createElement("div");
+  dialogAttach.setAttribute("id", "dialog__attach");
+  dialogAttach.classList.add("dialog__attach", "dialog__attach--file");
+  let inputFile = document.createElement("input");
+  inputFile.setAttribute("type", "file");
+  inputFile.setAttribute("name", "dialog__input--attach");
+  inputFile.setAttribute("id", "dialog__input--attach");
+  inputFile.setAttribute("class", "dialog__attach--input");
+  let spanIcon = document.createElement("span");
+  spanIcon.setAttribute("id", "dialog__icon");
+  spanIcon.setAttribute("class", "dialog__voice");
+  spanIcon.addEventListener("click", sendMesseg());
+  dialogAttach.appendChild(inputFile);
+  dialogAttach.appendChild(spanIcon);
+
+  let dialogMessage = document.createElement("div");
+  dialogMessage.setAttribute("class", "dialog__message");
+  dialogMessage.addEventListener("change", IconChanger());
+  let dialogMessageInput = document.createElement("textarea");
+  dialogMessageInput.setAttribute("name", "dialog__message");
+  dialogMessageInput.setAttribute("id", "dialog__message");
+  dialogMessageInput.setAttribute("class", "dialog__message--input");
+  dialogMessageInput.setAttribute("placeholder", "message...");
+  dialogMessage.appendChild(dialogMessageInput);
+
+  let dialogTools = document.createElement("div");
+  dialogTools.setAttribute("class", "dialog__tools");
+  let spanEmoji = document.createElement("span");
+  spanEmoji.setAttribute("class", "dialog__emoji");
+  dialogTools.appendChild(spanEmoji);
+
+  footer.appendChild(dialogAttach);
+  footer.appendChild(dialogMessage);
+  footer.appendChild(dialogTools);
+};
+
 const CreateContactBox = (object) => {
   let chatlistCard = document.createElement("div");
   chatlistCard.classList.add("chatlist__cadre");
@@ -123,26 +161,38 @@ const CreateContactBox = (object) => {
         for (let i = 0; i < Contacts.length; i++) {
           if (Contacts[i].Name === nameDialog.textContent) {
             let dialogBody = document.getElementById("dialogBody");
-            dialogBody.innerHTML = "";
-            let subChannel = document.getElementsByClassName("dialog__status")
-            let channels = chatlistCard.getElementsByClassName("chatlist__name--channel")
-            let group = chatlistCard.getElementsByClassName("chatlist__name--channel")
+            let subChannel = document.getElementsByClassName("dialog__status");
+            let channels = chatlistCard.getElementsByClassName(
+              "chatlist__name--channel"
+            );
+            let group = chatlistCard.getElementsByClassName(
+              "chatlist__name--channel"
+            );
             if (group.length > 0) {
-              subChannel[0].classList.add("dialog__header-right--channel")
+              subChannel[0].classList.add("dialog__header-right--channel");
+              // footer.innerText=''
+              // CreateFooterBox()
             } else {
-              subChannel[0].classList.remove("dialog__header-right--channel")
+              subChannel[0].classList.remove("dialog__header-right--channel");
+              // footer.innerText=''
+              // CreateFooterBox()
             }
             if (channels.length > 0) {
-              subChannel[0].classList.add("dialog__header-right--channel")
-              footer.innerHTML = "بی صدا"
-              footer.setAttribute("class", "dialog__footer--channels")
+              subChannel[0].classList.add("dialog__header-right--channel");
+              // footer.innerText= "بی صدا"
+              // footer.setAttribute("class", "dialog__footer--channels")
             } else {
-              footer.setAttribute("class", "dialog__footer")
-              footer.innerHTML = content
-              subChannel[0].classList.remove("dialog__header-right--channel")
+              footer.setAttribute("class", "dialog__footer");
+              subChannel[0].classList.remove("dialog__header-right--channel");
+              // footer.innerText=''
+              // CreateFooterBox()
             }
+            dialogBody.innerHTML = "";
             for (let j = 0; j < Contacts[i].chatlist.length; j++) {
-              sendMesseg(Contacts[i].chatlist[j].text, Contacts[i].chatlist[j].type);
+              sendMesseg(
+                Contacts[i].chatlist[j].text,
+                Contacts[i].chatlist[j].type
+              );
             }
           }
         }
@@ -284,8 +334,6 @@ const refreshChatlist = function () {
     });
 };
 
-const dialogIcon = document.getElementById("dialog__icon");
-
 const IconChanger = function () {
   if (dialog.value.length > 0 && dialog.value !== "") {
     dialogIcon.setAttribute("class", "dialog__send");
@@ -304,7 +352,6 @@ dialog.addEventListener("keydown", (event) => {
 });
 
 const sendMesseg = (dialogg = dialog.value, type = "self") => {
-
   let dialogBody = document.getElementById("dialogBody");
 
   let messageSelf = document.createElement("div");
@@ -340,4 +387,25 @@ const sendMesseg = (dialogg = dialog.value, type = "self") => {
   messageCard.appendChild(messageText);
   messageSelf.appendChild(messageCard);
   dialog.value = null;
+};
+
+const emojiIcon = document.getElementById("emojiIcon");
+const emojiMain = document.getElementById("emojiMain");
+
+const EmojiIconActiv = () => {
+  const EmojiActiv = () => {
+    emojiIcon.classList.remove("dialog__emoji")
+    emojiIcon.classList.add("dialog__Keyboard","dialog__emoji--activ");
+    emojiMain.style = "height: 500px;";
+  };
+  const EmojiInactiv = () => {
+    emojiIcon.classList.add("dialog__emoji")
+    emojiIcon.classList.remove("dialog__Keyboard","dialog__emoji--activ");
+    emojiMain.style = "height: 0px;";
+  };
+  if (emojiIcon.classList[1] === "dialog__emoji--activ") {
+    EmojiInactiv();
+  } else if (emojiIcon.classList[1] !== "dialog__emoji--activ"){
+    EmojiActiv();
+  }
 };

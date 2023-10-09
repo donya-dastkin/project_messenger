@@ -103,7 +103,7 @@
     background: #1c1c24;
     border: 1px #1e1e26 solid;
     border-radius: 20px;
-    margin: 10px 5px 8px;
+    margin: 5px 5px 2px;
 }
 
 .dialog__attach {
@@ -139,13 +139,35 @@
 
 .dialog__tools {
     height: 30px;
+    color: #4a4e51;
 }
 
 .dialog__emoji::before {
     content: '\e088';
-    color: #4a4e51;
     font-size: 20px;
     cursor: pointer;
+}
+
+.dialog__Keyboard::before{
+    content: '\e1c2';
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.dialog__emoji--activ ,.dialog__emoji:hover{
+    color: #40a0e5;
+}
+
+.emoji__main{
+    display: flex;
+    height: 0px;
+    color: #4a4e51;
+    align-items: center;
+    background: #1c1c24;
+    border: 1px #1e1e26 solid;
+    border-radius: 20px;
+    margin: 2px 5px;
+    transition: all 1s;
 }
 
 .dialog__voice:before {

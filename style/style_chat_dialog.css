@@ -148,26 +148,24 @@
     cursor: pointer;
 }
 
-.dialog__Keyboard::before{
+.dialog__Keyboard::before {
     content: '\e1c2';
     font-size: 20px;
     cursor: pointer;
 }
 
-.dialog__emoji--activ ,.dialog__emoji:hover{
+.dialog__emoji--activ,
+.dialog__emoji:hover {
     color: #40a0e5;
 }
 
-.emoji__main{
-    display: flex;
-    height: 0px;
-    color: #4a4e51;
-    align-items: center;
-    background: #1c1c24;
-    border: 1px #1e1e26 solid;
-    border-radius: 20px;
+.emoji__main {
+    display:none;
     margin: 2px 5px;
     transition: all 1s;
+    position: absolute;
+    bottom: 60px;
+    left: 30px;
 }
 
 .dialog__voice:before {
@@ -279,7 +277,7 @@
     min-height: max-content;
 }
 
-.dialog__footer--channels{
+.dialog__footer--channels {
     display: flex;
     height: 50px;
     color: #40a0e5;

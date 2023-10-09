@@ -88,23 +88,23 @@
           </div>
         </div>
         
-        <div id="footer" class="dialog__footer" onkeyup="IconChanger()">
+        <div class="emoji__main" id="emojiMain">
+          
+        </div>
+        <div id="footer" class="dialog__footer" onkeyup="IconChanger()" onclick="IconChanger()">
           <div id="dialog__attach" class="dialog__attach dialog__attach--file">
             <input type="file" name="dialog__input--attach" id="dialog__input--attach" class="dialog__attach--input" />
             <span onclick="sendMesseg()" id="dialog__icon" class="dialog__voice"></span>
           </div>
 
           <div class="dialog__message">
-            <textarea name="dialog__message" id="dialog__message" class="dialog__message--input"
+            <textarea onmousedown="EmojiIconActiv()" name="dialog__message" id="dialog__message" class="dialog__message--input"
               placeholder="message..."></textarea>
           </div>
 
           <div class="dialog__tools">
             <span onclick="EmojiIconActiv()" id="emojiIcon" class="dialog__emoji"></span>
           </div>
-        </div>
-        <div class="emoji__main" id="emojiMain">
-          
         </div>
       </div>
     </div>
@@ -137,7 +137,9 @@
     </form>
   </section>
 
+  <script src="https://unpkg.com/picmo@latest/dist/umd/index.js"></script>
   <script src="./js/pageReaction.js"></script>
+
 </body>
 
 </html>

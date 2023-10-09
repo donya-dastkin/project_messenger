@@ -389,19 +389,27 @@ const sendMesseg = (dialogg = dialog.value, type = "self") => {
   dialog.value = null;
 };
 
-const emojiIcon = document.getElementById("emojiIcon");
-const emojiMain = document.getElementById("emojiMain");
 
 const EmojiIconActiv = () => {
+  const emojiIcon = document.getElementById("emojiIcon");
+  const { createPicker } = window.picmo;
+  const rootElement = document.getElementById("emojiMain");
+
   const EmojiActiv = () => {
     emojiIcon.classList.remove("dialog__emoji")
     emojiIcon.classList.add("dialog__Keyboard","dialog__emoji--activ");
-    emojiMain.style = "height: 500px;";
+    rootElement.style="display:block;"
+    const picker = createPicker({
+      rootElement,
+    });
+    picker.addEventListener("emoji:select", (selection) => {
+      dialog.value += selection.emoji;
+    });
   };
   const EmojiInactiv = () => {
     emojiIcon.classList.add("dialog__emoji")
     emojiIcon.classList.remove("dialog__Keyboard","dialog__emoji--activ");
-    emojiMain.style = "height: 0px;";
+    rootElement.style="display:none;"
   };
   if (emojiIcon.classList[1] === "dialog__emoji--activ") {
     EmojiInactiv();

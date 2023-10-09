@@ -2,6 +2,8 @@ let footer = document.getElementById("footer");
 // let content = footer
 const chatlist = document.getElementById("chatlist");
 let dialogSection = document.getElementById("dialog");
+const emojiIcon = document.getElementById("emojiIcon");
+const rootElement = document.getElementById("emojiMain");
 const dialog = document.getElementById("dialog__message");
 const dialogIcon = document.getElementById("dialog__icon");
 const ContactlistSection = document.getElementById("Contacts");
@@ -389,16 +391,14 @@ const sendMesseg = (dialogg = dialog.value, type = "self") => {
   dialog.value = null;
 };
 
-
 const EmojiIconActiv = () => {
-  const emojiIcon = document.getElementById("emojiIcon");
+
   const { createPicker } = window.picmo;
-  const rootElement = document.getElementById("emojiMain");
 
   const EmojiActiv = () => {
     emojiIcon.classList.remove("dialog__emoji")
-    emojiIcon.classList.add("dialog__Keyboard","dialog__emoji--activ");
-    rootElement.style="display:block;"
+    emojiIcon.classList.add("dialog__Keyboard", "dialog__emoji--activ");
+    rootElement.style = "display:block;"
     const picker = createPicker({
       rootElement,
     });
@@ -408,12 +408,16 @@ const EmojiIconActiv = () => {
   };
   const EmojiInactiv = () => {
     emojiIcon.classList.add("dialog__emoji")
-    emojiIcon.classList.remove("dialog__Keyboard","dialog__emoji--activ");
-    rootElement.style="display:none;"
+    emojiIcon.classList.remove("dialog__Keyboard", "dialog__emoji--activ");
+    rootElement.style = "display:none;"
   };
   if (emojiIcon.classList[1] === "dialog__emoji--activ") {
     EmojiInactiv();
-  } else if (emojiIcon.classList[1] !== "dialog__emoji--activ"){
+  } else if (emojiIcon.classList[1] !== "dialog__emoji--activ") {
     EmojiActiv();
   }
 };
+
+dialog.addEventListener('mousedown', () => {
+  rootElement.style = "display:none;"
+})

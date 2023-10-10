@@ -1,11 +1,11 @@
 let footer = document.getElementById("footer");
-// let content = footer
 const chatlist = document.getElementById("chatlist");
 let dialogSection = document.getElementById("dialog");
 const emojiIcon = document.getElementById("emojiIcon");
 const rootElement = document.getElementById("emojiMain");
 const dialog = document.getElementById("dialog__message");
 const dialogIcon = document.getElementById("dialog__icon");
+let footerChannels = document.getElementById("footerChannels"); 
 const ContactlistSection = document.getElementById("Contacts");
 const dialogIconattach = document.getElementById("dialog__attach");
 const Contacts = chatlist.getElementsByClassName("chatlist__cadre");
@@ -106,42 +106,42 @@ const foldersISactive = function (chatType) {
   }
 };
 
-const CreateFooterBox = () => {
-  let dialogAttach = document.createElement("div");
-  dialogAttach.setAttribute("id", "dialog__attach");
-  dialogAttach.classList.add("dialog__attach", "dialog__attach--file");
-  let inputFile = document.createElement("input");
-  inputFile.setAttribute("type", "file");
-  inputFile.setAttribute("name", "dialog__input--attach");
-  inputFile.setAttribute("id", "dialog__input--attach");
-  inputFile.setAttribute("class", "dialog__attach--input");
-  let spanIcon = document.createElement("span");
-  spanIcon.setAttribute("id", "dialog__icon");
-  spanIcon.setAttribute("class", "dialog__voice");
-  spanIcon.addEventListener("click", sendMesseg());
-  dialogAttach.appendChild(inputFile);
-  dialogAttach.appendChild(spanIcon);
+// const CreateFooterBox = () => {
+//   let dialogAttach = document.createElement("div");
+//   dialogAttach.setAttribute("id", "dialog__attach");
+//   dialogAttach.classList.add("dialog__attach", "dialog__attach--file");
+//   let inputFile = document.createElement("input");
+//   inputFile.setAttribute("type", "file");
+//   inputFile.setAttribute("name", "dialog__input--attach");
+//   inputFile.setAttribute("id", "dialog__input--attach");
+//   inputFile.setAttribute("class", "dialog__attach--input");
+//   let spanIcon = document.createElement("span");
+//   spanIcon.setAttribute("id", "dialog__icon");
+//   spanIcon.setAttribute("class", "dialog__voice");
+//   spanIcon.addEventListener("click", sendMesseg());
+//   dialogAttach.appendChild(inputFile);
+//   dialogAttach.appendChild(spanIcon);
 
-  let dialogMessage = document.createElement("div");
-  dialogMessage.setAttribute("class", "dialog__message");
-  dialogMessage.addEventListener("change", IconChanger());
-  let dialogMessageInput = document.createElement("textarea");
-  dialogMessageInput.setAttribute("name", "dialog__message");
-  dialogMessageInput.setAttribute("id", "dialog__message");
-  dialogMessageInput.setAttribute("class", "dialog__message--input");
-  dialogMessageInput.setAttribute("placeholder", "message...");
-  dialogMessage.appendChild(dialogMessageInput);
+//   let dialogMessage = document.createElement("div");
+//   dialogMessage.setAttribute("class", "dialog__message");
+//   dialogMessage.addEventListener("change", IconChanger());
+//   let dialogMessageInput = document.createElement("textarea");
+//   dialogMessageInput.setAttribute("name", "dialog__message");
+//   dialogMessageInput.setAttribute("id", "dialog__message");
+//   dialogMessageInput.setAttribute("class", "dialog__message--input");
+//   dialogMessageInput.setAttribute("placeholder", "message...");
+//   dialogMessage.appendChild(dialogMessageInput);
 
-  let dialogTools = document.createElement("div");
-  dialogTools.setAttribute("class", "dialog__tools");
-  let spanEmoji = document.createElement("span");
-  spanEmoji.setAttribute("class", "dialog__emoji");
-  dialogTools.appendChild(spanEmoji);
+//   let dialogTools = document.createElement("div");
+//   dialogTools.setAttribute("class", "dialog__tools");
+//   let spanEmoji = document.createElement("span");
+//   spanEmoji.setAttribute("class", "dialog__emoji");
+//   dialogTools.appendChild(spanEmoji);
 
-  footer.appendChild(dialogAttach);
-  footer.appendChild(dialogMessage);
-  footer.appendChild(dialogTools);
-};
+//   footer.appendChild(dialogAttach);
+//   footer.appendChild(dialogMessage);
+//   footer.appendChild(dialogTools);
+// };
 
 const CreateContactBox = (object) => {
   let chatlistCard = document.createElement("div");
@@ -172,22 +172,21 @@ const CreateContactBox = (object) => {
             );
             if (group.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
-              // footer.innerText=''
-              // CreateFooterBox()
+              footerChannels.style="display: none;"
+              footer.style="display: flex;"
             } else {
               subChannel[0].classList.remove("dialog__header-right--channel");
-              // footer.innerText=''
-              // CreateFooterBox()
+              footerChannels.style="display: none;"
+              footer.style="display: flex;"
             }
             if (channels.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
-              // footer.innerText= "بی صدا"
-              // footer.setAttribute("class", "dialog__footer--channels")
+              footerChannels.style="display: block;"
+              footer.style="display: none;"
             } else {
-              footer.setAttribute("class", "dialog__footer");
+              footerChannels.style="display: none;"
+              footer.style="display: flex;"
               subChannel[0].classList.remove("dialog__header-right--channel");
-              // footer.innerText=''
-              // CreateFooterBox()
             }
             dialogBody.innerHTML = "";
             for (let j = 0; j < Contacts[i].chatlist.length; j++) {

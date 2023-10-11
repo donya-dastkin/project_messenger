@@ -1,12 +1,17 @@
-let footer = document.getElementById("footer");
+let mediaStream;
+let mediaRecorder;
+let chunks = [];
+const footer = document.getElementById("footer");
 const chatlist = document.getElementById("chatlist");
-let dialogSection = document.getElementById("dialog");
 const emojiIcon = document.getElementById("emojiIcon");
+const timerVoice =document.getElementById("timerVoice");
+const dialogSection = document.getElementById("dialog");
 const rootElement = document.getElementById("emojiMain");
 const dialog = document.getElementById("dialog__message");
+const footerVoice = document.getElementById("footerVoice");
 const dialogIcon = document.getElementById("dialog__icon");
-let footerChannels = document.getElementById("footerChannels"); 
 const ContactlistSection = document.getElementById("Contacts");
+const footerChannels = document.getElementById("footerChannels");
 const dialogIconattach = document.getElementById("dialog__attach");
 const Contacts = chatlist.getElementsByClassName("chatlist__cadre");
 
@@ -172,20 +177,20 @@ const CreateContactBox = (object) => {
             );
             if (group.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style="display: none;"
-              footer.style="display: flex;"
+              footerChannels.style = "display: none;"
+              footer.style = "display: flex;"
             } else {
               subChannel[0].classList.remove("dialog__header-right--channel");
-              footerChannels.style="display: none;"
-              footer.style="display: flex;"
+              footerChannels.style = "display: none;"
+              footer.style = "display: flex;"
             }
             if (channels.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style="display: block;"
-              footer.style="display: none;"
+              footerChannels.style = "display: block;"
+              footer.style = "display: none;"
             } else {
-              footerChannels.style="display: none;"
-              footer.style="display: flex;"
+              footerChannels.style = "display: none;"
+              footer.style = "display: flex;"
               subChannel[0].classList.remove("dialog__header-right--channel");
             }
             dialogBody.innerHTML = "";
@@ -420,3 +425,84 @@ const EmojiIconActiv = () => {
 dialog.addEventListener('mousedown', () => {
   rootElement.style = "display:none;"
 })
+
+const clickIcon = () => {
+  if (dialogIcon.classList[0] === "dialog__send") {
+    sendMesseg()
+  }
+  else if (dialogIcon.classList[0] === "dialog__voice") {
+    startRecording()
+  }
+}
+
+const startPlayingVoice = () => {
+  const playerButton = document.getElementById("playerButton");
+  playerButton.style = "transition: all 2s;"
+  if (playerButton.classList[0] === "dialog__message--pause") {
+    playerButton.setAttribute("class", "dialog__message--playe")
+  }
+  else {
+    playerButton.setAttribute("class", "dialog__message--pause")
+  }
+
+}
+
+async function startRecording() {
+  footerVoice.style = "display:block;"
+  try {
+    mediaStream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+    });
+    mediaRecorder = new MediaRecorder(mediaStream);
+    mediaRecorder.addEventListener("dataavailable", handleDataAvailable);
+    mediaRecorder.start();
+    timer();
+
+  } catch (error) {
+    alert("خطا در دسترسی به دستگاه صوتی کاربر:", error);
+  }
+}
+
+function handleDataAvailable(event) {
+  chunks.push(event.data);
+}
+
+function saveRecording() {
+  const blob = new Blob(chunks, { type: "audio/webm" });
+  const downloadLink = document.createElement("a");
+  downloadLink.href = URL.createObjectURL(blob);
+  downloadLink.download = "recording.webm";
+  document.body.appendChild(downloadLink);
+  downloadLink.textContent = "ضبط صدا";
+  downloadLink.click();
+  chunks = [];
+  footerVoice.style = "display:none;"
+  stopTimer()
+}
+
+// function cancelRecording(){
+// }
+
+function timer() {
+  let seconds = 0
+  let minutes = 0
+  let startTime = Date.now();
+  setInterval(() => {
+      let currentTime = Date.now();
+      let elapsedTime = currentTime - startTime;
+      if (elapsedTime >= 1000) {
+        if (seconds >= 60) {
+          minutes += 1
+          seconds = 0
+        } else {
+          seconds += 1
+        }
+        timerVoice.textContent = minutes + ":" + seconds
+        startTime = Date.now();
+      }
+    }, 1);
+}
+
+function stopTimer() {
+  clearInterval(intervalId);
+  }

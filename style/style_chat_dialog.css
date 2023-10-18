@@ -154,7 +154,7 @@
     right: 50px;
 }
 
-.dialog__footer--voice-timer{
+.dialog__footer--voice-timer {
     display: inline-block;
     margin: 5px;
     width: 15%;
@@ -162,7 +162,7 @@
     cursor: pointer;
 }
 
-.dialog__footer--voice-status{
+.dialog__footer--voice-status {
     display: inline-block;
     margin: 5px;
     width: 50%;
@@ -170,7 +170,7 @@
     cursor: pointer;
 }
 
-.dialog__footer--voice-send{
+.dialog__footer--voice-send {
     display: inline-block;
     margin: 5px;
     width: 15%;
@@ -215,7 +215,7 @@
 }
 
 .emoji__main {
-    display:none;
+    display: none;
     margin: 2px 5px;
     transition: all 1s;
     position: absolute;
@@ -332,15 +332,16 @@
     min-height: max-content;
 }
 
-.dialog__message--voice{
-display: flex;
-flex-direction: row-reverse;
-max-width:400px;
-min-width: 150px;
-color: #fff;
-padding: 10px 5px;
+.dialog__message--voice {
+    display: flex;
+    flex-direction: row-reverse;
+    max-width: 400px;
+    min-width: 150px;
+    color: #fff;
+    padding: 10px 5px;
 }
-.dialog__message--voice-control{
+
+.dialog__message--voice-control {
     /* background: linear-gradient(45deg, #0f8ca6, #40a0e5); */
     width: 30px;
     height: 18px;
@@ -353,66 +354,56 @@ padding: 10px 5px;
 
 .dialog__message--voice-control:before,
 .dialog__message--voice-control:after {
-content: "";
-position: absolute;
-width: 10px;
-height: 5px;
-right: 0.2px;
-border-left: 15px solid transparent;
-border-right: 15px solid transparent;
-} 
- 
-.dialog__message--voice-control:before {
-top: -10px;
-border-bottom: 10px solid #1e1e26;
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    right: 0.2px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
 }
- 
-.dialog__message--voice-control:after {
-bottom: -10px;
-border-top: 10px solid #1e1e26;
-} 
 
-.dialog__message--playe::before{
+.dialog__message--voice-control:before {
+    top: -10px;
+    border-bottom: 10px solid #1e1e26;
+}
+
+.dialog__message--voice-control:after {
+    bottom: -10px;
+    border-top: 10px solid #1e1e26;
+}
+
+.dialog__message--playe::before {
     content: '\f04b';
     color: #ddd;
     font-size: 18px;
     position: absolute;
     top: -8px;
-    right:0px;
+    right: 0px;
     height: 90%;
     width: 90%;
     cursor: pointer;
 }
 
-.dialog__message--pause::before{
+.dialog__message--pause::before {
     content: '\f04c';
     color: #ddd;
     font-size: 18px;
     position: absolute;
     top: -8px;
-    right:2px;
+    right: 2px;
     height: 90%;
     width: 90%;
     cursor: pointer;
 }
 
-.dialog__message--voice-Wave{
-    margin:5px;
+.dialog__message--voice-Wave {
+    margin: 5px;
     justify-content: center;
     background-color: transparent;
     color: #1e1e26;
     flex-grow: 1;
-    font-size:14px;
-}
-
-.dialog__message--voice-download::before{
-    content: "\f019";
-    margin:5px;
-    justify-content: center;
-    background-color: transparent;
-    color: #fff;
-    font-size:18px;
-    cursor: pointer;
+    font-size: 14px;
 }
 
 /* .information {

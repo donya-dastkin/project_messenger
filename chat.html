@@ -41,7 +41,7 @@
       <div id="Contacts"></div>
     </div>
 
-    <div id="dialog" class="dialog" style="display: none;">
+    <div id="dialog" class="dialog" style="display: block;">
       <div class="dialog__wrapper">
         <div class="dialog__header">
           <div class="dialog__header-right">
@@ -87,27 +87,10 @@
             </div>
           </div>
 
-          <div class="message message__self">
-            <div class="message__photo">
-              <img src="./image/user.png" alt="profile" class="message__img" />
-            </div>
-            <div class="message__card message__card--self">
-              <div class="dialog__message--voice">
-                <div class="dialog__message--voice-control">
-                  <button onclick="startPlayingVoice()" id="playerButton" class="dialog__message--playe"></button>
-                </div>
-                <div class="dialog__message--voice-Wave">
-                  <div id="playeButton" class="dialog__message--play">hii</div>
-                </div>
-                <div id="voiceDownload" class="dialog__message--voice-download">
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div id="footerVoice" class="dialog__footer--voice" style="display: none;">
-          <div id="saveButton" onclick="saveRecording()" class="dialog__footer--voice-send dialog__send">
+          <div id="saveButton" onclick="stopRecording()" class="dialog__footer--voice-send dialog__send">
           </div>
           <div onclick="cancelRecording()" class="dialog__footer--voice-status">
             لغو
@@ -173,8 +156,8 @@
   </section>
 
   <script src="https://unpkg.com/picmo@latest/dist/umd/index.js"></script>
+  <script src="https://unpkg.com/wavesurfer.js@7"></script>
   <script src="./js/pageReaction.js"></script>
-
 </body>
 
 </html>

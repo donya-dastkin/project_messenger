@@ -1,10 +1,9 @@
-let mediaStream;
-let mediaRecorder;
-let chunks = [];
+let wavesurfer
+let mediaRecorder, chunks = [], audioURL = ''
 const footer = document.getElementById("footer");
 const chatlist = document.getElementById("chatlist");
 const emojiIcon = document.getElementById("emojiIcon");
-const timerVoice =document.getElementById("timerVoice");
+const timerVoice = document.getElementById("timerVoice");
 const dialogSection = document.getElementById("dialog");
 const rootElement = document.getElementById("emojiMain");
 const dialog = document.getElementById("dialog__message");
@@ -197,6 +196,7 @@ const CreateContactBox = (object) => {
             for (let j = 0; j < Contacts[i].chatlist.length; j++) {
               sendMesseg(
                 Contacts[i].chatlist[j].text,
+                "text",
                 Contacts[i].chatlist[j].type
               );
             }
@@ -357,18 +357,17 @@ dialog.addEventListener("keydown", (event) => {
   }
 });
 
-const sendMesseg = (dialogg = dialog.value, type = "self") => {
+const sendMesseg = (dialogg = dialog.value, type = "text", sender = "self") => {
   let dialogBody = document.getElementById("dialogBody");
-
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
 
-  if (type === "other") {
+  if (sender === "other") {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
-  } else if (type === "self") {
+  } else if (sender === "self") {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
     messageCard.classList.add("message__card", "message__card--self");
@@ -387,12 +386,50 @@ const sendMesseg = (dialogg = dialog.value, type = "self") => {
   messagePhoto.appendChild(messageImg);
   messageSelf.appendChild(messagePhoto);
 
-  let messageText = document.createElement("span");
-  messageText.setAttribute("class", "message__text");
-  messageText.textContent = dialogg;
-  messageCard.appendChild(messageText);
+  if (type === "voice") {
+    let messageVoice = document.createElement("div");
+    messageVoice.setAttribute("class", "dialog__message--voice");
+
+    let messageVoiceControl = document.createElement("div");
+    messageVoiceControl.setAttribute("class", "dialog__message--voice-control");
+    let messageVoiceControlBtn = document.createElement("button");
+    messageVoiceControlBtn.setAttribute("class", "dialog__message--playe")
+    messageVoiceControlBtn.addEventListener('click', startPlayingVoice = () => {
+      messageVoiceControlBtn.style = "transition: all 2s;"
+      wavesurfer.playPause()
+
+      if (messageVoiceControlBtn.classList[0] === "dialog__message--pause") {
+        messageVoiceControlBtn.setAttribute("class", "dialog__message--playe")
+      }
+      else {
+        messageVoiceControlBtn.setAttribute("class", "dialog__message--pause")
+      }
+
+      wavesurfer.once('finsh', () => {
+        wavesurfer.stop()
+      })
+
+    })
+    messageVoiceControl.appendChild(messageVoiceControlBtn)
+
+    let messageVoiceWave = document.createElement("div");
+    messageVoiceWave.setAttribute("class", "dialog__message--voice-Wave");
+    let messageVoiceWaveForm = document.createElement("div");
+    messageVoiceWaveForm.setAttribute("class", "dialog__message--play");
+    messageVoiceWaveForm.id = "waveform"
+    messageVoiceWave.appendChild(messageVoiceWaveForm)
+
+    messageVoice.appendChild(messageVoiceControl)
+    messageVoice.appendChild(messageVoiceWave)
+    messageCard.appendChild(messageVoice);
+  } else if (type === "text") {
+    let messageText = document.createElement("span");
+    messageText.setAttribute("class", "message__text");
+    messageText.textContent = dialogg;
+    messageCard.appendChild(messageText);
+    dialog.value = null;
+  }
   messageSelf.appendChild(messageCard);
-  dialog.value = null;
 };
 
 const EmojiIconActiv = () => {
@@ -431,78 +468,85 @@ const clickIcon = () => {
     sendMesseg()
   }
   else if (dialogIcon.classList[0] === "dialog__voice") {
-    startRecording()
+    record()
+    // !
   }
 }
 
-const startPlayingVoice = () => {
-  const playerButton = document.getElementById("playerButton");
-  playerButton.style = "transition: all 2s;"
-  if (playerButton.classList[0] === "dialog__message--pause") {
-    playerButton.setAttribute("class", "dialog__message--playe")
-  }
-  else {
-    playerButton.setAttribute("class", "dialog__message--pause")
-  }
-
-}
-
-async function startRecording() {
-  footerVoice.style = "display:block;"
-  try {
-    mediaStream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-    });
-    mediaRecorder = new MediaRecorder(mediaStream);
-    mediaRecorder.addEventListener("dataavailable", handleDataAvailable);
-    mediaRecorder.start();
-    timer();
-
-  } catch (error) {
-    alert("خطا در دسترسی به دستگاه صوتی کاربر:", error);
-  }
-}
-
-function handleDataAvailable(event) {
-  chunks.push(event.data);
-}
-
-function saveRecording() {
-  const blob = new Blob(chunks, { type: "audio/webm" });
-  const downloadLink = document.createElement("a");
-  downloadLink.href = URL.createObjectURL(blob);
-  downloadLink.download = "recording.webm";
-  document.body.appendChild(downloadLink);
-  downloadLink.textContent = "ضبط صدا";
-  downloadLink.click();
-  chunks = [];
-  footerVoice.style = "display:none;"
-  stopTimer()
-}
-
-// function cancelRecording(){
-// }
 
 function timer() {
   let seconds = 0
   let minutes = 0
-  let startTime = Date.now();
+  let startTime = 0;
   setInterval(() => {
-      let currentTime = Date.now();
-      let elapsedTime = currentTime - startTime;
-      if (elapsedTime >= 1000) {
-        if (seconds >= 60) {
-          minutes += 1
-          seconds = 0
-        } else {
-          seconds += 1
-        }
-        timerVoice.textContent = minutes + ":" + seconds
-        startTime = Date.now();
+    let currentTime = Date.now();
+    let elapsedTime = currentTime - startTime;
+    if (elapsedTime >= 1000) {
+      if (seconds >= 60) {
+        minutes += 1
+        seconds = 0
+      } else {
+        seconds += 1
       }
-    }, 1);
+      timerVoice.textContent = minutes + ":" + seconds
+      startTime = Date.now();
+    }
+  }, 1);
 }
 
 function stopTimer() {
-  clearInterval(intervalId);
+  mediaRecorder.stop();
+  clearInterval(timer);
+}
+
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({
+    audio: true
+  }).then(stream => {
+    mediaRecorder = new MediaRecorder(stream)
+
+    mediaRecorder.ondataavailable = (e) => {
+      chunks.push(e.data)
+    }
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' })
+      chunks = []
+      audioURL = window.URL.createObjectURL(blob)
+      // document.querySelector('audio').src = audioURL
+    }
+  }).catch(error => {
+    alert(`Following error has occured : \n ${error}`)
+  })
+}
+// ضبط شروع شود
+const record = () => {
+  timer();
+  mediaRecorder.start()
+  footerVoice.style = "display:block;"
+}
+// توقف ضبط
+const stopRecording = () => {
+  stopTimer()
+  mediaRecorder.stop()
+  footerVoice.style = "display:none;"
+  if (audioURL !== "") {
+    sendMesseg("", "voice", "self")
+    const messageVoiceWaveF = document.querySelectorAll(".dialog__message--play")
+    wavesurfer = WaveSurfer.create({
+      container: messageVoiceWaveF[messageVoiceWaveF.length - 1],
+      waveColor: '#3f3f49',
+      progressColor: '#1e212a',
+      cursorWidth: 2,
+      barWidth: 1,
+      barHeight: 20,
+      barGap: 1,
+      responsive: true,
+      height: 25,
+      barRadius: 30,
+      url: audioURL,
+    })
+  } else {
+    alert("دوباره ضبط کنید صدا ضبط نشده!!")
   }
+}

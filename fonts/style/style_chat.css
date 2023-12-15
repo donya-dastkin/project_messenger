@@ -1,0 +1,34 @@
+html {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    direction: rtl;
+    background-color: #15161a;
+}
+
+* {
+    outline: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: 'Arial';
+}
+
+*::before,
+*::after {
+    box-sizing: inherit;
+    font-family: 'fonticon', 'fonticon2', 'Arial';
+}
+
+a,
+span,
+label {
+    display: inline-block;
+}
+
+.Messenger {
+    display: flex;
+}

@@ -1,0 +1,113 @@
+.folders {
+    height: 100vh;
+    display: flex;
+    width: 72px;
+    flex-shrink: 0;
+    min-width: 72px;
+    flex-direction: column;
+    background: #18171d;
+    box-shadow: 0 0 5px 1px #2f3235;
+}
+
+.folders__allchat,
+.folders__menu,
+.folders__pv,
+.folders__channel,
+.folders__group,
+.folders__setting,
+.folders__screenmode {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 8px 0;
+    position: relative;
+    flex-direction: column;
+    /* color: #8494a4; */
+    color: #4a4e51;
+    font-size: 10px;
+}
+
+.folders__allchat:hover,
+.folders__menu:hover,
+.folders__pv:hover,
+.folders__channel:hover,
+.folders__group:hover,
+.folders__setting:hover,
+.folders__screenmode:hover {
+    color: #3ca0df;
+}
+
+.folders--is--active {
+    color: #3ca0df;
+    border-right: 3px #3ca0df solid;
+}
+
+.folders--is--active::before {
+    color: #3ca0df;
+}
+
+.folders__setting::before {
+    content: '\f013';
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.folders__dark::before {
+    content: '\f186';
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.folders__light::before {
+    content: '\f185';
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.folders__allchat::after {
+    content: attr(data-badge);
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 25px;
+    height: 20px;
+    background: #ef1f35;
+    border-radius: 50px;
+    border: 1px #17212b solid;
+    text-align: center;
+    line-height: 16px;
+    font-family: 'Arial';
+    font-size: 12px;
+}
+
+.folders__menu::before {
+    content: '\f0c9';
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.folders__allchat::before {
+    /* content: '\f086'; */
+    content: '\f4b6';
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.folders__group::before {
+    content: '\f500';
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.folders__channel::before {
+    content: '\f0a1';
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.folders__pv::before {
+    content: '\f007';
+    font-size: 28px;
+    cursor: pointer;
+}

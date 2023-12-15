@@ -235,7 +235,7 @@ const CreateContactBox = (object) => {
   chatlistMessage.classList.add("chatlist__message");
 
   if (object.profile === undefined) {
-    chatlistImg.src = "./image/user.png";
+    chatlistImg.src = "./asset/image/user.png";
   } else if (object.profile !== "") {
     chatlistImg.src = object.profile;
   }
@@ -380,7 +380,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "self") => {
   messagePhoto.setAttribute("class", "message__photo");
 
   let messageImg = document.createElement("img");
-  messageImg.src = "./image/user.png";
+  messageImg.src = "./asset/image/user.png";
   messageImg.setAttribute("class", "message__img");
 
   messagePhoto.appendChild(messageImg);

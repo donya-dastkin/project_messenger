@@ -1,5 +1,7 @@
-let wavesurfer
-let mediaRecorder, chunks = [], audioURL = ''
+let wavesurfer;
+let mediaRecorder,
+  chunks = [],
+  audioURL = "";
 const footer = document.getElementById("footer");
 const chatlist = document.getElementById("chatlist");
 const emojiIcon = document.getElementById("emojiIcon");
@@ -176,20 +178,20 @@ const CreateContactBox = (object) => {
             );
             if (group.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style = "display: none;"
-              footer.style = "display: flex;"
+              footerChannels.style = "display: none;";
+              footer.style = "display: flex;";
             } else {
               subChannel[0].classList.remove("dialog__header-right--channel");
-              footerChannels.style = "display: none;"
-              footer.style = "display: flex;"
+              footerChannels.style = "display: none;";
+              footer.style = "display: flex;";
             }
             if (channels.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style = "display: block;"
-              footer.style = "display: none;"
+              footerChannels.style = "display: block;";
+              footer.style = "display: none;";
             } else {
-              footerChannels.style = "display: none;"
-              footer.style = "display: flex;"
+              footerChannels.style = "display: none;";
+              footer.style = "display: flex;";
               subChannel[0].classList.remove("dialog__header-right--channel");
             }
             dialogBody.innerHTML = "";
@@ -393,34 +395,41 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "self") => {
     let messageVoiceControl = document.createElement("div");
     messageVoiceControl.setAttribute("class", "dialog__message--voice-control");
     let messageVoiceControlBtn = document.createElement("button");
-    messageVoiceControlBtn.setAttribute("class", "dialog__message--playe")
-    messageVoiceControlBtn.addEventListener('click', startPlayingVoice = () => {
-      messageVoiceControlBtn.style = "transition: all 2s;"
-      wavesurfer.playPause()
+    messageVoiceControlBtn.setAttribute("class", "dialog__message--playe");
+    messageVoiceControlBtn.addEventListener(
+      "click",
+      (startPlayingVoice = () => {
+        messageVoiceControlBtn.style = "transition: all 2s;";
+        wavesurfer.playPause();
 
-      if (messageVoiceControlBtn.classList[0] === "dialog__message--pause") {
-        messageVoiceControlBtn.setAttribute("class", "dialog__message--playe")
-      }
-      else {
-        messageVoiceControlBtn.setAttribute("class", "dialog__message--pause")
-      }
+        if (messageVoiceControlBtn.classList[0] === "dialog__message--pause") {
+          messageVoiceControlBtn.setAttribute(
+            "class",
+            "dialog__message--playe"
+          );
+        } else {
+          messageVoiceControlBtn.setAttribute(
+            "class",
+            "dialog__message--pause"
+          );
+        }
 
-      wavesurfer.once('finsh', () => {
-        wavesurfer.stop()
+        wavesurfer.once("finsh", () => {
+          wavesurfer.stop();
+        });
       })
-
-    })
-    messageVoiceControl.appendChild(messageVoiceControlBtn)
+    );
+    messageVoiceControl.appendChild(messageVoiceControlBtn);
 
     let messageVoiceWave = document.createElement("div");
     messageVoiceWave.setAttribute("class", "dialog__message--voice-Wave");
     let messageVoiceWaveForm = document.createElement("div");
     messageVoiceWaveForm.setAttribute("class", "dialog__message--play");
-    messageVoiceWaveForm.id = "waveform"
-    messageVoiceWave.appendChild(messageVoiceWaveForm)
+    messageVoiceWaveForm.id = "waveform";
+    messageVoiceWave.appendChild(messageVoiceWaveForm);
 
-    messageVoice.appendChild(messageVoiceControl)
-    messageVoice.appendChild(messageVoiceWave)
+    messageVoice.appendChild(messageVoiceControl);
+    messageVoice.appendChild(messageVoiceWave);
     messageCard.appendChild(messageVoice);
   } else if (type === "text") {
     let messageText = document.createElement("span");
@@ -433,13 +442,12 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "self") => {
 };
 
 const EmojiIconActiv = () => {
-
   const { createPicker } = window.picmo;
 
   const EmojiActiv = () => {
-    emojiIcon.classList.remove("dialog__emoji")
+    emojiIcon.classList.remove("dialog__emoji");
     emojiIcon.classList.add("dialog__Keyboard", "dialog__emoji--activ");
-    rootElement.style = "display:block;"
+    rootElement.style = "display:block;";
     const picker = createPicker({
       rootElement,
     });
@@ -448,9 +456,9 @@ const EmojiIconActiv = () => {
     });
   };
   const EmojiInactiv = () => {
-    emojiIcon.classList.add("dialog__emoji")
+    emojiIcon.classList.add("dialog__emoji");
     emojiIcon.classList.remove("dialog__Keyboard", "dialog__emoji--activ");
-    rootElement.style = "display:none;"
+    rootElement.style = "display:none;";
   };
   if (emojiIcon.classList[1] === "dialog__emoji--activ") {
     EmojiInactiv();
@@ -459,36 +467,46 @@ const EmojiIconActiv = () => {
   }
 };
 
-dialog.addEventListener('mousedown', () => {
-  rootElement.style = "display:none;"
-})
+dialog.addEventListener("mousedown", () => {
+  rootElement.style = "display:none;";
+});
 
-const clickIcon = () => {
-  if (dialogIcon.classList[0] === "dialog__send") {
-    sendMesseg()
-  }
-  else if (dialogIcon.classList[0] === "dialog__voice") {
-    record()
-    // !
-  }
-}
-
+$(document).ready(function () {
+  $("#send_form").submit(function (event) {
+    event.preventDefault();
+    var values = $(this).serialize();
+    $.ajax({
+      type: "get",
+      url: "asset/php/index.php",
+      data: values,
+      success: function (res) {
+        alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
+        if (dialogIcon.classList[0] === "dialog__send") {
+          sendMesseg();
+        } else if (dialogIcon.classList[0] === "dialog__voice") {
+          record();
+          // !
+        }
+      },
+    });
+  });
+});
 
 function timer() {
-  let seconds = 0
-  let minutes = 0
+  let seconds = 0;
+  let minutes = 0;
   let startTime = 0;
   setInterval(() => {
     let currentTime = Date.now();
     let elapsedTime = currentTime - startTime;
     if (elapsedTime >= 1000) {
       if (seconds >= 60) {
-        minutes += 1
-        seconds = 0
+        minutes += 1;
+        seconds = 0;
       } else {
-        seconds += 1
+        seconds += 1;
       }
-      timerVoice.textContent = minutes + ":" + seconds
+      timerVoice.textContent = minutes + ":" + seconds;
       startTime = Date.now();
     }
   }, 1);
@@ -500,43 +518,48 @@ function stopTimer() {
 }
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({
-    audio: true
-  }).then(stream => {
-    mediaRecorder = new MediaRecorder(stream)
+  navigator.mediaDevices
+    .getUserMedia({
+      audio: true,
+    })
+    .then((stream) => {
+      mediaRecorder = new MediaRecorder(stream);
 
-    mediaRecorder.ondataavailable = (e) => {
-      chunks.push(e.data)
-    }
+      mediaRecorder.ondataavailable = (e) => {
+        chunks.push(e.data);
+      };
 
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' })
-      chunks = []
-      audioURL = window.URL.createObjectURL(blob)
-      // document.querySelector('audio').src = audioURL
-    }
-  }).catch(error => {
-    alert(`Following error has occured : \n ${error}`)
-  })
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+        chunks = [];
+        audioURL = window.URL.createObjectURL(blob);
+        // document.querySelector('audio').src = audioURL
+      };
+    })
+    .catch((error) => {
+      alert(`Following error has occured : \n ${error}`);
+    });
 }
 // ضبط شروع شود
 const record = () => {
   timer();
-  mediaRecorder.start()
-  footerVoice.style = "display:block;"
-}
+  mediaRecorder.start();
+  footerVoice.style = "display:block;";
+};
 // توقف ضبط
 const stopRecording = () => {
-  stopTimer()
-  mediaRecorder.stop()
-  footerVoice.style = "display:none;"
+  stopTimer();
+  mediaRecorder.stop();
+  footerVoice.style = "display:none;";
   if (audioURL !== "") {
-    sendMesseg("", "voice", "self")
-    const messageVoiceWaveF = document.querySelectorAll(".dialog__message--play")
+    sendMesseg("", "voice", "self");
+    const messageVoiceWaveF = document.querySelectorAll(
+      ".dialog__message--play"
+    );
     wavesurfer = WaveSurfer.create({
       container: messageVoiceWaveF[messageVoiceWaveF.length - 1],
-      waveColor: '#3f3f49',
-      progressColor: '#1e212a',
+      waveColor: "#3f3f49",
+      progressColor: "#1e212a",
       cursorWidth: 2,
       barWidth: 1,
       barHeight: 20,
@@ -545,8 +568,8 @@ const stopRecording = () => {
       height: 25,
       barRadius: 30,
       url: audioURL,
-    })
+    });
   } else {
-    alert("دوباره ضبط کنید صدا ضبط نشده!!")
+    alert("دوباره ضبط کنید صدا ضبط نشده!!");
   }
-}
+};

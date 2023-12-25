@@ -237,9 +237,12 @@
     color: #0f8ca6;
     font-size: 20px;
     cursor: pointer;
-    padding-left: 10px;
-}
+    padding-left: 10px
 
+}
+#dialog__icon{
+    background-color: inherit;
+}
 .dialog__header,
 .dialog__footer {
     padding: 8px 10px;

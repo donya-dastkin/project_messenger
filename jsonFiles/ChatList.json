@@ -3,11 +3,11 @@
         "Name": "Go Channel",
         "chatlist": [
             {
-                "type": "other",
+                "type": "1",
                 "text": "hey"
             },
             {
-                "type": "other",
+                "type": "1",
                 "text": "hi"
             }
         ]
@@ -16,15 +16,15 @@
         "Name": "Fateme Zaka",
         "chatlist": [
             {
-                "type": "other",
+                "type": "1",
                 "text": "Ooh"
             },
             {
-                "type": "self",
+                "type": "0",
                 "text": "yehh"
             },
             {
-                "type": "other",
+                "type": "1",
                 "text": "nop"
             }
         ]
@@ -33,15 +33,15 @@
         "Name": "Donya Dastkin",
         "chatlist": [
             {
-                "type": "other",
+                "type": "1",
                 "text": "Donyaaaaa"
             },
             {
-                "type": "self",
+                "type": "0",
                 "text": "yehh"
             },
             {
-                "type": "other",
+                "type": "1",
                 "text": "nop"
             }
         ]
@@ -50,11 +50,11 @@
         "Name": "HTML-- group",
         "chatlist": [
             {
-                "type": "other",
+                "type": "1",
                 "text": "hoooyy"
             },
             {
-                "type": "other",
+                "type": "1",
                 "text": "heyyyy"
             }
         ]
@@ -63,15 +63,15 @@
         "Name": "Arman",
         "chatlist": [
             {
-                "type": "other",
+                "type": "1",
                 "text": "Ooh"
             },
             {
-                "type": "self",
+                "type": "0",
                 "text": "yehh"
             },
             {
-                "type": "other",
+                "type": "1",
                 "text": "nop"
             }
         ]

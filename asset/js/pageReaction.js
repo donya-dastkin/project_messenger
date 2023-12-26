@@ -179,11 +179,11 @@ const CreateContactBox = (object) => {
             if (group.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
               footerChannels.style = "display: none;";
-              footer.style = "display: flex;";
+              footer.style = "display:flex;";
             } else {
               subChannel[0].classList.remove("dialog__header-right--channel");
               footerChannels.style = "display: none;";
-              footer.style = "display: flex;";
+              footer.style = "display:flex;";
             }
             if (channels.length > 0) {
               subChannel[0].classList.add("dialog__header-right--channel");
@@ -359,17 +359,18 @@ dialog.addEventListener("keydown", (event) => {
   }
 });
 
-const sendMesseg = (dialogg = dialog.value, type = "text", sender = "self") => {
+const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
+
   let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
 
-  if (sender === "other") {
+  if (sender === "1") {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
-  } else if (sender === "self") {
+  } else if (sender === "0") {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
     messageCard.classList.add("message__card", "message__card--self");
@@ -552,7 +553,7 @@ const stopRecording = () => {
   mediaRecorder.stop();
   footerVoice.style = "display:none;";
   if (audioURL !== "") {
-    sendMesseg("", "voice", "self");
+    sendMesseg("", "voice", "0");
     const messageVoiceWaveF = document.querySelectorAll(
       ".dialog__message--play"
     );

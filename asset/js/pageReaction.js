@@ -157,17 +157,17 @@ const CreateContactBox = (object) => {
     let chatlistisActive = document.getElementsByClassName(
       "chatlist--is--active"
     );
+
     let nameDialog = document.getElementById("dialog__name");
     nameDialog.textContent = chatlistName.textContent;
     dialogSection.setAttribute("style", "display:block;");
-
     fetch("./jsonFiles/ChatList.json")
       .then(function (response) {
         return response.json();
       })
       .then(function (Contacts) {
         for (let i = 0; i < Contacts.length; i++) {
-          if (Contacts[i].Name === nameDialog.textContent) {
+          if (Contacts[i].chatname === nameDialog.textContent) {
             let dialogBody = document.getElementById("dialogBody");
             let subChannel = document.getElementsByClassName("dialog__status");
             let channels = chatlistCard.getElementsByClassName(
@@ -197,9 +197,9 @@ const CreateContactBox = (object) => {
             dialogBody.innerHTML = "";
             for (let j = 0; j < Contacts[i].chatlist.length; j++) {
               sendMesseg(
-                Contacts[i].chatlist[j].text,
+                Contacts[i].chatlist[j].messagetext,
                 "text",
-                Contacts[i].chatlist[j].type
+                Contacts[i].chatlist[j].sendertype
               );
             }
           }

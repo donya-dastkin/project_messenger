@@ -38,7 +38,8 @@ function selectAllData($conn,$table){
     $sql = "SELECT * FROM `$table` ORDER BY `id` ASC";
     $result = mysqli_query($conn,$sql);
     
-    $data = array("id"=>"", "messagetext"=>"", "sendertype"=>"","sendtime"=>"","chatname"=>"");
+    $chatList = array("chatname"=>"", "chatlist"=>"");
+    $data = array("id"=>"", "messagetext"=>"", "sendertype"=>"","sendtime"=>"");
     
     while($row = mysqli_fetch_array($result)){
     
@@ -46,9 +47,11 @@ function selectAllData($conn,$table){
     $data["messagetext"]=$row["messagetext"];
     $data["sendertype"]=$row["sendertype"];
     $data["sendtime"]=$row["sendtime"];
-    $data["chatname"]=$row["chatname"];
+    $chatList["chatname"]=$row["chatname"];
+    $chatList["chatlist"]=$data;
+
     
-    $json = json_encode($data);
+    $json = json_encode($chatList);
     
     echo $json;
     echo "<br>";

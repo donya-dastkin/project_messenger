@@ -2,8 +2,7 @@
 
 include 'Database.php' ;
 
-$message ="";
-//  $_GET['dialog__message'];
+$message =$_GET['dialog__message'];
 
 //? run function
 

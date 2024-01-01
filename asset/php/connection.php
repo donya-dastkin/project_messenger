@@ -31,3 +31,16 @@ function insertData($conn, $data, $table)
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+
+function selectAllData($conn, $table, $field)
+{
+
+    $sql = "SELECT $field FROM $table";
+    $result = $conn->query($sql);
+    $data = [];
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_all();
+    }
+    return $data;
+}

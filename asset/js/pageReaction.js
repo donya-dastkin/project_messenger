@@ -481,7 +481,7 @@ $(document).ready(function () {
       url: "asset/php/index.php",
       data: values,
       success: function (res) {
-        alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
+        alert("Sending Was Successfull! \n");
         if (dialogIcon.classList[0] === "dialog__send") {
           sendMesseg();
         } else if (dialogIcon.classList[0] === "dialog__voice") {

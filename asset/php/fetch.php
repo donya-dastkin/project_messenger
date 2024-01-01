@@ -2,12 +2,10 @@
 
 include 'connection.php';
 
-$conn = connect("localhost", "root", "", "chat");
+echo $data = json_encode(selectAllData());
 
+R::close();
 
-$data = selectAllData($conn, 'message', 'messagetext');
+echo $data;
 
-$conn->close();
-
-echo json_encode($data);
 exit();

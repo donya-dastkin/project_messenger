@@ -481,7 +481,7 @@ $(document).ready(function () {
       url: "asset/php/index.php",
       data: values,
       success: function (res) {
-        alert("Sending Was Successfull! \n");
+        alert("Sending Was Successfull! \n " + res);
         if (dialogIcon.classList[0] === "dialog__send") {
           sendMesseg();
         } else if (dialogIcon.classList[0] === "dialog__voice") {
@@ -609,7 +609,7 @@ $("#dialog__refresh").click(() => {
     dataType: "json",
     success: function (data) {
       for (let i = 0; i < data.length; i++) {
-        let text = data[i];
+        let text = data[i]["messagetext"];
         creatMessageBox(text);
       }
     },

@@ -1,16 +1,10 @@
 <?php
-
-function connect($servername, $username, $password, $dbname)
-{
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    return $conn;
-}
+require 'rb-mysql.php';
+R::setup(
+    'mysql:host=localhost;dbname=chat',
+    'root',
+    ''
+);
 
 function getTime()
 {
@@ -19,28 +13,21 @@ function getTime()
     return date("h:i:sa", $time);
 }
 
-function insertData($conn, $data, $table)
+function insertData($data)
 {
     $currentTime = getTime();
-
-    $sql = "INSERT INTO $table (messagetext,time) VALUES ('$data','$currentTime')";
-
-    if ($conn->query($sql) === TRUE) {
+    $messageTable = R::dispense('message');
+    $messageTable->messagetext = $data;
+    $messageTable->time = $currentTime;
+    $id = R::store($messageTable);
+    
+    if (isset($id)) {
         echo "\n New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
 
-
-function selectAllData($conn, $table, $field)
+function selectAllData()
 {
-
-    $sql = "SELECT $field FROM $table";
-    $result = $conn->query($sql);
-    $data = [];
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_all();
-    }
+    $data = R::getAll('SELECT * FROM message');
     return $data;
 }

@@ -8,11 +8,9 @@ $message = strip_tags(trim($message));
 
 //? run function
 
-$conn = connect("localhost", "root", "", "chat");
-$table = "message";
 
 if (!empty($message)) {
-    insertData($conn, $message, $table);
+    insertData($message);
 }
 
-$conn->close();
+R::close();

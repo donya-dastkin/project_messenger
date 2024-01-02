@@ -591,5 +591,42 @@ function creatMessageBox(text) {
 
 
 $("#dialog__refresh").click(() => {
-  
+  $.ajax({
+    type: "get",
+    url: "asset/php/fetch.php",
+    dataType: "json",
+    success: function (data) {
+      for (let i = 0; i < data.length; i++) {
+        let text = data[i]["messagetext"];
+        creatMessageBox(text);
+      }
+    },
+  });
+});
+function loadPreviousMessages() {
+    $.ajax({
+        url: 'get_messages.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            $('#previousMessages').html('');
+
+            response.forEach(function (message) {
+                $('#previousMessages').append(`
+                    <div class="message message__other">
+                        <div class="message__card message__card--other">
+                            <span class="message__text">${message.content}</span>
+                        </div>
+                    </div>
+                `);
+            });
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+}
+
+$(document).ready(function () {
+    loadPreviousMessages();
 });

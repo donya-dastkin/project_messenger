@@ -11,6 +11,4 @@ function sendMessage($message) {
     $messageBean->content = $message;
     R::store($messageBean);
 }
-
-
 ?>

@@ -2,14 +2,15 @@ let wavesurfer;
 let mediaRecorder,
   chunks = [],
   audioURL = "";
-const footer = document.getElementById("footer");
-const chatlist = document.getElementById("chatlist");
-const emojiIcon = document.getElementById("emojiIcon");
-const timerVoice = document.getElementById("timerVoice");
-const dialogSection = document.getElementById("dialog");
-const rootElement = document.getElementById("emojiMain");
-const dialog = document.getElementById("dialog__message");
-const footerVoice = document.getElementById("footerVoice");
+  const footer = document.getElementById("footer");
+  const chatlist = document.getElementById("chatlist");
+  const emojiIcon = document.getElementById("emojiIcon");
+  const timerVoice = document.getElementById("timerVoice");
+  const dialogSection = document.getElementById("dialog");
+  const rootElement = document.getElementById("emojiMain");
+  const dialog = document.getElementById("dialog__message");
+  const chatrefresh = document.getElementById("chatrefresh");
+  const footerVoice = document.getElementById("footerVoice");
 const dialogIcon = document.getElementById("dialog__icon");
 const ContactlistSection = document.getElementById("Contacts");
 const footerChannels = document.getElementById("footerChannels");
@@ -161,50 +162,53 @@ const CreateContactBox = (object) => {
     let nameDialog = document.getElementById("dialog__name");
     nameDialog.textContent = chatlistName.textContent;
     dialogSection.setAttribute("style", "display:block;");
-    fetch("./jsonFiles/ChatList.json")
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (Contacts) {
-        for (let i = 0; i < Contacts.length; i++) {
-          if (Contacts[i].chatname === nameDialog.textContent) {
-            let dialogBody = document.getElementById("dialogBody");
-            let subChannel = document.getElementsByClassName("dialog__status");
-            let channels = chatlistCard.getElementsByClassName(
-              "chatlist__name--channel"
-            );
-            let group = chatlistCard.getElementsByClassName(
-              "chatlist__name--channel"
-            );
-            if (group.length > 0) {
-              subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style = "display: none;";
-              footer.style = "display:flex;";
-            } else {
-              subChannel[0].classList.remove("dialog__header-right--channel");
-              footerChannels.style = "display: none;";
-              footer.style = "display:flex;";
-            }
-            if (channels.length > 0) {
-              subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style = "display: block;";
-              footer.style = "display: none;";
-            } else {
-              footerChannels.style = "display: none;";
-              footer.style = "display: flex;";
-              subChannel[0].classList.remove("dialog__header-right--channel");
-            }
-            dialogBody.innerHTML = "";
-            for (let j = 0; j < Contacts[i].chatlist.length; j++) {
-              sendMesseg(
-                Contacts[i].chatlist[j].messagetext,
-                "text",
-                Contacts[i].chatlist[j].sendertype
-              );
-            }
-          }
-        }
-      });
+    dialogBody.innerHTML = "";
+    loadchat();
+    //!
+    // fetch("./jsonFiles/ChatList.json")
+    //   .then(function (response) {
+    //     return response.json();
+    //   })
+    //   .then(function (Contacts) {
+    //     for (let i = 0; i < Contacts.length; i++) {
+    //       if (Contacts[i].chatname === nameDialog.textContent) {
+    //         let dialogBody = document.getElementById("dialogBody");
+    //         let subChannel = document.getElementsByClassName("dialog__status");
+    //         let channels = chatlistCard.getElementsByClassName(
+    //           "chatlist__name--channel"
+    //         );
+    //         let group = chatlistCard.getElementsByClassName(
+    //           "chatlist__name--channel"
+    //         );
+    //         if (group.length > 0) {
+    //           subChannel[0].classList.add("dialog__header-right--channel");
+    //           footerChannels.style = "display: none;";
+    //           footer.style = "display:flex;";
+    //         } else {
+    //           subChannel[0].classList.remove("dialog__header-right--channel");
+    //           footerChannels.style = "display: none;";
+    //           footer.style = "display:flex;";
+    //         }
+    //         if (channels.length > 0) {
+    //           subChannel[0].classList.add("dialog__header-right--channel");
+    //           footerChannels.style = "display: block;";
+    //           footer.style = "display: none;";
+    //         } else {
+    //           footerChannels.style = "display: none;";
+    //           footer.style = "display: flex;";
+    //           subChannel[0].classList.remove("dialog__header-right--channel");
+    //         }
+    //         dialogBody.innerHTML = "";
+    //         for (let j = 0; j < Contacts[i].chatlist.length; j++) {
+    //           sendMesseg(
+    //             Contacts[i].chatlist[j].messagetext,
+    //             "text",
+    //             Contacts[i].chatlist[j].sendertype
+    //           );
+    //         }
+    //       }
+    //     }
+    //   });
 
     if (chatlistisActive.length >= 1) {
       chatlistisActive[0].classList.remove("chatlist--is--active");
@@ -574,3 +578,21 @@ const stopRecording = () => {
     alert("دوباره ضبط کنید صدا ضبط نشده!!");
   }
 };
+
+chatrefresh.addEventListener("click",loadchat = ()=>{
+    fetch("asset/php/fetch.php")
+    .then(function (response){
+      return response.json();
+    })
+    .then(function (Contacts){
+      let lastMessage= 1;
+      if(lastMessage===1){
+        dialogBody.innerHTML = "";
+      }
+      for (let i = lastMessage; i < Contacts.length; i++) {
+        sendMesseg(Contacts[i].messagetext,"text",Contacts[i].sendertype);
+        // console.log(Contacts[i]);
+      }
+      lastMessage= Contacts.length;
+    })
+})

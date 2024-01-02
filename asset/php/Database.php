@@ -1,17 +1,10 @@
 <?php
 
+require 'rb-mysql.php';
+
+R::setup('mysql:host=localhost;dbname=chat','root','');
+
 //? function
-
-function connect($servername, $username, $password, $dbname){
-    
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    
-    return $conn;
-
-}
 
 function sendTime(){
     
@@ -21,42 +14,28 @@ function sendTime(){
 
 }
 
-function insertData($conn, $data,$table){
-    $sendTime=sendTime();
-    $sql = "INSERT INTO $table (messagetext,sendertype,sendtime,chatname) 
-        VALUES ('$data',0,'$sendTime','Donya Dstkin')";
-        if ($conn->query($sql) === TRUE) {
-            echo "\n New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+function insertData($data){
 
+    $sendTime=sendTime();
+    $sendTime=sendTime();
+    $messageTable = R::dispense('message');
+    $messageTable->messagetext = $data;
+    $messageTable->sendertype = 0;
+    $messageTable->sendtime = $sendTime;
+    $messageTable->chatname = "Donya Dstkin";
+    
+    $id = R::store($messageTable);
+    
+    if (isset($id)) {
+        echo "\n New record created successfully";
+    }
 }
 
-function selectAllData($conn,$table){
+function selectAllData($table){
 
-    $sql = "SELECT * FROM `$table` ORDER BY `id` ASC";
-    $result = mysqli_query($conn,$sql);
+    $data = R::getAll("SELECT * FROM $table");
+    return $data;
     
-    $chatList = array("chatname"=>"", "chatlist"=>"");
-    $data = array("id"=>"", "messagetext"=>"", "sendertype"=>"","sendtime"=>"");
-    
-    while($row = mysqli_fetch_array($result)){
-    
-    $data["id"]=$row["id"];
-    $data["messagetext"]=$row["messagetext"];
-    $data["sendertype"]=$row["sendertype"];
-    $data["sendtime"]=$row["sendtime"];
-    $chatList["chatname"]=$row["chatname"];
-    $chatList["chatlist"]=$data;
+}
 
-    
-    $json = json_encode($chatList);
-    
-    echo $json;
-    echo "<br>";
-    echo "<br>";
-    
-    };
-    
-    }
+?>

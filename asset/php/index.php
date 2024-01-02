@@ -3,17 +3,13 @@
 include 'Database.php' ;
 
 $message =$_GET['dialog__message'];
+$message = strip_tags(trim($message));
 
 //? run function
 
-$conn = connect("localhost", "root", "", "chat");
-$table = "message";
-
-if ($message!== "") {
-    insertData($conn, $message, $table);
+if (!empty($message)) {
+    insertData($message);
 }
 
-selectAllData($conn,$table);
-
-$conn->close();
+R::close();
 ?>

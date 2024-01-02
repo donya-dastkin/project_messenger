@@ -232,6 +232,7 @@
     padding-left: 10px;
 }
 
+
 .dialog__send::before {
     content: '\e20a';
     /* content: '\f1d8'; */
@@ -288,7 +289,6 @@
     position: relative;
     top: 25px;
 }
-
 .message__text {
     max-width: 350px;
     font-size: 14px;

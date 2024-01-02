@@ -352,13 +352,6 @@ const IconChanger = function () {
   }
 };
 
-dialog.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    sendMesseg();
-    dialog.value = null;
-  }
-});
-
 let dialogBody = document.getElementById("dialogBody");
 const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   let messageSelf = document.createElement("div");
@@ -472,6 +465,7 @@ dialog.addEventListener("mousedown", () => {
 });
 
 //! insert data into database
+
 $(document).ready(function () {
   $("#send_form").submit(function (event) {
     event.preventDefault();
@@ -481,7 +475,7 @@ $(document).ready(function () {
       url: "asset/php/index.php",
       data: values,
       success: function (res) {
-        alert("Sending Was Successfull! \n " + res);
+        alert("Sending Was Successfull! " + res);
         if (dialogIcon.classList[0] === "dialog__send") {
           sendMesseg();
         } else if (dialogIcon.classList[0] === "dialog__voice") {
@@ -491,6 +485,12 @@ $(document).ready(function () {
       },
     });
   });
+});
+
+dialog.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    $("#send_form").submit();
+  }
 });
 
 function timer() {

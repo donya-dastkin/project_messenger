@@ -1,33 +1,12 @@
 <?php
 
-function connect($servername, $username, $password, $dbname)
-{
+require 'path/to/redbean/rb.php';
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+R::setup('mysql:host=localhost;dbname=chat', 'root', '');
 
-    return $conn;
+if (!R::testConnection()) {
+    exit('Connection failed');
 }
 
-function getTime()
-{
-    date_default_timezone_set("Asia/Tehran");
-    $time = time();
-    return date("h:i:sa", $time);
-}
-
-function insertData($conn, $data, $table)
-{
-    $currentTime = getTime();
-
-    $sql = "INSERT INTO $table (messagetext,time) VALUES ('$data','$currentTime')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "\n New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
+?>

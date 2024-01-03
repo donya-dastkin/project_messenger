@@ -1,12 +1,11 @@
 <?php
 
-require 'function.php';
+include 'connection.php';
 
+$data = json_encode(selectAllData());
 
-$messages = getMessages();
+R::close();
 
-foreach ($messages as $message) {
-    echo $message->content . '<br>';
-}
+echo $data;
 
-?>
+exit();

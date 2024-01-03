@@ -476,12 +476,7 @@ $(document).ready(function () {
       data: values,
       success: function (res) {
         alert("Sending Was Successfull! " + res);
-        if (dialogIcon.classList[0] === "dialog__send") {
-          sendMesseg();
-        } else if (dialogIcon.classList[0] === "dialog__voice") {
-          record();
-          // !
-        }
+        dialog.value=null
       },
     });
   });
@@ -602,16 +597,27 @@ function creatMessageBox(text) {
   messageSelf.appendChild(messageCard);
 }
 
-$("#dialog__refresh").click(() => {
+let uploaded=0;
+function uploadMessage(){
   $.ajax({
     type: "get",
     url: "asset/php/fetch.php",
     dataType: "json",
     success: function (data) {
-      for (let i = 0; i < data.length; i++) {
+      for (let i = uploaded; i < data.length; i++) {
         let text = data[i]["messagetext"];
         creatMessageBox(text);
       }
+      uploaded=data.length;
     },
   });
+}
+$("#dialog__refresh").click(() => {
+ uploadMessage()
 });
+$(document).ready(function () {
+  setInterval(()=>{
+    console.log("hi")
+   uploadMessage()
+  },4000)
+})

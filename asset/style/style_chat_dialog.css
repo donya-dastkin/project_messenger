@@ -58,7 +58,6 @@
 .dialog__search::before,
 .dialog__edit::before,
 .dialog__showprofile::before,
-.dialog__refresh::before,
 .dialog__options::before {
     padding: 20px 10px;
     font-size: 18px;
@@ -90,6 +89,8 @@
     color: #4a4e51;
     content: '\f021';
     cursor: pointer;
+    font-size: 18px;
+    background: #18191e;
 }
 
 .dialog__edit::before {
@@ -231,6 +232,7 @@
     padding-left: 10px;
 }
 
+
 .dialog__send::before {
     content: '\e20a';
     /* content: '\f1d8'; */
@@ -287,7 +289,6 @@
     position: relative;
     top: 25px;
 }
-
 .message__text {
     max-width: 350px;
     font-size: 14px;

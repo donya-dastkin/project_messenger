@@ -352,13 +352,6 @@ const IconChanger = function () {
   }
 };
 
-dialog.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    sendMesseg();
-    dialog.value = null;
-  }
-});
-
 let dialogBody = document.getElementById("dialogBody");
 const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   let messageSelf = document.createElement("div");
@@ -472,12 +465,32 @@ dialog.addEventListener("mousedown", () => {
 });
 
 //! insert data into database
+
 $(document).ready(function () {
   $("#send_form").submit(function (event) {
     event.preventDefault();
-
-
+    var values = $(this).serialize();
+    $.ajax({
+      type: "get",
+      url: "asset/php/index.php",
+      data: values,
+      success: function (res) {
+        alert("Sending Was Successfull! " + res);
+        if (dialogIcon.classList[0] === "dialog__send") {
+          sendMesseg();
+        } else if (dialogIcon.classList[0] === "dialog__voice") {
+          record();
+          // !
+        }
+      },
+    });
   });
+});
+
+dialog.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    $("#send_form").submit();
+  }
 });
 
 function timer() {
@@ -589,8 +602,7 @@ function creatMessageBox(text) {
   messageSelf.appendChild(messageCard);
 }
 
-
-$("#dialog__refresh").click(() => {
+setInterval(() => {
   $.ajax({
     type: "get",
     url: "asset/php/fetch.php",
@@ -602,31 +614,4 @@ $("#dialog__refresh").click(() => {
       }
     },
   });
-});
-function loadPreviousMessages() {
-    $.ajax({
-        url: 'get_messages.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function (response) {
-            $('#previousMessages').html('');
-
-            response.forEach(function (message) {
-                $('#previousMessages').append(`
-                    <div class="message message__other">
-                        <div class="message__card message__card--other">
-                            <span class="message__text">${message.content}</span>
-                        </div>
-                    </div>
-                `);
-            });
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
-}
-
-$(document).ready(function () {
-    loadPreviousMessages();
-});
+}, 5000);

@@ -601,17 +601,18 @@ function creatMessageBox(text) {
   messageCard.appendChild(messageText);
   messageSelf.appendChild(messageCard);
 }
-
+let length=0;
 setInterval(() => {
   $.ajax({
     type: "get",
     url: "asset/php/fetch.php",
     dataType: "json",
     success: function (data) {
-      for (let i = 0; i < data.length; i++) {
+      for (let i = length; i < data.length; i++) {
         let text = data[i]["messagetext"];
         creatMessageBox(text);
       }
+	  length=data.length;
     },
   });
 }, 5000);

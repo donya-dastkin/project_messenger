@@ -20,7 +20,7 @@ function insertData($data)
     $messageTable->messagetext = $data;
     $messageTable->time = $currentTime;
     $id = R::store($messageTable);
-    
+
     if (isset($id)) {
         echo "\n New record created successfully";
     }
@@ -30,4 +30,11 @@ function selectAllData()
 {
     $data = R::getAll('SELECT * FROM message');
     return $data;
+}
+
+function deleteData($id,$table)
+{
+    $message = R::load($table, $id);
+    $res = R::trash($message);
+    return $res;
 }

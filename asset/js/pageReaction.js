@@ -476,7 +476,7 @@ $(document).ready(function () {
       data: values,
       success: function (res) {
         alert("Sending Was Successfull! " + res);
-        dialog.value=null
+        dialog.value = null;
       },
     });
   });
@@ -570,7 +570,6 @@ const stopRecording = () => {
   }
 };
 
-//! fetch data from database
 function creatMessageBox(text) {
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
@@ -595,10 +594,67 @@ function creatMessageBox(text) {
   messageText.textContent = text;
   messageCard.appendChild(messageText);
   messageSelf.appendChild(messageCard);
+  messageCard.addEventListener("contextmenu", (e) => {
+    e.preventDefault()
+    const sectionTools = creatMessageMenu();
+    messageCard.appendChild(sectionTools);
+  });
 }
 
-let uploaded=0;
-function uploadMessage(){
+function creatMessageMenu() {
+  const sectionTools = document.createElement("section");
+  sectionTools.classList.add("section-tools");
+  const closeBtn = document.createElement("button");
+  closeBtn.classList.add("close-btn");
+  sectionTools.appendChild(closeBtn);
+  closeBtn.addEventListener("click", () => {
+    sectionTools.style.display = "none";
+  });
+  const table = document.createElement("table");
+  for (let i = 0; i < 6; i++) {
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    switch (i) {
+      case 0:
+        td.id = id = "message__tools--delete";
+        td.textContent = "حذف";
+        td.addEventListener("click", () => {
+          alert("delete");
+          sectionTools.style.display = "none";
+        });
+        break;
+      case 1:
+        td.id = id = "message__tools--edit";
+        td.textContent = "ویرایش";
+        break;
+      case 2:
+        td.id = id = "message__tools--forward";
+        td.textContent = "هدایت";
+        break;
+      case 3:
+        td.id = id = "message__tools--response";
+        td.textContent = "پاسخ";
+        break;
+      case 4:
+        td.id = id = "message__tools--copy";
+        td.textContent = "کپی";
+        break;
+      case 5:
+        td.id = id = "message__tools--pin";
+        td.textContent = "سنجاق";
+        break;
+    }
+    tr.appendChild(td);
+    table.appendChild(tr);
+  }
+  sectionTools.appendChild(table);
+  return sectionTools;
+}
+
+//! fetch data from database
+
+let uploaded = 0;
+function uploadMessage() {
   $.ajax({
     type: "get",
     url: "asset/php/fetch.php",
@@ -608,16 +664,15 @@ function uploadMessage(){
         let text = data[i]["messagetext"];
         creatMessageBox(text);
       }
-      uploaded=data.length;
+      uploaded = data.length;
     },
   });
 }
 $("#dialog__refresh").click(() => {
- uploadMessage()
+  uploadMessage();
 });
 $(document).ready(function () {
-  setInterval(()=>{
-    console.log("hi")
-   uploadMessage()
-  },4000)
-})
+  setInterval(() => {
+    uploadMessage();
+  }, 4000);
+});

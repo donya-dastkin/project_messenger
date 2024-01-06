@@ -11,16 +11,16 @@
     <link rel="stylesheet" href="./asset/style/style_add_contacts.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"
-  ></script>
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"
-></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body onload="refreshChatlist()">
@@ -73,7 +73,7 @@
         <div id="Contacts"></div>
       </div>
 
-      <div id="dialog" class="dialog" style="display:none;">
+      <div id="dialog" class="dialog" style="display: none">
         <div class="dialog__wrapper">
           <div class="dialog__header">
             <div class="dialog__header-right">
@@ -155,7 +155,8 @@
 
           <div class="emoji__main" id="emojiMain"></div>
 
-          <form id="send_form"
+          <form
+            id="send_form"
             id="footer"
             class="dialog__footer"
             onkeyup="IconChanger()"
@@ -171,28 +172,28 @@
               id="dialog__input--attach"
               class="dialog__attach--input"
             />
-              <button
-                id="dialog__icon"
-                class="dialog__voice"
-                type="submit"
-              ></button>
-              <div class="dialog__message">
-                <textarea
-                  name="dialog__message"
-                  id="dialog__message"
-                  class="dialog__message--input"
-                  placeholder="message..."
-                ></textarea>
-              </div>
-              <div class="dialog__tools">
-                <span
+            <button
+              id="dialog__icon"
+              class="dialog__voice"
+              type="submit"
+            ></button>
+            <div class="dialog__message">
+              <textarea
+                name="dialog__message"
+                id="dialog__message"
+                class="dialog__message--input"
+                placeholder="message..."
+              ></textarea>
+            </div>
+            <div class="dialog__tools">
+              <span
                 onclick="EmojiIconActiv()"
                 id="emojiIcon"
                 class="dialog__emoji"
-                ></span>
-              </div>
+              ></span>
+            </div>
           </form>
-            
+
           <div
             id="footerChannels"
             class="dialog__footer--channels"
@@ -261,8 +262,8 @@
     </section>
 
     <script src="https://unpkg.com/picmo@latest/dist/umd/index.js"></script>
-      <script src="https://unpkg.com/wavesurfer.js@7"></script>
-      <script
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"
@@ -272,7 +273,6 @@
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
       crossorigin="anonymous"
     ></script>
-      <script src="./asset/js/pageReaction.js"></script>
-     
+    <script src="./asset/js/pageReaction.js"></script>
   </body>
 </html>

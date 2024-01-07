@@ -15,6 +15,7 @@ const ContactlistSection = document.getElementById("Contacts");
 const footerChannels = document.getElementById("footerChannels");
 const dialogIconattach = document.getElementById("dialog__attach");
 const Contacts = chatlist.getElementsByClassName("chatlist__cadre");
+let activeChatlist;
 
 const ChatList = function () {
   let ClosedChatList = () => {
@@ -148,7 +149,6 @@ const foldersISactive = function (chatType) {
 //   footer.appendChild(dialogMessage);
 //   footer.appendChild(dialogTools);
 // };
-
 const CreateContactBox = (object) => {
   let chatlistCard = document.createElement("div");
   chatlistCard.classList.add("chatlist__cadre");
@@ -158,6 +158,7 @@ const CreateContactBox = (object) => {
       "chatlist--is--active"
     );
     let nameDialog = document.getElementById("dialog__name");
+    activeChatlist = chatlistName.textContent;
     nameDialog.textContent = chatlistName.textContent;
     dialogSection.setAttribute("style", "display:block;");
 
@@ -356,7 +357,8 @@ const sendMesseg = (
   dialogg = dialog.value,
   type = "text",
   sender = 0,
-  dataId
+  dataId,
+  send_time
 ) => {
   let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
@@ -431,11 +433,15 @@ const sendMesseg = (
     messageCard.appendChild(messageVoice);
   } else if (type === "text") {
     let messageText = document.createElement("span");
+    let messageSendTime = document.createElement("span");
+    messageSendTime.textContent = send_time;
+    messageSendTime.setAttribute("class", "message__sendTime");
     messageText.setAttribute("class", "message__text");
     messageText.setAttribute("data-id", dataId);
     messageCard.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
+    messageCard.appendChild(messageSendTime);
     messageCard.addEventListener("contextmenu", (e) => {
       e.preventDefault();
       const sectionTools = creatMessageMenu(e.target);
@@ -445,7 +451,6 @@ const sendMesseg = (
   }
   messageSelf.appendChild(messageCard);
 };
-
 const EmojiIconActiv = () => {
   const { createPicker } = window.picmo;
 
@@ -657,17 +662,16 @@ function uploadMessage() {
     dataType: "json",
     success: function (data) {
       for (let i = uploaded; i < data.length; i++) {
-        if(data[i]["chat_name"]==nameDialog){
-          let text = data[i]["text_message"];
-        let dataId = data[i]["id"];
-        let userId = data[i]["user_id"];
-        if (userId == 191) {
-          sendMesseg(text, "text", 0, dataId);
-        } else {
-          sendMesseg(text, "text", 1, dataId);
+        let chatlistName = data[i]["chat_name"];
+        if (chatlistName == activeChatlist) {
+          let { id, text_message, user_id, send_time } = data[i];
+          send_time = send_time.substring(11, 16);
+          if (user_id == 191) {
+            sendMesseg(text_message, "text", 0, id, send_time);
+          } else {
+            sendMesseg(text_message, "text", 1, id, send_time);
+          }
         }
-        }
-        
       }
       uploaded = data.length;
     },

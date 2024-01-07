@@ -352,17 +352,22 @@ const IconChanger = function () {
   }
 };
 
-let dialogBody = document.getElementById("dialogBody");
-const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
+const sendMesseg = (
+  dialogg = dialog.value,
+  type = "text",
+  sender = 0,
+  dataId
+) => {
+  let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
 
-  if (sender === "1") {
+  if (sender === 1) {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
-  } else if (sender === "0") {
+  } else if (sender === 0) {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
     messageCard.classList.add("message__card", "message__card--self");
@@ -427,8 +432,15 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   } else if (type === "text") {
     let messageText = document.createElement("span");
     messageText.setAttribute("class", "message__text");
+    messageText.setAttribute("data-id", dataId);
+    messageCard.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
+    messageCard.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      const sectionTools = creatMessageMenu(e.target);
+      messageCard.appendChild(sectionTools);
+    });
     dialog.value = null;
   }
   messageSelf.appendChild(messageCard);
@@ -462,30 +474,6 @@ const EmojiIconActiv = () => {
 
 dialog.addEventListener("mousedown", () => {
   rootElement.style = "display:none;";
-});
-
-//! insert data into database
-
-$(document).ready(function () {
-  $("#send_form").submit(function (event) {
-    event.preventDefault();
-    var values = $(this).serialize();
-    $.ajax({
-      type: "get",
-      url: "asset/php/index.php",
-      data: values,
-      success: function (res) {
-        alert("Sending Was Successfull! " + res);
-        dialog.value = null;
-      },
-    });
-  });
-});
-
-dialog.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    $("#send_form").submit();
-  }
 });
 
 function timer() {
@@ -548,7 +536,7 @@ const stopRecording = () => {
   mediaRecorder.stop();
   footerVoice.style = "display:none;";
   if (audioURL !== "") {
-    sendMesseg("", "voice", "0");
+    sendMesseg("", "voice", 0);
     const messageVoiceWaveF = document.querySelectorAll(
       ".dialog__message--play"
     );
@@ -570,43 +558,29 @@ const stopRecording = () => {
   }
 };
 
-function creatMessageBox(text, dataId) {
-  let messageSelf = document.createElement("div");
-  let messageCard = document.createElement("div");
+//! insert data into database
 
-  messageCard.classList.add("message__card", "message__card--self");
-  messageSelf.classList.add("message", "message__self");
-
-  dialogBody.appendChild(messageSelf);
-
-  let messagePhoto = document.createElement("div");
-  messagePhoto.setAttribute("class", "message__photo");
-
-  let messageImg = document.createElement("img");
-  messageImg.src = "./asset/image/user.png";
-  messageImg.setAttribute("class", "message__img");
-
-  messagePhoto.appendChild(messageImg);
-  messageSelf.appendChild(messagePhoto);
-
-  let messageText = document.createElement("span");
-  messageText.setAttribute("class", "message__text");
-  messageText.setAttribute("data-id", dataId);
-  messageCard.setAttribute("data-id", dataId);
-  messageText.textContent = text;
-  messageCard.appendChild(messageText);
-  messageSelf.appendChild(messageCard);
-  messageCard.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-    const sectionTools = creatMessageMenu(e.target);
-    messageCard.appendChild(sectionTools);
+$(document).ready(function () {
+  $("#send_form").submit(function (event) {
+    event.preventDefault();
+    var values = $(this).serialize();
+    $.ajax({
+      type: "get",
+      url: "asset/php/index.php",
+      data: values,
+      success: function (res) {
+        alert(res);
+        dialog.value = null;
+      },
+    });
   });
-}
-function deleteMessageBox(target) {
-  let parent = target.parentNode;
-  parent.removeChild(target);
-  parent.removeChild(parent.children[0]);
-}
+});
+
+dialog.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    $("#send_form").submit();
+  }
+});
 
 function creatMessageMenu(target) {
   let dataId = target.getAttribute("data-id");
@@ -667,6 +641,12 @@ function creatMessageMenu(target) {
   return sectionTools;
 }
 
+function deleteMessageBox(target) {
+  let parent = target.parentNode;
+  parent.removeChild(target);
+  parent.removeChild(parent.children[0]);
+}
+
 //! fetch data from database
 
 let uploaded = 0;
@@ -677,9 +657,17 @@ function uploadMessage() {
     dataType: "json",
     success: function (data) {
       for (let i = uploaded; i < data.length; i++) {
-        let text = data[i]["messagetext"];
+        if(data[i]["chat_name"]==nameDialog){
+          let text = data[i]["text_message"];
         let dataId = data[i]["id"];
-        creatMessageBox(text, dataId);
+        let userId = data[i]["user_id"];
+        if (userId == 191) {
+          sendMesseg(text, "text", 0, dataId);
+        } else {
+          sendMesseg(text, "text", 1, dataId);
+        }
+        }
+        
       }
       uploaded = data.length;
     },

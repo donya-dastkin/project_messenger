@@ -59,20 +59,5 @@
         "date": "18:00 ب.ط",
         "numberMessages": "20",
         "messageSendingStatus":""
-    },
-    {
-        "nationalCode":"0927088177",
-        "fName":"Arman",
-        "lName":"",
-        "phone":"09156560562",
-        "fullNname": "Arman",
-        "userName":"@armii",
-        "profile": "./asset/image/user.png",
-        "chatType": "pv",
-        "sender": "MuM",
-        "lastMessage": "Wher are you??",
-        "date": "23:00 ب.ط",
-        "numberMessages": "2",
-        "messageSendingStatus":""
     }
 ]

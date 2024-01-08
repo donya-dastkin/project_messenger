@@ -58,22 +58,5 @@
                 "text": "heyyyy"
             }
         ]
-    },
-    {
-        "Name": "Arman",
-        "chatlist": [
-            {
-                "type": "1",
-                "text": "Ooh"
-            },
-            {
-                "type": "0",
-                "text": "yehh"
-            },
-            {
-                "type": "1",
-                "text": "nop"
-            }
-        ]
     }
 ]

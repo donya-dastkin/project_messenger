@@ -154,6 +154,7 @@ const CreateContactBox = (object) => {
   chatlistCard.classList.add("chatlist__cadre");
 
   chatlistCard.addEventListener("click", () => {
+    uploadMessage();
     let chatlistisActive = document.getElementsByClassName(
       "chatlist--is--active"
     );
@@ -563,6 +564,7 @@ const stopRecording = () => {
   }
 };
 
+
 //! insert data into database
 
 $(document).ready(function () {
@@ -572,7 +574,7 @@ $(document).ready(function () {
     $.ajax({
       type: "get",
       url: "asset/php/index.php",
-      data: values,
+      data: values + "&activeChatlist=" + activeChatlist,
       success: function (res) {
         alert(res);
         dialog.value = null;
@@ -586,6 +588,49 @@ dialog.addEventListener("keydown", (event) => {
     $("#send_form").submit();
   }
 });
+
+//! delete data from database
+
+function deleteMessageBox(target) {
+  let parent = target.parentNode;
+  let dataId = target.getAttribute("data-id");
+  $.ajax({
+    type: "get",
+    url: "asset/php/delete.php",
+    data: { dataId: dataId },
+    success: function (res) {
+      alert(res);
+      parent.removeChild(target);
+      parent.removeChild(parent.children[0]);
+    },
+  });
+}
+
+//! update data from database
+
+function updateMessage(target) {
+  let span = target.children[0];
+  let dataId = target.getAttribute("data-id");
+  dialog.value = span.textContent;
+  dialog.focus();
+  const sendBtn = document
+    .getElementById("dialog__icon")
+    .addEventListener("click", (e) => {
+      e.preventDefault();
+      let newMessage = dialog.value;
+      $.ajax({
+        type: "get",
+        url: "asset/php/update.php",
+        data: { dataId: dataId, newMessage: newMessage },
+        success: function (res) {
+          span.textContent = res;
+          dialog.value = null;
+        },
+      });
+    });
+}
+
+//! create message menu
 
 function creatMessageMenu(target) {
   let dataId = target.getAttribute("data-id");
@@ -606,21 +651,21 @@ function creatMessageMenu(target) {
         td.id = "message__tools--delete";
         td.textContent = "حذف";
         td.addEventListener("click", () => {
-          $.ajax({
-            type: "get",
-            url: "asset/php/delete.php",
-            data: { dataId: dataId },
-            success: function (res) {
-              alert(res);
-              deleteMessageBox(target);
-            },
-          });
+          if (dataId) {
+            deleteMessageBox(target);
+          }
           sectionTools.style.display = "none";
         });
         break;
       case 1:
         td.id = "message__tools--edit";
         td.textContent = "ویرایش";
+        td.addEventListener("click", () => {
+          if (dataId) {
+            updateMessage(target);
+          }
+          sectionTools.style.display = "none";
+        });
         break;
       case 2:
         td.id = "message__tools--forward";
@@ -646,15 +691,9 @@ function creatMessageMenu(target) {
   return sectionTools;
 }
 
-function deleteMessageBox(target) {
-  let parent = target.parentNode;
-  parent.removeChild(target);
-  parent.removeChild(parent.children[0]);
-}
-
 //! fetch data from database
-
 let uploaded = 0;
+
 function uploadMessage() {
   $.ajax({
     type: "get",
@@ -677,6 +716,7 @@ function uploadMessage() {
     },
   });
 }
+
 $("#dialog__refresh").click(() => {
   uploadMessage();
 });

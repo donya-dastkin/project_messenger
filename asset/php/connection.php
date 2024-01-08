@@ -18,7 +18,7 @@ function getTime()
     return $now;
 }
 
-function insertData($data,$userId)
+function insertData($data, $userId, $chat_name)
 {
     $currentTime = getTime();
     $messageTable = R::dispense('message');
@@ -26,7 +26,7 @@ function insertData($data,$userId)
     $messageTable->send_time = $currentTime;
     $messageTable->user_id = $userId;
     $messageTable->sender_type = 0;
-    $messageTable->chat_name = 'farawin';
+    $messageTable->chat_name = $chat_name;
     $id = R::store($messageTable);
 
     if (isset($id)) {
@@ -36,7 +36,7 @@ function insertData($data,$userId)
 
 function selectAllData()
 {
-    $data=R::getAll('SELECT * FROM message ORDER BY send_time ASC');
+    $data = R::getAll('SELECT * FROM message ORDER BY send_time ASC');
     return $data;
 }
 
@@ -44,5 +44,11 @@ function deleteData($id, $table)
 {
     $message = R::load($table, $id);
     $res = R::trash($message);
+    return $res;
+}
+function updateData($id,$table,$newMessage){
+    $message = R::load($table, $id);
+    $message->text_message = $newMessage;
+    $res=R::store( $message );
     return $res;
 }

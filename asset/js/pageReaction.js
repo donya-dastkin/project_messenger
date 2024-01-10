@@ -368,11 +368,13 @@ const sendMesseg = (
   if (sender === 1) {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
+
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
   } else if (sender === 0) {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
+
     messageCard.classList.add("message__card", "message__card--self");
     messageSelf.classList.add("message", "message__self");
   }
@@ -438,14 +440,13 @@ const sendMesseg = (
     messageSendTime.textContent = send_time;
     messageSendTime.setAttribute("class", "message__sendTime");
     messageText.setAttribute("class", "message__text");
-    messageText.setAttribute("data-id", dataId);
-    messageCard.setAttribute("data-id", dataId);
+    messageSelf.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
     messageCard.appendChild(messageSendTime);
-    messageCard.addEventListener("contextmenu", (e) => {
+    messageSelf.addEventListener("contextmenu", (e) => {
       e.preventDefault();
-      const sectionTools = creatMessageMenu(e.target);
+      const sectionTools = creatMessageMenu(messageSelf);
       messageCard.appendChild(sectionTools);
     });
     dialog.value = null;
@@ -564,7 +565,6 @@ const stopRecording = () => {
   }
 };
 
-
 //! insert data into database
 
 $(document).ready(function () {
@@ -573,10 +573,9 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "asset/php/index.php",
+      url: "asset/php/models/messages/insert.php",
       data: values + "&activeChatlist=" + activeChatlist,
       success: function (res) {
-        alert(res);
         dialog.value = null;
       },
     });
@@ -591,26 +590,23 @@ dialog.addEventListener("keydown", (event) => {
 
 //! delete data from database
 
-function deleteMessageBox(target) {
-  let parent = target.parentNode;
-  let dataId = target.getAttribute("data-id");
+function deleteMessageBox(messageBox) {
+  let dataID = messageBox.getAttribute("data-id");
   $.ajax({
     type: "get",
-    url: "asset/php/delete.php",
-    data: { dataId: dataId },
-    success: function (res) {
-      alert(res);
-      parent.removeChild(target);
-      parent.removeChild(parent.children[0]);
+    url: "asset/php/models/messages/delete.php",
+    data: { dataID: dataID },
+    success: function () {
+      messageBox.remove()
     },
   });
 }
 
 //! update data from database
 
-function updateMessage(target) {
-  let span = target.children[0];
-  let dataId = target.getAttribute("data-id");
+function updateMessage(messageBox) {
+  let span = messageBox.children[1].children[0]
+  let dataID = messageBox.getAttribute("data-id");
   dialog.value = span.textContent;
   dialog.focus();
   const sendBtn = document
@@ -620,10 +616,10 @@ function updateMessage(target) {
       let newMessage = dialog.value;
       $.ajax({
         type: "get",
-        url: "asset/php/update.php",
-        data: { dataId: dataId, newMessage: newMessage },
+        url: "asset/php/models/messages/update.php",
+        data: { dataID: dataID, newMessage: newMessage },
         success: function (res) {
-          span.textContent = res;
+          span.textContent = res['data'];
           dialog.value = null;
         },
       });
@@ -632,8 +628,8 @@ function updateMessage(target) {
 
 //! create message menu
 
-function creatMessageMenu(target) {
-  let dataId = target.getAttribute("data-id");
+function creatMessageMenu(messageBox) {
+  let dataID = messageBox.getAttribute("data-id");
   const sectionTools = document.createElement("section");
   sectionTools.classList.add("section-tools");
   const closeBtn = document.createElement("button");
@@ -651,8 +647,8 @@ function creatMessageMenu(target) {
         td.id = "message__tools--delete";
         td.textContent = "حذف";
         td.addEventListener("click", () => {
-          if (dataId) {
-            deleteMessageBox(target);
+          if (dataID) {
+            deleteMessageBox(messageBox);
           }
           sectionTools.style.display = "none";
         });
@@ -661,8 +657,8 @@ function creatMessageMenu(target) {
         td.id = "message__tools--edit";
         td.textContent = "ویرایش";
         td.addEventListener("click", () => {
-          if (dataId) {
-            updateMessage(target);
+          if (dataID) {
+            updateMessage(messageBox);
           }
           sectionTools.style.display = "none";
         });
@@ -692,23 +688,32 @@ function creatMessageMenu(target) {
 }
 
 //! fetch data from database
+
+
 let uploaded = 0;
 
 function uploadMessage() {
   $.ajax({
     type: "get",
-    url: "asset/php/fetch.php",
+    url: "asset/php/models/messages/fetch.php",
     dataType: "json",
     success: function (data) {
+      data=data['data']
       for (let i = uploaded; i < data.length; i++) {
-        let chatlistName = data[i]["chat_name"];
-        if (chatlistName == activeChatlist) {
-          let { id, text_message, user_id, send_time } = data[i];
-          send_time = send_time.substring(11, 16);
+        let { id, text_message, user_id, send_time, chat_name} = data[i];
+        function getTime(send_time){
+          const date = new Date(send_time * 1000);
+          const time = [
+             date.getHours(),
+             date.getMinutes(),
+          ];
+          return time.join(':')
+        }
+        if (chat_name == activeChatlist) {
           if (user_id == 191) {
-            sendMesseg(text_message, "text", 0, id, send_time);
+            sendMesseg(text_message, "text", 0, id,  getTime(send_time));
           } else {
-            sendMesseg(text_message, "text", 1, id, send_time);
+            sendMesseg(text_message, "text", 1, id,  getTime(send_time));
           }
         }
       }

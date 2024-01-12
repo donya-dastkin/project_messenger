@@ -163,7 +163,7 @@ const CreateContactBox = (object) => {
     nameDialog.textContent = chatlistName.textContent;
     dialogSection.setAttribute("style", "display:block;");
 
-    fetch("./jsonFiles/ChatList.json")
+    fetch("../../../jsonFiles/ChatList.json")
       .then(function (response) {
         return response.json();
       })
@@ -239,7 +239,7 @@ const CreateContactBox = (object) => {
   chatlistMessage.classList.add("chatlist__message");
 
   if (object.profile === undefined) {
-    chatlistImg.src = "./asset/image/user.png";
+    chatlistImg.src = "../../image/user.png";
   } else if (object.profile !== "") {
     chatlistImg.src = object.profile;
   }
@@ -333,7 +333,7 @@ const refreshChatlist = function () {
     ContactlistSection.innerHTML = "";
   }
 
-  fetch("./jsonFiles/Contacts.json")
+  fetch("../../../jsonFiles/Contacts.json")
     .then(function (response) {
       return response.json();
     })
@@ -385,7 +385,7 @@ const sendMesseg = (
   messagePhoto.setAttribute("class", "message__photo");
 
   let messageImg = document.createElement("img");
-  messageImg.src = "./asset/image/user.png";
+  messageImg.src = "../../image/user.png";
   messageImg.setAttribute("class", "message__img");
 
   messagePhoto.appendChild(messageImg);
@@ -573,9 +573,9 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "asset/php/models/messages/insert.php",
+      url: "../Controllers/insert.php",
       data: values + "&activeChatlist=" + activeChatlist,
-      success: function (res) {
+      success: function () {
         dialog.value = null;
       },
     });
@@ -594,7 +594,7 @@ function deleteMessageBox(messageBox) {
   let dataID = messageBox.getAttribute("data-id");
   $.ajax({
     type: "get",
-    url: "asset/php/models/messages/delete.php",
+    url: "../Controllers/delete.php",
     data: { dataID: dataID },
     success: function () {
       messageBox.remove()
@@ -616,7 +616,7 @@ function updateMessage(messageBox) {
       let newMessage = dialog.value;
       $.ajax({
         type: "get",
-        url: "asset/php/models/messages/update.php",
+        url: "../Controllers/update.php",
         data: { dataID: dataID, newMessage: newMessage },
         success: function (res) {
           span.textContent = res['data'];
@@ -695,7 +695,7 @@ let uploaded = 0;
 function uploadMessage() {
   $.ajax({
     type: "get",
-    url: "asset/php/models/messages/fetch.php",
+    url: "../Controllers/fetch.php",
     dataType: "json",
     success: function (data) {
       data=data['data']

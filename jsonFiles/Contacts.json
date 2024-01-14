@@ -6,7 +6,7 @@
     "phone": "",
     "fullNname": "Go Channel",
     "userName": "@go_channel",
-    "profile": "../../image/user.png",
+    "profile": "../image/user.png",
     "chatType": "channel",
     "sender": "Go Channel",
     "lastMessage": "Golang",
@@ -21,8 +21,7 @@
     "phone": "09156560562",
     "fullNname": "Fateme Zaka",
     "userName": "@ftm-Zaka20",
-    "profile": "../../image/user.png",
-
+    "profile": "../image/user.png",
     "chatType": "pv",
     "sender": "Donya",
     "lastMessage": "Hi my name is Donya",
@@ -37,8 +36,7 @@
     "phone": "09399652583",
     "fullNname": "Donya Dastkin",
     "userName": "@donyaa-583",
-    "profile": "../../image/user.png",
-
+    "profile": "../image/user.png",
     "chatType": "pv",
     "sender": "Donya Dastkin",
     "lastMessage": "Hiii",
@@ -53,8 +51,7 @@
     "phone": "",
     "fullNname": "farawin",
     "userName": "@farawin",
-    "profile": "../../image/user.png",
-
+    "profile": "../image/user.png",
     "chatType": "group",
     "sender": "Fateme Zaka",
     "lastMessage": "tag p,span,h1,img",

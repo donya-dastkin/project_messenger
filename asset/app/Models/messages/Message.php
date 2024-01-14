@@ -24,12 +24,12 @@ class Message
         $messageTable->send_time = $currentTime;
         $messageTable->user_id = $userId;
         $messageTable->chat_name = $chat_name;
-         R::store($messageTable);
+        R::store($messageTable);
     }
 
-    public function selectAllData()
+    public function selectAllData($up)
     {
-        $data = R::getAll('SELECT * FROM message ORDER BY send_time ASC');
+        $data = R::getAll('SELECT * FROM message ORDER BY send_time ASC LIMIT ' . $up . ',' . 2);
         return $data;
     }
 
@@ -37,11 +37,11 @@ class Message
     {
         $message = R::load($table, $id);
         $message->text_message = $newMessage;
-         R::store($message);
+        R::store($message);
     }
 
     public function deleteData($id)
     {
-         R::trashBatch('message', $id);
+        R::trashBatch('message', $id);
     }
 }

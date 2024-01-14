@@ -1,5 +1,6 @@
 <?php
-require '../db/init.php';
+
+require '/xampp/htdocs/project_messenger/asset/bootstrap/DB/init.php';
 
 trait CreateSendTime
 {

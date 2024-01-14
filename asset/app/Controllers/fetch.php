@@ -1,11 +1,11 @@
 <?php
 
 require '../Models/messages/Message.php';
-
+$uploaded=$_GET['uploaded'];
 $message = new Message();
 
 try {
-    $data = $message->selectAllData();
+    $data = $message->selectAllData($uploaded);
     header('Content-Type: application/json');
     http_response_code(200);
     echo json_encode([

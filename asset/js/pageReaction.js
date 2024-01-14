@@ -597,7 +597,7 @@ function deleteMessageBox(messageBox) {
     url: "../app/Controllers/delete.php",
     data: { dataID: dataID },
     success: function () {
-      messageBox.remove()
+      messageBox.remove();
     },
   });
 }
@@ -605,7 +605,7 @@ function deleteMessageBox(messageBox) {
 //! update data from database
 
 function updateMessage(messageBox) {
-  let span = messageBox.children[1].children[0]
+  let span = messageBox.children[1].children[0];
   let dataID = messageBox.getAttribute("data-id");
   dialog.value = span.textContent;
   dialog.focus();
@@ -619,7 +619,7 @@ function updateMessage(messageBox) {
         url: "../app/Controllers/update.php",
         data: { dataID: dataID, newMessage: newMessage },
         success: function (res) {
-          span.textContent = res['data'];
+          span.textContent = res["data"];
           dialog.value = null;
         },
       });
@@ -689,7 +689,6 @@ function creatMessageMenu(messageBox) {
 
 //! fetch data from database
 
-
 let uploaded = 0;
 
 function uploadMessage() {
@@ -697,27 +696,25 @@ function uploadMessage() {
     type: "get",
     url: "../app/Controllers/fetch.php",
     dataType: "json",
+    data: { uploaded: uploaded },
     success: function (data) {
-      data=data['data']
-      for (let i = uploaded; i < data.length; i++) {
-        let { id, text_message, user_id, send_time, chat_name} = data[i];
-        function getTime(send_time){
+      data = data["data"];
+      for (let i = 0; i < data.length; i++) {
+        let { id, text_message, user_id, send_time, chat_name } = data[i];
+        function getTime(send_time) {
           const date = new Date(send_time * 1000);
-          const time = [
-             date.getHours(),
-             date.getMinutes(),
-          ];
-          return time.join(':')
+          const time = [date.getHours(), date.getMinutes()];
+          return time.join(":");
         }
         if (chat_name == activeChatlist) {
           if (user_id == 191) {
-            sendMesseg(text_message, "text", 0, id,  getTime(send_time));
+            sendMesseg(text_message, "text", 0, id, getTime(send_time));
           } else {
-            sendMesseg(text_message, "text", 1, id,  getTime(send_time));
+            sendMesseg(text_message, "text", 1, id, getTime(send_time));
           }
         }
       }
-      uploaded = data.length;
+      uploaded += data.length;
     },
   });
 }

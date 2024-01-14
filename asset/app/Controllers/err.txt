@@ -18,3 +18,61 @@ SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in you
 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '123 ORDER BY send_time ASC' at line 1
 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '123 ORDER BY send_time ASC' at line 1
 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '123 ORDER BY send_time ASC' at line 1
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $u
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: $up
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '2' at line 1
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '2' at line 1
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '2' at line 1
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '2' at line 1
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '2' at line 1

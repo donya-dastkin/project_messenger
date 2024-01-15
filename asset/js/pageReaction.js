@@ -589,18 +589,83 @@ dialog.addEventListener("keydown", (event) => {
 });
 
 //! delete data from database
+function createPopup(text, deleteType) {
+  let box = document.createElement("section");
+  box.id = "popup";
+  let submitBtn = document.createElement("button");
+  let closeBtn = document.createElement("button");
+  box.textContent = text;
+  closeBtn.classList.add("close-btn");
+  submitBtn.classList.add("submit-add");
+  submitBtn.textContent = "تایید";
+  closeBtn.addEventListener("click", () => {
+    dialogBody.removeChild(box);
+  });
+  if (deleteType == "single") {
+    let div = document.createElement("div");
+    let checkBox = document.createElement("input");
+    checkBox.id = "deletCheckbox";
+    let lbl = document.createElement("label");
+    lbl.style.fontFamily = "shabnam";
+    lbl.textContent = " حذف برای گیرنده";
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.setAttribute("checked", "checked");
+    div.style.marginTop = "35px";
+    div.appendChild(checkBox);
+    div.appendChild(lbl);
+    box.appendChild(div);
+  }
+  box.appendChild(submitBtn);
+  box.appendChild(closeBtn);
+  box.classList.add("section-Contact");
+  dialogBody.appendChild(box);
+  return submitBtn;
+}
 
 function deleteMessageBox(messageBox) {
   let dataID = messageBox.getAttribute("data-id");
+  let deleteType;
+  let deletCheckbox = document.getElementById("deletCheckbox");
+  if (deletCheckbox.checked == true) {
+    deleteType = "single-real";
+  } else {
+    deleteType = "single-physical";
+  }
   $.ajax({
     type: "get",
     url: "../app/Controllers/delete.php",
-    data: { dataID: dataID },
-    success: function () {
+    data: { dataID: dataID, deleteType: deleteType },
+    success: function (res) {
       messageBox.remove();
+      $("#popup").remove();
     },
   });
 }
+
+$("#deleteChat").click(() => {
+  let submitBtn = createPopup(
+    "آیا نسبت به حذف تاریخچه مطمئن هستید؟",
+    "integrated"
+  );
+  function deleteChatHistory() {
+    $.ajax({
+      type: "get",
+      url: "../app/Controllers/delete.php",
+      dataType: "json",
+      data: { activeChatlist: activeChatlist, deleteType: "integrated" },
+      success: function (res) {
+        let len = res["data"].length;
+        let messages = document.getElementsByClassName("message");
+        for (let i = len - 1; i >= 0; i--) {
+          let smg = messages[i];
+          smg.remove();
+        }
+      },
+    });
+    $("#popup").remove();
+  }
+  submitBtn.addEventListener("click", deleteChatHistory);
+});
 
 //! update data from database
 
@@ -648,7 +713,10 @@ function creatMessageMenu(messageBox) {
         td.textContent = "حذف";
         td.addEventListener("click", () => {
           if (dataID) {
-            deleteMessageBox(messageBox);
+            let submitBtn = createPopup("پیام حذف شود؟", "single");
+            submitBtn.addEventListener("click", () => {
+              deleteMessageBox(messageBox);
+            });
           }
           sectionTools.style.display = "none";
         });
@@ -726,5 +794,5 @@ $("#dialog__refresh").click(() => {
 $(document).ready(function () {
   setInterval(() => {
     uploadMessage();
-  }, 4000);
+  }, 2000);
 });

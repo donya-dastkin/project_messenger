@@ -4,11 +4,12 @@
     font-family: 'fonticon', 'fonticon2', 'Arial';
 }
 
+
 .section-Contact {
     position: absolute;
     width: 280px;
-    height: 320px;
-    flex-direction: row;
+    height: 250px;
+    flex-direction: column;
     padding: 20px;
     border-radius: 20px;
     display: flex;
@@ -19,6 +20,8 @@
     top: 50px;
     left: 400px;
     border: #4a4e51 solid 1px;
+    font-family: 'shabnam';
+    color: white;
 }
 
 .section-Contact:hover {
@@ -116,6 +119,7 @@
     outline: 0;
     text-align: center;
     width: 98%;
+    font-family: 'shabnam';
 }
 
 .submit-add:active {

@@ -22,7 +22,7 @@ function insertData($data){
     $messageTable->messagetext = $data;
     $messageTable->sendertype = 0;
     $messageTable->sendtime = $sendTime;
-    $messageTable->chatname = "Donya Dstkin";
+    $messageTable->chatname = "Donya Dastkin";
     
     $id = R::store($messageTable);
     
@@ -36,6 +36,9 @@ function selectAllData($table){
     $data = R::getAll("SELECT * FROM $table");
     return $data;
     
+}
+function deleteData($table,$id){
+    R::trashBatch($table, $id);
 }
 
 ?>

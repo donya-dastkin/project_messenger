@@ -405,7 +405,8 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0",dataId) 
   } else if (type === "text") {
     let messageText = document.createElement("span");
     messageText.setAttribute("class", "message__text");
-    messageSelf.setAttribute("data-id", dataId);
+    messageText.setAttribute("data-id", dataId);
+    messageCard.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
   }
@@ -413,7 +414,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0",dataId) 
   messageSelf.appendChild(messageCard);
   messageCard.addEventListener("contextmenu", (e) => {
     e.preventDefault();
-    const sectionTools = creatMessageMenu();
+    const sectionTools = creatMessageMenu(e.target);
     messageCard.appendChild(sectionTools);
   });
   dialog.value = null;
@@ -567,7 +568,6 @@ chatrefresh.addEventListener(
         for (let i = lastMessage; i < Contacts.length; i++) {
           if (Contacts[i].chatname == nameDialogg) {
             sendMesseg(Contacts[i].messagetext, "text", Contacts[i].sendertype,Contacts[i].id);
-            console.log(Contacts[i]);
           }
           lastMessage = Contacts.length;
         }
@@ -575,7 +575,8 @@ chatrefresh.addEventListener(
   })
 );
 
-function creatMessageMenu() {
+function creatMessageMenu(target) {
+  let dataId = target.getAttribute("data-id")
   const sectionTools = document.createElement("section");
   sectionTools.classList.add("section-tools");
   const closeBtn = document.createElement("button");
@@ -590,31 +591,39 @@ function creatMessageMenu() {
     let td = document.createElement("td");
     switch (i) {
       case 0:
-        td.id = id = "message__tools--delete";
+        td.id = "message__tools--delete";
         td.textContent = "حذف";
         td.addEventListener("click", () => {
-          alert("delete");
+          $.ajax({
+            type: "get",
+            url: "asset/php/delete.php",
+            data: { dataId: dataId },
+            success: function (res) {
+              alert(res);
+              deleteMessageBox(target);
+            },
+          });
           sectionTools.style.display = "none";
         });
         break;
       case 1:
-        td.id = id = "message__tools--edit";
+        td.id = "message__tools--edit";
         td.textContent = "ویرایش";
         break;
       case 2:
-        td.id = id = "message__tools--forward";
+        td.id = "message__tools--forward";
         td.textContent = "هدایت";
         break;
       case 3:
-        td.id = id = "message__tools--response";
+        td.id = "message__tools--response";
         td.textContent = "پاسخ";
         break;
       case 4:
-        td.id = id = "message__tools--copy";
+        td.id = "message__tools--copy";
         td.textContent = "کپی";
         break;
       case 5:
-        td.id = id = "message__tools--pin";
+        td.id = "message__tools--pin";
         td.textContent = "سنجاق";
         break;
     }
@@ -623,4 +632,11 @@ function creatMessageMenu() {
   }
   sectionTools.appendChild(table);
   return sectionTools;
+}
+
+function deleteMessageBox(target) {
+  let parent = target.parentNode;
+  parent.removeChild(target);
+  parent.removeChild(parent.children[0]);
+  loadchat()
 }

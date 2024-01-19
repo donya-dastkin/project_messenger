@@ -328,7 +328,7 @@ dialog.addEventListener("keydown", (event) => {
   }
 });
 
-const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
+const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0",dataId) => {
   let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
@@ -336,11 +336,13 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   if (sender === "1") {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
+
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
   } else if (sender === "0") {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
+    
     messageCard.classList.add("message__card", "message__card--self");
     messageSelf.classList.add("message", "message__self");
   }
@@ -403,11 +405,18 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   } else if (type === "text") {
     let messageText = document.createElement("span");
     messageText.setAttribute("class", "message__text");
+    messageSelf.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
-    dialog.value = null;
   }
+
   messageSelf.appendChild(messageCard);
+  messageCard.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    const sectionTools = creatMessageMenu();
+    messageCard.appendChild(sectionTools);
+  });
+  dialog.value = null;
 };
 
 const EmojiIconActiv = () => {
@@ -557,7 +566,7 @@ chatrefresh.addEventListener(
         }
         for (let i = lastMessage; i < Contacts.length; i++) {
           if (Contacts[i].chatname == nameDialogg) {
-            sendMesseg(Contacts[i].messagetext, "text", Contacts[i].sendertype);
+            sendMesseg(Contacts[i].messagetext, "text", Contacts[i].sendertype,Contacts[i].id);
             console.log(Contacts[i]);
           }
           lastMessage = Contacts.length;
@@ -565,3 +574,53 @@ chatrefresh.addEventListener(
       });
   })
 );
+
+function creatMessageMenu() {
+  const sectionTools = document.createElement("section");
+  sectionTools.classList.add("section-tools");
+  const closeBtn = document.createElement("button");
+  closeBtn.classList.add("close-btn");
+  sectionTools.appendChild(closeBtn);
+  closeBtn.addEventListener("click", () => {
+    sectionTools.style.display = "none";
+  });
+  const table = document.createElement("table");
+  for (let i = 0; i < 6; i++) {
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    switch (i) {
+      case 0:
+        td.id = id = "message__tools--delete";
+        td.textContent = "حذف";
+        td.addEventListener("click", () => {
+          alert("delete");
+          sectionTools.style.display = "none";
+        });
+        break;
+      case 1:
+        td.id = id = "message__tools--edit";
+        td.textContent = "ویرایش";
+        break;
+      case 2:
+        td.id = id = "message__tools--forward";
+        td.textContent = "هدایت";
+        break;
+      case 3:
+        td.id = id = "message__tools--response";
+        td.textContent = "پاسخ";
+        break;
+      case 4:
+        td.id = id = "message__tools--copy";
+        td.textContent = "کپی";
+        break;
+      case 5:
+        td.id = id = "message__tools--pin";
+        td.textContent = "سنجاق";
+        break;
+    }
+    tr.appendChild(td);
+    table.appendChild(tr);
+  }
+  sectionTools.appendChild(table);
+  return sectionTools;
+}

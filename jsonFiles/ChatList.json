@@ -1,6 +1,6 @@
 [
     {
-        "Name": "Go Channel",
+        "Name": "php Channel",
         "chatlist": [
             {
                 "type": "1",
@@ -9,23 +9,6 @@
             {
                 "type": "1",
                 "text": "hi"
-            }
-        ]
-    },
-    {
-        "Name": "Fateme Zaka",
-        "chatlist": [
-            {
-                "type": "1",
-                "text": "Ooh"
-            },
-            {
-                "type": "0",
-                "text": "yehh"
-            },
-            {
-                "type": "1",
-                "text": "nop"
             }
         ]
     },
@@ -56,23 +39,6 @@
             {
                 "type": "1",
                 "text": "heyyyy"
-            }
-        ]
-    },
-    {
-        "Name": "Arman",
-        "chatlist": [
-            {
-                "type": "1",
-                "text": "Ooh"
-            },
-            {
-                "type": "0",
-                "text": "yehh"
-            },
-            {
-                "type": "1",
-                "text": "nop"
             }
         ]
     }

@@ -454,8 +454,8 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "asset/php/index.php",
-      data: values,
+      url: "asset/php/models/messages/index.php",
+      data: values + "&activeChatlist=" + activeChatlist,
       success: function (res) {
         alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
         if (dialogIcon.classList[0] === "dialog__send") {
@@ -555,7 +555,7 @@ chatrefresh.addEventListener(
   "click",
   (loadchat = (nameDialogg = nameDialog.textContent) => {
     nameDialogg = nameDialog.textContent
-    fetch("asset/php/fetch.php")
+    fetch("asset/php/models/messages/fetch.php")
       .then(function (response) {
         return response.json();
       })
@@ -564,16 +564,16 @@ chatrefresh.addEventListener(
         if (lastMessage === 0) {
           dialogBody.innerHTML = "";
         }
-        for (let i = lastMessage; i < Contacts.length; i++) {
-          if (Contacts[i].chat_name == nameDialogg) {
-            if (Contacts[i].user_id == 404) {
-              sendMesseg(Contacts[i].text_message, "text", "0", Contacts[i].id);
-            } else if (Contacts[i].user_id != 404) {
-              sendMesseg(Contacts[i].text_message, "text", "1", Contacts[i].id);
+        for (let i = lastMessage; i < Contacts.data.length; i++) {
+          if (Contacts.data[i].chat_name == nameDialogg) {
+            if (Contacts.data[i].user_id == 404) {
+              sendMesseg(Contacts.data[i].text_message, "text", "0", Contacts.data[i].id);
+            } else if (Contacts.data[i].user_id != 404) {
+              sendMesseg(Contacts.data[i].text_message, "text", "1", Contacts.data[i].id);
             }
           }
         }
-        lastMessage = Contacts.length;
+        lastMessage = Contacts.data.length;
       });
   })
 );
@@ -599,7 +599,7 @@ function creatMessageMenu(target) {
         td.addEventListener("click", () => {
           $.ajax({
             type: "get",
-            url: "asset/php/delete.php",
+            url: "asset/php/models/messages/delete.php",
             data: { dataId: dataId },
             success: function (res) {
               alert(res);

@@ -90,7 +90,7 @@
     color: #4a4e51;
     content: '\f021';
     cursor: pointer;
-    background-color: transparent;
+    background-color: #18191e;
 }
 
 .dialog__edit::before {

@@ -1,5 +1,5 @@
 let wavesurfer;
-let mediaRecorder,chunks = [],audioURL = "";
+let mediaRecorder, chunks = [], audioURL = "";
 const footer = document.getElementById("footer");
 const chatlist = document.getElementById("chatlist");
 const emojiIcon = document.getElementById("emojiIcon");
@@ -173,7 +173,7 @@ const CreateContactBox = (object) => {
     //   // footer.style = "display: flex;";
     //   subChannel[0].classList.remove("dialog__header-right--channel");
     // }
-    loadchat(nameDialog.textContent);
+    loadchat();
 
     if (chatlistisActive.length >= 1) {
       chatlistisActive[0].classList.remove("chatlist--is--active");
@@ -323,12 +323,11 @@ const IconChanger = function () {
 
 dialog.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    sendMesseg();
-    dialog.value = null;
+    $("#send_form").submit();
   }
 });
 
-const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0",dataId) => {
+const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0", dataId) => {
   let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
@@ -342,7 +341,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0",dataId) 
   } else if (sender === "0") {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
-    
+
     messageCard.classList.add("message__card", "message__card--self");
     messageSelf.classList.add("message", "message__self");
   }
@@ -409,15 +408,14 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0",dataId) 
     messageCard.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
+    messageCard.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      const sectionTools = creatMessageMenu(e.target);
+      messageCard.appendChild(sectionTools);
+    });
+    dialog.value = null;
   }
-
   messageSelf.appendChild(messageCard);
-  messageCard.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-    const sectionTools = creatMessageMenu(e.target);
-    messageCard.appendChild(sectionTools);
-  });
-  dialog.value = null;
 };
 
 const EmojiIconActiv = () => {
@@ -556,6 +554,7 @@ const stopRecording = () => {
 chatrefresh.addEventListener(
   "click",
   (loadchat = (nameDialogg = nameDialog.textContent) => {
+    nameDialogg = nameDialog.textContent
     fetch("asset/php/fetch.php")
       .then(function (response) {
         return response.json();
@@ -566,11 +565,15 @@ chatrefresh.addEventListener(
           dialogBody.innerHTML = "";
         }
         for (let i = lastMessage; i < Contacts.length; i++) {
-          if (Contacts[i].chatname == nameDialogg) {
-            sendMesseg(Contacts[i].messagetext, "text", Contacts[i].sendertype,Contacts[i].id);
+          if (Contacts[i].chat_name == nameDialogg) {
+            if (Contacts[i].user_id == 404) {
+              sendMesseg(Contacts[i].text_message, "text", "0", Contacts[i].id);
+            } else if (Contacts[i].user_id != 404) {
+              sendMesseg(Contacts[i].text_message, "text", "1", Contacts[i].id);
+            }
           }
-          lastMessage = Contacts.length;
         }
+        lastMessage = Contacts.length;
       });
   })
 );

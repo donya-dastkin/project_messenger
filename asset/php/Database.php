@@ -28,7 +28,10 @@ function insertData($data){
     }
 }
 function selectAllData($table){
-    $data = R::getAll("SELECT * FROM $table");
+    // $data = R::getAll("SELECT * FROM $table");
+    
+    //? sort by Time
+    $data=R::getAll("SELECT * FROM $table ORDER BY send_time ASC");
     return $data;
 }
 function deleteData($table,$id){

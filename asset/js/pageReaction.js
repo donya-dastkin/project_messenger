@@ -352,16 +352,8 @@ const IconChanger = function () {
   }
 };
 
-dialog.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    sendMesseg();
-    dialog.value = null;
-  }
-});
-
+let dialogBody = document.getElementById("dialogBody");
 const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
-
-  let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
 
@@ -472,6 +464,8 @@ dialog.addEventListener("mousedown", () => {
   rootElement.style = "display:none;";
 });
 
+//! insert data into database
+
 $(document).ready(function () {
   $("#send_form").submit(function (event) {
     event.preventDefault();
@@ -481,7 +475,7 @@ $(document).ready(function () {
       url: "asset/php/index.php",
       data: values,
       success: function (res) {
-        alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
+        alert("Sending Was Successfull! " + res);
         if (dialogIcon.classList[0] === "dialog__send") {
           sendMesseg();
         } else if (dialogIcon.classList[0] === "dialog__voice") {
@@ -491,6 +485,12 @@ $(document).ready(function () {
       },
     });
   });
+});
+
+dialog.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    $("#send_form").submit();
+  }
 });
 
 function timer() {
@@ -574,3 +574,45 @@ const stopRecording = () => {
     alert("دوباره ضبط کنید صدا ضبط نشده!!");
   }
 };
+
+//! fetch data from database
+function creatMessageBox(text) {
+  let messageSelf = document.createElement("div");
+  let messageCard = document.createElement("div");
+
+  messageCard.classList.add("message__card", "message__card--self");
+  messageSelf.classList.add("message", "message__self");
+
+  dialogBody.appendChild(messageSelf);
+
+  let messagePhoto = document.createElement("div");
+  messagePhoto.setAttribute("class", "message__photo");
+
+  let messageImg = document.createElement("img");
+  messageImg.src = "./asset/image/user.png";
+  messageImg.setAttribute("class", "message__img");
+
+  messagePhoto.appendChild(messageImg);
+  messageSelf.appendChild(messagePhoto);
+
+  let messageText = document.createElement("span");
+  messageText.setAttribute("class", "message__text");
+  messageText.textContent = text;
+  messageCard.appendChild(messageText);
+  messageSelf.appendChild(messageCard);
+}
+let length=0;
+setInterval(() => {
+  $.ajax({
+    type: "get",
+    url: "asset/php/fetch.php",
+    dataType: "json",
+    success: function (data) {
+      for (let i = length; i < data.length; i++) {
+        let text = data[i]["messagetext"];
+        creatMessageBox(text);
+      }
+	  length=data.length;
+    },
+  });
+}, 5000);

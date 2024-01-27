@@ -6,7 +6,7 @@ $id = $_GET['dataID'];
 
 if (!empty($id)) {
     $message = new MessageController();
-    $res = $message->delete([$id]);
+    $res = $message->delete($id);
     echo $res;
 }
 

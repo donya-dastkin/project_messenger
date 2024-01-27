@@ -408,14 +408,14 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0", dataId)
     messageCard.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
+    messageSelf.appendChild(messageCard);
     messageCard.addEventListener("contextmenu", (e) => {
       e.preventDefault();
-      const sectionTools = creatMessageMenu(e.target);
+      const sectionTools = creatMessageMenu(messageSelf);
       messageCard.appendChild(sectionTools);
     });
     dialog.value = null;
   }
-  messageSelf.appendChild(messageCard);
 };
 
 const EmojiIconActiv = () => {
@@ -454,8 +454,8 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "asset/php/models/messages/index.php",
-      data: values + "&activeChatlist=" + activeChatlist,
+      url: "asset/php/controller/messages/insert.php",
+      data: values + "&activeChatlist=" + nameDialog.textContent,
       success: function (res) {
         alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
         if (dialogIcon.classList[0] === "dialog__send") {
@@ -464,7 +464,7 @@ $(document).ready(function () {
           record();
           // !
         }
-      },
+      }
     });
   });
 });
@@ -555,7 +555,7 @@ chatrefresh.addEventListener(
   "click",
   (loadchat = (nameDialogg = nameDialog.textContent) => {
     nameDialogg = nameDialog.textContent
-    fetch("asset/php/models/messages/fetch.php")
+    fetch("asset/php/controller/messages/fetch.php")
       .then(function (response) {
         return response.json();
       })
@@ -599,7 +599,7 @@ function creatMessageMenu(target) {
         td.addEventListener("click", () => {
           $.ajax({
             type: "get",
-            url: "asset/php/models/messages/delete.php",
+            url: "asset/php/controller/messages/delete.php",
             data: { dataId: dataId },
             success: function (res) {
               alert(res);

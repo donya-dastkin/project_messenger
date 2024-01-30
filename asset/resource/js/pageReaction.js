@@ -154,7 +154,6 @@ const CreateContactBox = (object) => {
   chatlistCard.classList.add("chatlist__cadre");
 
   chatlistCard.addEventListener("click", () => {
-    uploadMessage();
     let chatlistisActive = document.getElementsByClassName(
       "chatlist--is--active"
     );
@@ -163,7 +162,7 @@ const CreateContactBox = (object) => {
     nameDialog.textContent = chatlistName.textContent;
     dialogSection.setAttribute("style", "display:block;");
 
-    fetch("../../jsonFiles/ChatList.json")
+    fetch("../../../jsonFiles/ChatList.json")
       .then(function (response) {
         return response.json();
       })
@@ -239,7 +238,7 @@ const CreateContactBox = (object) => {
   chatlistMessage.classList.add("chatlist__message");
 
   if (object.profile === undefined) {
-    chatlistImg.src = "../image/user.png";
+    chatlistImg.src = "../../image/user.png";
   } else if (object.profile !== "") {
     chatlistImg.src = object.profile;
   }
@@ -333,7 +332,7 @@ const refreshChatlist = function () {
     ContactlistSection.innerHTML = "";
   }
 
-  fetch("../../jsonFiles/Contacts.json")
+  fetch("../../../jsonFiles/Contacts.json")
     .then(function (response) {
       return response.json();
     })
@@ -385,7 +384,7 @@ const sendMesseg = (
   messagePhoto.setAttribute("class", "message__photo");
 
   let messageImg = document.createElement("img");
-  messageImg.src = "../image/user.png";
+  messageImg.src = "../../image/user.png";
   messageImg.setAttribute("class", "message__img");
 
   messagePhoto.appendChild(messageImg);
@@ -573,7 +572,7 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "../app/Controllers/insert.php",
+      url: "Messages/set",
       data: values + "&activeChatlist=" + activeChatlist,
       success: function () {
         dialog.value = null;
@@ -633,9 +632,9 @@ function deleteMessageBox(messageBox) {
   }
   $.ajax({
     type: "get",
-    url: "../app/Controllers/delete.php",
+    url: "Messages/delete",
     data: { dataID: dataID, deleteType: deleteType },
-    success: function (res) {
+    success: function () {
       messageBox.remove();
       $("#popup").remove();
     },
@@ -650,13 +649,13 @@ $("#deleteChat").click(() => {
   function deleteChatHistory() {
     $.ajax({
       type: "get",
-      url: "../app/Controllers/delete.php",
+      url: "Messages/delete",
       dataType: "json",
       data: { activeChatlist: activeChatlist, deleteType: "integrated" },
       success: function (res) {
-        let len = res["data"].length;
         let messages = document.getElementsByClassName("message");
-        for (let i = len - 1; i >= 0; i--) {
+        let len = messages.length - 1;
+        for (let i = len; i >= 0; i--) {
           let smg = messages[i];
           smg.remove();
         }
@@ -681,7 +680,7 @@ function updateMessage(messageBox) {
       let newMessage = dialog.value;
       $.ajax({
         type: "get",
-        url: "../app/Controllers/update.php",
+        url: "Messages/update",
         data: { dataID: dataID, newMessage: newMessage },
         success: function (res) {
           span.textContent = res["data"];
@@ -759,10 +758,10 @@ function creatMessageMenu(messageBox) {
 
 let uploaded = 0;
 
-function uploadMessage() {
-  $.ajax({
+const uploadMessage = async () => {
+  await $.ajax({
     type: "get",
-    url: "../app/Controllers/fetch.php",
+    url: "Messages/get",
     dataType: "json",
     data: { uploaded: uploaded },
     success: function (data) {
@@ -780,12 +779,14 @@ function uploadMessage() {
           } else {
             sendMesseg(text_message, "text", 1, id, getTime(send_time));
           }
+        } else {
+          continue;
         }
       }
       uploaded += data.length;
     },
   });
-}
+};
 
 $("#dialog__refresh").click(() => {
   uploadMessage();
@@ -794,5 +795,5 @@ $("#dialog__refresh").click(() => {
 $(document).ready(function () {
   setInterval(() => {
     uploadMessage();
-  }, 2000);
+  }, 3000);
 });

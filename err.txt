@@ -1,0 +1,11 @@
+fetch.php => Could not connect to database (chat).
+fetch.php => Could not connect to database (chat).
+fetch.php => Could not connect to database (chat).
+fetch.php => Could not connect to database (chat).
+fetch.php => Could not connect to database (chat).
+fetch.php => Could not connect to database (chat).
+fetch.php => Could not connect to database (chat).
+
+
+
+

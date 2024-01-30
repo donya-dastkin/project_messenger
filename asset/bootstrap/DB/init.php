@@ -1,5 +1,5 @@
 <?php
-require '/xampp/htdocs/project_messenger/asset/bootstrap/ORM/rb-mysql.php';
+require '/xampp/htdocs/project_messanger/asset/bootstrap/ORM/rb-mysql.php';
 // R::setup(
 //     'mysql:host=denali.liara.cloud;port=30653;dbname=nostalgic_dhawan',
 //     'root',

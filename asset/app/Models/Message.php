@@ -1,10 +1,8 @@
 <?php
-
-require '/xampp/htdocs/project_messenger/asset/bootstrap/DB/init.php';
-
+require '/xampp/htdocs/project_messanger/asset/bootstrap/DB/init.php';
 trait CreateSendTime
 {
-    function CreateTime()
+    public static function CreateTime()
     {
         date_default_timezone_set("Asia/Tehran");
         $now = time();
@@ -16,9 +14,9 @@ class Message
 {
     use CreateSendTime;
 
-    public function insertData($data, $userId, $chat_name)
+    public static function insertData(string $data, int $userId, string $chat_name)
     {
-        $currentTime = $this->CreateTime();
+        $currentTime = self::CreateTime();
         $messageTable = R::dispense('message');
         $messageTable->text_message = $data;
         $messageTable->send_time = $currentTime;
@@ -28,30 +26,31 @@ class Message
         R::store($messageTable);
     }
 
-    public function selectAllData($up)
+    public static function selectAllData(int $up): array
     {
         $data = R::getAll('SELECT * FROM message WHERE deleted=0 ORDER BY send_time ASC LIMIT ' . $up . ',' . 2);
         return $data;
     }
 
-    public function updateData($id, $table, $newMessage)
+    public static function updateData(int $id, string $table, string $newMessage)
     {
         $message = R::load($table, $id);
         $message->text_message = $newMessage;
         R::store($message);
     }
 
-    public function deleteData($id)
+    public static function deleteData(int $id)
     {
-        R::trashBatch('message', $id);
+        $message = R::load('message', $id);
+        R::trash($message);
     }
-    public function deleteDataphysical($id)
+    public static function deleteDataphysical(int $id)
     {
         $message = R::load('message', $id);
         $message->deleted = 1;
         R::store($message);
     }
-    public function deleteChatHistory($chatlistName)
+    public static function deleteChatHistory(string $chatlistName)
     {
         $messages = R::find('message', ' chat_name LIKE ? ', [$chatlistName . '%']);
         $id = [];
@@ -59,6 +58,5 @@ class Message
             array_push($id, $msg['id']);
         }
         R::trashBatch('message', $id);
-        return $id;
     }
 }

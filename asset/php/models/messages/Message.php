@@ -1,14 +1,11 @@
 <?php
 require '../../db/init.php';
+require '../helper/auxiliarMmethods.php';
 
 class Message
 {
-    private function sendTime()
-    {
-        date_default_timezone_set("Asia/Tehran");
-        $time = time();
-        return $time;
-    }
+
+    use globalFonc;
 
     public function insertData($data, $userId, $chat_name)
     {
@@ -20,7 +17,6 @@ class Message
             $messageTable->user_id = $userId;
             $messageTable->sender_type = 0;
             $messageTable->chat_name = $chat_name;
-            // $id = R::store($messageTable);
 
             header('Content-Type: application/json');
             http_response_code(200);

@@ -1,12 +1,11 @@
 <?php
 
-require_once 'MessageController.php';
+require 'MessageController.php';
 
 $id = $_GET['dataID'];
-
 if (!empty($id)) {
     $message = new MessageController();
-    $res = $message->delete($id);
+    $res = $message->delete([(int)$id]);
     echo $res;
 }
 

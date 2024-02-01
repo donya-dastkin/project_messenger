@@ -406,6 +406,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0", dataId)
     messageText.setAttribute("class", "message__text");
     messageText.setAttribute("data-id", dataId);
     messageCard.setAttribute("data-id", dataId);
+    messageSelf.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
     messageSelf.appendChild(messageCard);
@@ -456,8 +457,7 @@ $(document).ready(function () {
       type: "get",
       url: "asset/php/controller/messages/insert.php",
       data: values + "&activeChatlist=" + nameDialog.textContent,
-      success: function (res) {
-        alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
+      success: function () {
         if (dialogIcon.classList[0] === "dialog__send") {
           sendMesseg();
         } else if (dialogIcon.classList[0] === "dialog__voice") {
@@ -554,7 +554,6 @@ const stopRecording = () => {
 chatrefresh.addEventListener(
   "click",
   (loadchat = (nameDialogg = nameDialog.textContent) => {
-    nameDialogg = nameDialog.textContent
     fetch("asset/php/controller/messages/fetch.php")
       .then(function (response) {
         return response.json();
@@ -600,9 +599,8 @@ function creatMessageMenu(target) {
           $.ajax({
             type: "get",
             url: "asset/php/controller/messages/delete.php",
-            data: { dataId: dataId },
-            success: function (res) {
-              alert(res);
+            data: { dataID: dataId },
+            success: function () {
               deleteMessageBox(target);
             },
           });

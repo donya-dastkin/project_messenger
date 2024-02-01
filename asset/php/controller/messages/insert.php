@@ -1,5 +1,5 @@
 <?php
-require_once 'MessageController.php';
+require 'MessageController.php';
 
 $messageText = $_GET['dialog__message'];
 $chat_name = $_GET['activeChatlist'];

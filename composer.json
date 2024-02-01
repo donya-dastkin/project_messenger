@@ -1,0 +1,22 @@
+{
+  "name": "fateme/project_messanger",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fateme Zaka",
+      "email": "email@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "project\\Controllers\\": "App/Controllers/",
+      "project\\Models\\": "App/Models/",
+      "project\\Router\\": "App/Router/"
+    }
+  },
+  "require": {
+    "gabordemooij/redbean": "^5.7"
+  }
+}

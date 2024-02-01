@@ -5,10 +5,10 @@
 //***String Methods***
 
 //trim
-$myStr = "  Hello  ";
-trim($myStr);   //"Hello"
-ltrim($myStr);  //"Hello  "
-rtrim($myStr);  //"  Hello"
+$myStr = "  Router  ";
+trim($myStr);   //"Router"
+ltrim($myStr);  //"Router  "
+rtrim($myStr);  //"  Router"
 
 //explode
 $resault = explode("*", "te*st"); // ["te","st"]

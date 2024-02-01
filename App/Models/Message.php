@@ -1,5 +1,12 @@
 <?php
-require '/xampp/htdocs/project_messanger/asset/bootstrap/DB/init.php';
+namespace project\Models;
+require '/xampp/htdocs/project_messanger/vendor/autoload.php';
+use \RedBeanPHP\R as R;
+R::setup(
+    'mysql:host=localhost;dbname=chat',
+    'root',
+    ''
+);
 trait CreateSendTime
 {
     public static function CreateTime()
@@ -10,12 +17,11 @@ trait CreateSendTime
     }
 }
 
-class Message
-{
+class Message extends \RedBeanPHP\SimpleModel {
     use CreateSendTime;
-
     public static function insertData(string $data, int $userId, string $chat_name)
     {
+
         $currentTime = self::CreateTime();
         $messageTable = R::dispense('message');
         $messageTable->text_message = $data;
@@ -28,6 +34,7 @@ class Message
 
     public static function selectAllData(int $up): array
     {
+
         $data = R::getAll('SELECT * FROM message WHERE deleted=0 ORDER BY send_time ASC LIMIT ' . $up . ',' . 2);
         return $data;
     }
@@ -44,17 +51,19 @@ class Message
         $message = R::load('message', $id);
         R::trash($message);
     }
+
     public static function deleteDataphysical(int $id)
     {
         $message = R::load('message', $id);
         $message->deleted = 1;
         R::store($message);
     }
+
     public static function deleteChatHistory(string $chatlistName)
     {
         $messages = R::find('message', ' chat_name LIKE ? ', [$chatlistName . '%']);
         $id = [];
-        foreach ($messages as  $msg) {
+        foreach ($messages as $msg) {
             array_push($id, $msg['id']);
         }
         R::trashBatch('message', $id);

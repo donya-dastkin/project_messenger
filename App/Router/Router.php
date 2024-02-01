@@ -1,6 +1,6 @@
 <?php
-require '/xampp/htdocs/project_messanger/asset/app/Controllers/MessageController.php';
-
+namespace project\Router;
+use project\Controllers\MessageController;
 class Router
 {
     public $url;
@@ -27,11 +27,11 @@ class Router
         }
         return $data;
     }
-    public  function routing()
+    public function routing()
     {
         $data = $this->getDataFromRequest($this->url);
-        $instance = new $this->controller();
-        $method = $this->method;
+        $instance = new MessageController;
+        $method=$this->method;
         $instance->$method($data);
     }
 }

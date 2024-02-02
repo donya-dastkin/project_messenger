@@ -8,7 +8,7 @@ class MessageController extends Message{
     }
 
     public function getData(){
-        $this->selectAllData();
+        return $this->selectAllData();;
     }
 
     public function delete($ids){

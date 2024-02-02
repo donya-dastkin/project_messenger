@@ -1,5 +1,5 @@
 <?php
-require '/xampp/htdocs/project_messenger/asset/bootstrap/ORM/rb-mysql.php';
+require '/xampp/htdocs/project_messenge/asset/bootstrap/ORM/rb-mysql.php';
 
 try{
 // R::setup('mysql:host=himalayas.liara.cloud;port=30854;dbname=happy_hamilton','root','VVvyXdNefDFq2NGFI8N0PY7s');

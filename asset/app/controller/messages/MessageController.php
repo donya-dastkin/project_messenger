@@ -1,18 +1,64 @@
 <?php
-require '../../models/messages/Message.php';
+require './asset/app/models/messages/Message.php';
 
-class MessageController extends Message{
+class MessageController {
 
-    public function setData(string $data, int $userId, string $chat_name){
-        $this->insertData($data,$userId,$chat_name);
+    public function set(string $data, int $userId, string $chat_name){
+        
+        $messageText = $data['dialog__message'];
+        $chat_name = $data['activeChatlist'];
+        $messageText = strip_tags(trim($messageText));
+        
+        if (!empty($messageText)) {
+            try {
+                Message::insertData($data,404,$chat_name);
+                header('Content-Type: application/json');
+                http_response_code(200);
+                echo json_encode([
+                    'status' => 'success',
+                ]);
+            } catch (Exception $err) {
+                header('Content-Type: application/json');
+                http_response_code(500);
+                error_log('insert.php => ' . $err->getMessage() . "\n", 3, "err.txt");
+            }
+        }
     }
 
-    public function getData(){
-        return $this->selectAllData();;
+    public function get(){
+        
+        try {
+            $messages = Message::selectAllData();
+            header('Content-Type: application/json');
+            http_response_code(200);
+            echo json_encode([
+                'status' => 'success',
+                'message' => '',
+                'data' => $messages
+            ]);
+        } catch (Exception $err) {
+            header('Content-Type: application/json');
+            http_response_code(500);
+            error_log('fetch.php => ' . $err->getMessage() . "\n", 3, "err.txt");
+        }
     }
 
     public function delete($ids){
-        $this->deleteData($ids);
+        if (!empty($ids)) {
+            try {
+                Message::deleteData($ids);
+                header('Content-Type: application/json');
+                http_response_code(200);
+                echo json_encode([
+                    'status' => 'success',
+                    'message' => 'deleted...',
+                ]);
+            } catch (Exception $err) {
+                header('Content-Type: application/json');
+                http_response_code(500);
+                error_log($err->getMessage() . "\n", 3, "err.txt");
+            }
+        }
     }
 
     // public function update(){
@@ -20,5 +66,5 @@ class MessageController extends Message{
     // }
     
 }
-
+R::close();
 ?>

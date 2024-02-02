@@ -1,18 +1,17 @@
 <?php
-require '../../../bootstrap/DB/init.php';
-
+require './asset/bootstrap/DB/init.php';
 class Message
 {
-    private function sendTime()
+    private static function sendTime()
     {
         date_default_timezone_set("Asia/Tehran");
         $time = time();
         return $time;
     }
 
-    public function insertData($data, $userId, $chat_name)
+    public static function insertData($data, $userId, $chat_name)
     {
-        $currentTime = $this->sendTime();
+        $currentTime = self::sendTime();
         $messageTable = R::dispense('message');
         $messageTable->text_message = $data;
         $messageTable->send_time = $currentTime;
@@ -22,13 +21,13 @@ class Message
         R::store($messageTable);
     }
 
-    public function selectAllData()
+    public static function selectAllData()
     {
         $data = R::getAll('SELECT * FROM message ORDER BY send_time ASC');
         return $data;
     }
 
-    // public function updateData($id, $table, $newMessage)
+    // public static function updateData($id, $table, $newMessage)
     // {
     //     //! try {
     //     //!     $message = R::load($table, $id);
@@ -50,8 +49,9 @@ class Message
     //     //! }
     // }
 
-    public function deleteData($ids)
+    public static function deleteData($ids)
     {
-        R::trashBatch('message', $ids);
+        $test = R::trashBatch('message', $ids);
+        return $test;
     }
 }

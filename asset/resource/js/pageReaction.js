@@ -206,7 +206,7 @@ const CreateContactBox = (object) => {
   chatlistMessage.classList.add("chatlist__message");
 
   if (object.profile === undefined) {
-    chatlistImg.src = "../image/user.png";
+    chatlistImg.src = "../../image/user.png";
   } else if (object.profile !== "") {
     chatlistImg.src = object.profile;
   }
@@ -300,7 +300,7 @@ const refreshChatlist = function () {
     ContactlistSection.innerHTML = "";
   }
 
-  fetch("../../jsonFiles/Contacts.json")
+  fetch("../../../jsonFiles/Contacts.json")
     .then(function (response) {
       return response.json();
     })
@@ -352,7 +352,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0", dataId)
   messagePhoto.setAttribute("class", "message__photo");
 
   let messageImg = document.createElement("img");
-  messageImg.src = "../image/user.png";
+  messageImg.src = "../../image/user.png";
   messageImg.setAttribute("class", "message__img");
 
   messagePhoto.appendChild(messageImg);
@@ -404,8 +404,6 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0", dataId)
   } else if (type === "text") {
     let messageText = document.createElement("span");
     messageText.setAttribute("class", "message__text");
-    messageText.setAttribute("data-id", dataId);
-    messageCard.setAttribute("data-id", dataId);
     messageSelf.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
@@ -455,7 +453,7 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "../app/controller/messages/insert.php",
+      url: "messages/set",
       data: values + "&activeChatlist=" + nameDialog.textContent,
       success: function () {
         if (dialogIcon.classList[0] === "dialog__send") {
@@ -554,7 +552,7 @@ const stopRecording = () => {
 chatrefresh.addEventListener(
   "click",
   (loadchat = (nameDialogg = nameDialog.textContent) => {
-    fetch("../app/controller/messages/fetch.php")
+    fetch("messages/get")
       .then(function (response) {
         return response.json();
       })
@@ -598,7 +596,7 @@ function creatMessageMenu(target) {
         td.addEventListener("click", () => {
           $.ajax({
             type: "get",
-            url: "../app/controller/messages/delete.php",
+            url: "messages/delete",
             data: { dataID: dataId },
             success: function () {
               deleteMessageBox(target);

@@ -1,5 +1,5 @@
 <?php
-require '../../db/init.php';
+require '../../../bootstrap/DB/init.php';
 
 class Message
 {

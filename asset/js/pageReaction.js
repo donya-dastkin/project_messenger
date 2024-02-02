@@ -206,7 +206,7 @@ const CreateContactBox = (object) => {
   chatlistMessage.classList.add("chatlist__message");
 
   if (object.profile === undefined) {
-    chatlistImg.src = "../../image/user.png";
+    chatlistImg.src = "../image/user.png";
   } else if (object.profile !== "") {
     chatlistImg.src = object.profile;
   }
@@ -300,7 +300,7 @@ const refreshChatlist = function () {
     ContactlistSection.innerHTML = "";
   }
 
-  fetch("../../../jsonFiles/Contacts.json")
+  fetch("../../jsonFiles/Contacts.json")
     .then(function (response) {
       return response.json();
     })
@@ -352,7 +352,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0", dataId)
   messagePhoto.setAttribute("class", "message__photo");
 
   let messageImg = document.createElement("img");
-  messageImg.src = "../../image/user.png";
+  messageImg.src = "../image/user.png";
   messageImg.setAttribute("class", "message__img");
 
   messagePhoto.appendChild(messageImg);
@@ -455,7 +455,7 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "../controller/messages/insert.php",
+      url: "../app/controller/messages/insert.php",
       data: values + "&activeChatlist=" + nameDialog.textContent,
       success: function () {
         if (dialogIcon.classList[0] === "dialog__send") {
@@ -554,7 +554,7 @@ const stopRecording = () => {
 chatrefresh.addEventListener(
   "click",
   (loadchat = (nameDialogg = nameDialog.textContent) => {
-    fetch("../controller/messages/fetch.php")
+    fetch("../app/controller/messages/fetch.php")
       .then(function (response) {
         return response.json();
       })
@@ -598,7 +598,7 @@ function creatMessageMenu(target) {
         td.addEventListener("click", () => {
           $.ajax({
             type: "get",
-            url: "../controller/messages/delete.php",
+            url: "../app/controller/messages/delete.php",
             data: { dataID: dataId },
             success: function () {
               deleteMessageBox(target);

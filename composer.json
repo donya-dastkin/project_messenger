@@ -1,0 +1,24 @@
+{
+    "name": "donya/project_messenge",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "project\\controller\\messages\\": "app/controller/messages/",
+            "project\\models\\messages\\": "app/models/messages/",
+            "project\\router\\": "app/router/",
+            "project\\bootstrap\\": "app/bootstrap/"
+
+        }
+    },
+    "authors": [
+        {
+            "name": "Donya Dastkin",
+            "email": "donya.dastkin583@gmail.com"
+        }
+    ],
+    "require": {
+        "gabordemooij/redbean": "^5.7"
+    }
+}

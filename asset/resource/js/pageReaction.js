@@ -1,14 +1,14 @@
 let wavesurfer;
-let mediaRecorder,
-  chunks = [],
-  audioURL = "";
+let mediaRecorder, chunks = [], audioURL = "";
 const footer = document.getElementById("footer");
 const chatlist = document.getElementById("chatlist");
 const emojiIcon = document.getElementById("emojiIcon");
-const timerVoice = document.getElementById("timerVoice");
 const dialogSection = document.getElementById("dialog");
+const timerVoice = document.getElementById("timerVoice");
+let nameDialog = document.getElementById("dialog__name");
 const rootElement = document.getElementById("emojiMain");
 const dialog = document.getElementById("dialog__message");
+const chatrefresh = document.getElementById("chatrefresh");
 const footerVoice = document.getElementById("footerVoice");
 const dialogIcon = document.getElementById("dialog__icon");
 const ContactlistSection = document.getElementById("Contacts");
@@ -157,54 +157,23 @@ const CreateContactBox = (object) => {
     let chatlistisActive = document.getElementsByClassName(
       "chatlist--is--active"
     );
-    let nameDialog = document.getElementById("dialog__name");
     nameDialog.textContent = chatlistName.textContent;
     dialogSection.setAttribute("style", "display:block;");
-
-    fetch("./jsonFiles/ChatList.json")
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (Contacts) {
-        for (let i = 0; i < Contacts.length; i++) {
-          if (Contacts[i].Name === nameDialog.textContent) {
-            let dialogBody = document.getElementById("dialogBody");
-            let subChannel = document.getElementsByClassName("dialog__status");
-            let channels = chatlistCard.getElementsByClassName(
-              "chatlist__name--channel"
-            );
-            let group = chatlistCard.getElementsByClassName(
-              "chatlist__name--channel"
-            );
-            if (group.length > 0) {
-              subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style = "display: none;";
-              footer.style = "display:flex;";
-            } else {
-              subChannel[0].classList.remove("dialog__header-right--channel");
-              footerChannels.style = "display: none;";
-              footer.style = "display:flex;";
-            }
-            if (channels.length > 0) {
-              subChannel[0].classList.add("dialog__header-right--channel");
-              footerChannels.style = "display: block;";
-              footer.style = "display: none;";
-            } else {
-              footerChannels.style = "display: none;";
-              footer.style = "display: flex;";
-              subChannel[0].classList.remove("dialog__header-right--channel");
-            }
-            dialogBody.innerHTML = "";
-            for (let j = 0; j < Contacts[i].chatlist.length; j++) {
-              sendMesseg(
-                Contacts[i].chatlist[j].text,
-                "text",
-                Contacts[i].chatlist[j].type
-              );
-            }
-          }
-        }
-      });
+    dialogBody.innerHTML = "";
+    // let subChannel = document.getElementsByClassName("dialog__status");
+    // let channels = chatlistCard.getElementsByClassName(
+    //   "chatlist__name--channel"
+    // );
+    // if (channels.length > 0) {
+    //   subChannel[0].classList.add("dialog__header-right--channel");
+    //   footerChannels.style = "display: block;";
+    //   footer.style = "display: none;";
+    // } else {
+    //   footerChannels.style = "display: none;";
+    //   // footer.style = "display: flex;";
+    //   subChannel[0].classList.remove("dialog__header-right--channel");
+    // }
+    loadchat();
 
     if (chatlistisActive.length >= 1) {
       chatlistisActive[0].classList.remove("chatlist--is--active");
@@ -237,7 +206,7 @@ const CreateContactBox = (object) => {
   chatlistMessage.classList.add("chatlist__message");
 
   if (object.profile === undefined) {
-    chatlistImg.src = "./asset/image/user.png";
+    chatlistImg.src = "../../image/user.png";
   } else if (object.profile !== "") {
     chatlistImg.src = object.profile;
   }
@@ -331,7 +300,7 @@ const refreshChatlist = function () {
     ContactlistSection.innerHTML = "";
   }
 
-  fetch("./jsonFiles/Contacts.json")
+  fetch("../../../jsonFiles/Contacts.json")
     .then(function (response) {
       return response.json();
     })
@@ -354,13 +323,11 @@ const IconChanger = function () {
 
 dialog.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    sendMesseg();
-    dialog.value = null;
+    $("#send_form").submit();
   }
 });
 
-const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
-
+const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0", dataId) => {
   let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
@@ -368,11 +335,13 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   if (sender === "1") {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
+
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
   } else if (sender === "0") {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
+
     messageCard.classList.add("message__card", "message__card--self");
     messageSelf.classList.add("message", "message__self");
   }
@@ -383,7 +352,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   messagePhoto.setAttribute("class", "message__photo");
 
   let messageImg = document.createElement("img");
-  messageImg.src = "./asset/image/user.png";
+  messageImg.src = "../../image/user.png";
   messageImg.setAttribute("class", "message__img");
 
   messagePhoto.appendChild(messageImg);
@@ -435,11 +404,17 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   } else if (type === "text") {
     let messageText = document.createElement("span");
     messageText.setAttribute("class", "message__text");
+    messageSelf.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
+    messageSelf.appendChild(messageCard);
+    messageCard.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      const sectionTools = creatMessageMenu(messageSelf);
+      messageCard.appendChild(sectionTools);
+    });
     dialog.value = null;
   }
-  messageSelf.appendChild(messageCard);
 };
 
 const EmojiIconActiv = () => {
@@ -478,17 +453,17 @@ $(document).ready(function () {
     var values = $(this).serialize();
     $.ajax({
       type: "get",
-      url: "asset/php/index.php",
-      data: values,
-      success: function (res) {
-        alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
+      url: "messages/set",
+      data: values + "&activeChatlist=" + nameDialog.textContent,
+      success: function () {
         if (dialogIcon.classList[0] === "dialog__send") {
           sendMesseg();
+          loadchat()
         } else if (dialogIcon.classList[0] === "dialog__voice") {
           record();
           // !
         }
-      },
+      }
     });
   });
 });
@@ -574,3 +549,94 @@ const stopRecording = () => {
     alert("دوباره ضبط کنید صدا ضبط نشده!!");
   }
 };
+
+chatrefresh.addEventListener(
+  "click",
+  (loadchat = (nameDialogg = nameDialog.textContent) => {
+    fetch("messages/get")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (Contacts) {
+        let lastMessage = 0;
+        if (lastMessage === 0) {
+          dialogBody.innerHTML = "";
+        }
+        for (let i = lastMessage; i < Contacts.data.length; i++) {
+          if (Contacts.data[i].chat_name == nameDialogg) {
+            if (Contacts.data[i].user_id == 404) {
+              sendMesseg(Contacts.data[i].text_message, "text", "0", Contacts.data[i].id);
+            } else if (Contacts.data[i].user_id != 404) {
+              sendMesseg(Contacts.data[i].text_message, "text", "1", Contacts.data[i].id);
+            }
+          }
+        }
+        lastMessage = Contacts.data.length;
+      });
+  })
+);
+
+function creatMessageMenu(target) {
+  let dataId = target.getAttribute("data-id")
+  const sectionTools = document.createElement("section");
+  sectionTools.classList.add("section-tools");
+  const closeBtn = document.createElement("button");
+  closeBtn.classList.add("close-btn");
+  sectionTools.appendChild(closeBtn);
+  closeBtn.addEventListener("click", () => {
+    sectionTools.style.display = "none";
+  });
+  const table = document.createElement("table");
+  for (let i = 0; i < 6; i++) {
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    switch (i) {
+      case 0:
+        td.id = "message__tools--delete";
+        td.textContent = "حذف";
+        td.addEventListener("click", () => {
+          $.ajax({
+            type: "get",
+            url: "messages/delete",
+            data: { dataID: dataId },
+            success: function () {
+              deleteMessageBox(target);
+            },
+          });
+          sectionTools.style.display = "none";
+        });
+        break;
+      case 1:
+        td.id = "message__tools--edit";
+        td.textContent = "ویرایش";
+        break;
+      case 2:
+        td.id = "message__tools--forward";
+        td.textContent = "هدایت";
+        break;
+      case 3:
+        td.id = "message__tools--response";
+        td.textContent = "پاسخ";
+        break;
+      case 4:
+        td.id = "message__tools--copy";
+        td.textContent = "کپی";
+        break;
+      case 5:
+        td.id = "message__tools--pin";
+        td.textContent = "سنجاق";
+        break;
+    }
+    tr.appendChild(td);
+    table.appendChild(tr);
+  }
+  sectionTools.appendChild(table);
+  return sectionTools;
+}
+
+function deleteMessageBox(target) {
+  let parent = target.parentNode;
+  parent.removeChild(target);
+  parent.removeChild(parent.children[0]);
+  loadchat()
+}

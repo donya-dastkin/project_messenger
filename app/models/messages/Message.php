@@ -1,6 +1,14 @@
 <?php
-require './asset/bootstrap/DB/init.php';
-class Message
+
+namespace project\models\messages;
+use project\bootstrap\init;
+
+$db = new init();
+$db->init();
+
+use \RedBeanPHP\R as R;
+
+class Message extends init
 {
     private static function sendTime()
     {

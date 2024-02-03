@@ -1,15 +1,13 @@
 <?php
-require './asset/app/models/messages/Message.php';
+namespace project\controller\messages;
+
+use project\models\messages\Message;
 
 class MessageController {
 
-    public function set(string $data, int $userId, string $chat_name){
-        
-        $messageText = $data['dialog__message'];
-        $chat_name = $data['activeChatlist'];
-        $messageText = strip_tags(trim($messageText));
-        
-        if (!empty($messageText)) {
+    public function set(string $data, string $chat_name){
+        $data = strip_tags(trim($data));
+        if (!empty($data)) {
             try {
                 Message::insertData($data,404,$chat_name);
                 header('Content-Type: application/json');
@@ -66,5 +64,5 @@ class MessageController {
     // }
     
 }
-R::close();
+
 ?>

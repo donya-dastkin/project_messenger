@@ -1,9 +1,9 @@
 <?php
-require './asset/app/controller/messages/MessageController.php';
+namespace project\router;
+use project\controller\messages\MessageController;
 
 class Router {
 
-    public $src=array();
     public $url_data;
     public $controller;
     public $method;
@@ -30,19 +30,21 @@ class Router {
         return $data;
     }
 
-    public function url_validation($controller,$method):array{
+    public function url_validation($controller,$method){
+        $is_data =false;
         $data=[];
         $controllers = ["messages","users"];
         $methods = ["set","update","delete","get"];
         if (in_array($controller, $controllers)) {
             if (in_array($method, $methods)) {
-                if($method!=="set"){
+                if($method!=="get"){
                     $data = $this->get_Data($this->url_data);
+                    $is_data=true;
                 }
             }
             switch ($controller) {
                 case 'messages':
-                    $this->controller = "MessageController";
+                    $this->controller =new MessageController;
                     break;
                 case 'users':
                     $this->controller = "users";
@@ -53,13 +55,33 @@ class Router {
             // echo $html_content;
             echo "test";
         }
-        return $data;
+        if($is_data){
+            return $data;
+        }
     }
 
+    public function input_Extraction($data,$instance,$method){
+        if($data!==null){
+            $data_Array = array(); 
+            foreach ($data as $value) {
+                $data_Array[] = $value; 
+            }
+            if(count($data_Array)==1){
+                $instance->$method($data);
+            }else if(count($data_Array)==2){
+                $instance->$method($data_Array[0],$data_Array[1]);
+            }
+        }else{
+            $instance->$method();
+        }
+
+
+    }
+    
     public function routing(){
         $data = $this->url_validation($this->controller,$this->method);
-        $instance = new $this->controller();
+        $instance = $this->controller;
         $method = $this->method;
-        $instance->$method($data);
+        $this->input_Extraction($data,$instance,$method);
     }
 }

@@ -458,6 +458,7 @@ $(document).ready(function () {
       success: function () {
         if (dialogIcon.classList[0] === "dialog__send") {
           sendMesseg();
+          loadchat()
         } else if (dialogIcon.classList[0] === "dialog__voice") {
           record();
           // !

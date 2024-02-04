@@ -11,9 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "project\\Controllers\\": "App/Controllers/",
-      "project\\Models\\": "App/Models/",
-      "project\\Router\\": "App/Router/"
+      "App\\": "App/"
     }
   },
   "require": {

@@ -1,6 +1,5 @@
 <?php
-namespace project\Models;
-require '/xampp/htdocs/project_messanger/vendor/autoload.php';
+namespace App\Models;
 use \RedBeanPHP\R as R;
 R::setup(
     'mysql:host=localhost;dbname=chat',
@@ -67,5 +66,9 @@ class Message extends \RedBeanPHP\SimpleModel {
             array_push($id, $msg['id']);
         }
         R::trashBatch('message', $id);
+    }
+    public  function __destruct()
+    {
+    R::close();
     }
 }

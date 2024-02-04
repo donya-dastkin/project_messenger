@@ -1,6 +1,6 @@
 <?php
-namespace project\Router;
-use project\Controllers\MessageController;
+namespace App\Router;
+use App\Controllers\MessageController;
 class Router
 {
     public $url;

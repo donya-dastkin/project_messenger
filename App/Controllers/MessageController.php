@@ -1,6 +1,6 @@
 <?php
-namespace project\Controllers;
-use project\Models\Message;
+namespace App\Controllers;
+use App\Models\Message;
 class MessageController
 {
     public function set($data)

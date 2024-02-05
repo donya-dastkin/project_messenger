@@ -3,7 +3,7 @@
         'name' => 'fateme/project_messanger',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0a5c58f69d07251a5535cfb626386de3ad0cabb6',
+        'reference' => '983b760609d36945a0a9d08f19449164f852e7ab',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'fateme/project_messanger' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0a5c58f69d07251a5535cfb626386de3ad0cabb6',
+            'reference' => '983b760609d36945a0a9d08f19449164f852e7ab',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -1,11 +1,6 @@
 <?php
-namespace App\Models;
+namespace app\Models;
 use \RedBeanPHP\R as R;
-R::setup(
-    'mysql:host=localhost;dbname=chat',
-    'root',
-    ''
-);
 trait CreateSendTime
 {
     public static function CreateTime()
@@ -20,7 +15,6 @@ class Message extends \RedBeanPHP\SimpleModel {
     use CreateSendTime;
     public static function insertData(string $data, int $userId, string $chat_name)
     {
-
         $currentTime = self::CreateTime();
         $messageTable = R::dispense('message');
         $messageTable->text_message = $data;

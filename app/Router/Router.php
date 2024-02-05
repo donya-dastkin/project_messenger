@@ -1,6 +1,6 @@
 <?php
-namespace App\Router;
-use App\Controllers\MessageController;
+namespace app\Router;
+use app\Controllers\MessageController;
 class Router
 {
     public $url;
@@ -10,6 +10,13 @@ class Router
     {
         $this->url = $url;
         $this->explodeUrl($url);
+    }
+    public function routing()
+    {
+        $data = $this->getDataFromRequest($this->url);
+        $instance = new MessageController;
+        $method=$this->method;
+        $instance->$method($data);
     }
     public  function explodeUrl($url)
     {
@@ -27,11 +34,5 @@ class Router
         }
         return $data;
     }
-    public function routing()
-    {
-        $data = $this->getDataFromRequest($this->url);
-        $instance = new MessageController;
-        $method=$this->method;
-        $instance->$method($data);
-    }
+
 }

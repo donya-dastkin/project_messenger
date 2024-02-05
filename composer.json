@@ -6,12 +6,12 @@
   "authors": [
     {
       "name": "Fateme Zaka",
-      "email": "email@example.com"
+      "email": "ftmzaka.pr02@gmail.com"
     }
   ],
   "autoload": {
     "psr-4": {
-      "App\\": "App/"
+      "app\\": "app/"
     }
   },
   "require": {

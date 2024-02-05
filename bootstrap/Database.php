@@ -1,9 +1,7 @@
 <?php
-namespace project\Bootstrap;
 use \RedBeanPHP\R as R;
-
-class Bootstrap extends \RedBeanPHP\SimpleModel{
-    public static function init(){
+class Database {
+    public static function connection(){
         // R::setup(
 //     'mysql:host=denali.liara.cloud;port=30653;dbname=nostalgic_dhawan',
 //     'root',

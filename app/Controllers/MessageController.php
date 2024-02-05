@@ -1,6 +1,6 @@
 <?php
-namespace App\Controllers;
-use App\Models\Message;
+namespace app\Controllers;
+use app\Models\Message;
 class MessageController
 {
     public function set($data)
@@ -17,7 +17,7 @@ class MessageController
                 echo json_encode([
                     'status' => 'success',
                 ]);
-            } catch (Exception $err) {
+            } catch (\Exception $err) {
                 header('Content-Type: application/json');
                 http_response_code(500);
                 error_log('insert.php => ' . $err->getMessage() . "\n", 3, "err.txt");
@@ -42,7 +42,7 @@ class MessageController
                     'message' => '',
                     'data' => $newMessage
                 ]);
-            } catch (Exception $err) {
+            } catch (\Exception $err) {
                 header('Content-Type: application/json');
                 http_response_code(500);
                 error_log('update.php => ' . $err->getMessage() . "\n", 3, "err.txt");
@@ -66,7 +66,7 @@ class MessageController
                             'status' => 'success',
                             'message' => 'deleted...',
                         ]);
-                    } catch (Exception $err) {
+                    } catch (\Exception $err) {
                         header('Content-Type: application/json');
                         http_response_code(500);
                         error_log($err->getMessage() . "\n", 3, "err.txt");
@@ -86,7 +86,7 @@ class MessageController
                             'status' => 'success',
                             'message' => 'deleted...',
                         ]);
-                    } catch (Exception $err) {
+                    } catch (\Exception $err) {
                         header('Content-Type: application/json');
                         http_response_code(500);
                         error_log($err->getMessage() . "\n", 3, "err.txt");
@@ -106,7 +106,7 @@ class MessageController
                             'status' => 'success',
                             'message' => 'deleted...',
                         ]);
-                    } catch (Exception $err) {
+                    } catch (\Exception $err) {
                         header('Content-Type: application/json');
                         http_response_code(500);
                         error_log('delete.php => ' . $err->getMessage() . "\n", 3, "err.txt");
@@ -129,7 +129,7 @@ class MessageController
                 'message' => '',
                 'data' => $messages
             ]);
-        } catch (Exception $err) {
+        } catch (\Exception $err) {
             header('Content-Type: application/json');
             http_response_code(500);
             error_log('fetch.php => ' . $err->getMessage() . "\n", 3, "err.txt");

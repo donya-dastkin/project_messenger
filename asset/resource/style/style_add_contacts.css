@@ -4,11 +4,12 @@
     font-family: 'fonticon', 'fonticon2', 'Arial';
 }
 
+
 .section-Contact {
     position: absolute;
     width: 280px;
-    height: 320px;
-    flex-direction: row;
+    height: 250px;
+    flex-direction: column;
     padding: 20px;
     border-radius: 20px;
     display: flex;
@@ -19,6 +20,8 @@
     top: 50px;
     left: 400px;
     border: #4a4e51 solid 1px;
+    font-family: 'shabnam';
+    color: white;
 }
 
 .section-Contact:hover {
@@ -116,6 +119,7 @@
     outline: 0;
     text-align: center;
     width: 98%;
+    font-family: 'shabnam';
 }
 
 .submit-add:active {
@@ -132,13 +136,81 @@
     font-size: 12px;
     outline: 0;
     text-align: center;
-    position: fixed;
-    top: 160px;
-    left: 510px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
     width: 25px;
     height: 25px;
 }
 
 .close-btn::before {
     content: '\e02d';
+}
+
+.section-tools {
+    color: #4a4e51;
+    position: absolute;
+    width: 100px;
+    height: 240px;
+    flex-direction: row;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: right;
+    box-sizing: border-box;
+    background: #1c1c24;
+    top: 50px;
+    right: 35px;
+    border: #4a4e51 solid 0.1px;
+    box-shadow: 0px 0px 10px 1px #4a4e51;
+    font-size: 13px;
+    z-index: 1;
+}
+
+.section-tools table tr td{
+    height: 35px;
+    width: 110px;
+    color: #eee;
+    border-bottom:1px solid #4a4e51;
+}
+
+#message__tools--delete::before{
+    content: '\f2ed';
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+#message__tools--edit::before{
+    content: '\f044';
+    /* content: '\f122';f */
+    /* content: '\f112';p */
+    /* content: '\f0ea';c */
+    /* content: '\f08d';pin */
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+#message__tools--forward::before{
+    content: '\f122';
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+#message__tools--response::before{
+    content: '\f112';
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+#message__tools--copy::before{
+    content: '\f0ea';
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+#message__tools--pin::before{
+    content: '\f08d';
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
 }

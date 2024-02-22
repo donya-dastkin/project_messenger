@@ -90,6 +90,7 @@
     color: #4a4e51;
     content: '\f021';
     cursor: pointer;
+    background-color: transparent;
 }
 
 .dialog__edit::before {
@@ -97,7 +98,11 @@
     color: #4a4e51;
     cursor: pointer;
 }
-
+.dialog__deleteChat::before {
+    content: '\f1f8';
+    color: #4a4e51;
+    cursor: pointer;
+}
 .dialog__footer {
     display: flex;
     align-items: center;
@@ -296,8 +301,16 @@
     word-wrap: break-word;
     word-break: break-word;
 }
+.message__sendTime{
+    font-size: 9px;
+    color: #ddd;
+    position: absolute;
+    top: 27px;
+    right: 9px;
+}
 
 .message__card--self {
+    position: relative;
     background: linear-gradient(45deg, #0f8ca6, #40a0e5);
     border-top-right-radius: 0px;
 }

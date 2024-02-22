@@ -15,6 +15,7 @@ const ContactlistSection = document.getElementById("Contacts");
 const footerChannels = document.getElementById("footerChannels");
 const dialogIconattach = document.getElementById("dialog__attach");
 const Contacts = chatlist.getElementsByClassName("chatlist__cadre");
+let activeChatlist;
 
 const ChatList = function () {
   let ClosedChatList = () => {
@@ -148,7 +149,6 @@ const foldersISactive = function (chatType) {
 //   footer.appendChild(dialogMessage);
 //   footer.appendChild(dialogTools);
 // };
-
 const CreateContactBox = (object) => {
   let chatlistCard = document.createElement("div");
   chatlistCard.classList.add("chatlist__cadre");
@@ -158,10 +158,11 @@ const CreateContactBox = (object) => {
       "chatlist--is--active"
     );
     let nameDialog = document.getElementById("dialog__name");
+    activeChatlist = chatlistName.textContent;
     nameDialog.textContent = chatlistName.textContent;
     dialogSection.setAttribute("style", "display:block;");
 
-    fetch("./jsonFiles/ChatList.json")
+    fetch("../../../jsonFiles/ChatList.json")
       .then(function (response) {
         return response.json();
       })
@@ -237,7 +238,7 @@ const CreateContactBox = (object) => {
   chatlistMessage.classList.add("chatlist__message");
 
   if (object.profile === undefined) {
-    chatlistImg.src = "./asset/image/user.png";
+    chatlistImg.src = "../../image/user.png";
   } else if (object.profile !== "") {
     chatlistImg.src = object.profile;
   }
@@ -331,7 +332,7 @@ const refreshChatlist = function () {
     ContactlistSection.innerHTML = "";
   }
 
-  fetch("./jsonFiles/Contacts.json")
+  fetch("../../../jsonFiles/Contacts.json")
     .then(function (response) {
       return response.json();
     })
@@ -352,27 +353,27 @@ const IconChanger = function () {
   }
 };
 
-dialog.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    sendMesseg();
-    dialog.value = null;
-  }
-});
-
-const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
-
+const sendMesseg = (
+  dialogg = dialog.value,
+  type = "text",
+  sender = 0,
+  dataId,
+  send_time
+) => {
   let dialogBody = document.getElementById("dialogBody");
   let messageSelf = document.createElement("div");
   let messageCard = document.createElement("div");
 
-  if (sender === "1") {
+  if (sender === 1) {
     messageCard.classList.remove("message__card", "message__card--self");
     messageSelf.classList.remove("message", "message__self");
+
     messageSelf.classList.add("message", "message__other");
     messageCard.classList.add("message__card", "message__card--other");
-  } else if (sender === "0") {
+  } else if (sender === 0) {
     messageSelf.classList.remove("message", "message__other");
     messageCard.classList.remove("message__card", "message__card--other");
+
     messageCard.classList.add("message__card", "message__card--self");
     messageSelf.classList.add("message", "message__self");
   }
@@ -383,7 +384,7 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
   messagePhoto.setAttribute("class", "message__photo");
 
   let messageImg = document.createElement("img");
-  messageImg.src = "./asset/image/user.png";
+  messageImg.src = "../../image/user.png";
   messageImg.setAttribute("class", "message__img");
 
   messagePhoto.appendChild(messageImg);
@@ -434,14 +435,23 @@ const sendMesseg = (dialogg = dialog.value, type = "text", sender = "0") => {
     messageCard.appendChild(messageVoice);
   } else if (type === "text") {
     let messageText = document.createElement("span");
+    let messageSendTime = document.createElement("span");
+    messageSendTime.textContent = send_time;
+    messageSendTime.setAttribute("class", "message__sendTime");
     messageText.setAttribute("class", "message__text");
+    messageSelf.setAttribute("data-id", dataId);
     messageText.textContent = dialogg;
     messageCard.appendChild(messageText);
+    messageCard.appendChild(messageSendTime);
+    messageSelf.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      const sectionTools = creatMessageMenu(messageSelf);
+      messageCard.appendChild(sectionTools);
+    });
     dialog.value = null;
   }
   messageSelf.appendChild(messageCard);
 };
-
 const EmojiIconActiv = () => {
   const { createPicker } = window.picmo;
 
@@ -470,27 +480,6 @@ const EmojiIconActiv = () => {
 
 dialog.addEventListener("mousedown", () => {
   rootElement.style = "display:none;";
-});
-
-$(document).ready(function () {
-  $("#send_form").submit(function (event) {
-    event.preventDefault();
-    var values = $(this).serialize();
-    $.ajax({
-      type: "get",
-      url: "asset/php/index.php",
-      data: values,
-      success: function (res) {
-        alert("Sending Was Successfull! \n" + "Your Message is :  " + res);
-        if (dialogIcon.classList[0] === "dialog__send") {
-          sendMesseg();
-        } else if (dialogIcon.classList[0] === "dialog__voice") {
-          record();
-          // !
-        }
-      },
-    });
-  });
 });
 
 function timer() {
@@ -553,7 +542,7 @@ const stopRecording = () => {
   mediaRecorder.stop();
   footerVoice.style = "display:none;";
   if (audioURL !== "") {
-    sendMesseg("", "voice", "0");
+    sendMesseg("", "voice", 0);
     const messageVoiceWaveF = document.querySelectorAll(
       ".dialog__message--play"
     );
@@ -574,3 +563,237 @@ const stopRecording = () => {
     alert("دوباره ضبط کنید صدا ضبط نشده!!");
   }
 };
+
+//! insert data into database
+
+$(document).ready(function () {
+  $("#send_form").submit(function (event) {
+    event.preventDefault();
+    var values = $(this).serialize();
+    $.ajax({
+      type: "get",
+      url: "Messages/set",
+      data: values + "&activeChatlist=" + activeChatlist,
+      success: function () {
+        dialog.value = null;
+      },
+    });
+  });
+});
+
+dialog.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    $("#send_form").submit();
+  }
+});
+
+//! delete data from database
+function createPopup(text, deleteType) {
+  let box = document.createElement("section");
+  box.id = "popup";
+  let submitBtn = document.createElement("button");
+  let closeBtn = document.createElement("button");
+  box.textContent = text;
+  closeBtn.classList.add("close-btn");
+  submitBtn.classList.add("submit-add");
+  submitBtn.textContent = "تایید";
+  closeBtn.addEventListener("click", () => {
+    dialogBody.removeChild(box);
+  });
+  if (deleteType == "single") {
+    let div = document.createElement("div");
+    let checkBox = document.createElement("input");
+    checkBox.id = "deletCheckbox";
+    let lbl = document.createElement("label");
+    lbl.style.fontFamily = "shabnam";
+    lbl.textContent = " حذف برای گیرنده";
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.setAttribute("checked", "checked");
+    div.style.marginTop = "35px";
+    div.appendChild(checkBox);
+    div.appendChild(lbl);
+    box.appendChild(div);
+  }
+  box.appendChild(submitBtn);
+  box.appendChild(closeBtn);
+  box.classList.add("section-Contact");
+  dialogBody.appendChild(box);
+  return submitBtn;
+}
+
+function deleteMessageBox(messageBox) {
+  let dataID = messageBox.getAttribute("data-id");
+  let deleteType;
+  let deletCheckbox = document.getElementById("deletCheckbox");
+  if (deletCheckbox.checked == true) {
+    deleteType = "single-real";
+  } else {
+    deleteType = "single-physical";
+  }
+  $.ajax({
+    type: "get",
+    url: "Messages/delete",
+    data: { dataID: dataID, deleteType: deleteType },
+    success: function () {
+      messageBox.remove();
+      $("#popup").remove();
+    },
+  });
+}
+
+$("#deleteChat").click(() => {
+  let submitBtn = createPopup(
+    "آیا نسبت به حذف تاریخچه مطمئن هستید؟",
+    "integrated"
+  );
+  function deleteChatHistory() {
+    $.ajax({
+      type: "get",
+      url: "Messages/delete",
+      dataType: "json",
+      data: { activeChatlist: activeChatlist, deleteType: "integrated" },
+      success: function (res) {
+        let messages = document.getElementsByClassName("message");
+        let len = messages.length - 1;
+        for (let i = len; i >= 0; i--) {
+          let smg = messages[i];
+          smg.remove();
+        }
+      },
+    });
+    $("#popup").remove();
+  }
+  submitBtn.addEventListener("click", deleteChatHistory);
+});
+
+//! update data from database
+
+function updateMessage(messageBox) {
+  let span = messageBox.children[1].children[0];
+  let dataID = messageBox.getAttribute("data-id");
+  dialog.value = span.textContent;
+  dialog.focus();
+  const sendBtn = document
+    .getElementById("dialog__icon")
+    .addEventListener("click", (e) => {
+      e.preventDefault();
+      let newMessage = dialog.value;
+      $.ajax({
+        type: "get",
+        url: "Messages/update",
+        data: { dataID: dataID, newMessage: newMessage },
+        success: function (res) {
+          span.textContent = res["data"];
+          dialog.value = null;
+        },
+      });
+    });
+}
+
+//! create message menu
+
+function creatMessageMenu(messageBox) {
+  let dataID = messageBox.getAttribute("data-id");
+  const sectionTools = document.createElement("section");
+  sectionTools.classList.add("section-tools");
+  const closeBtn = document.createElement("button");
+  closeBtn.classList.add("close-btn");
+  sectionTools.appendChild(closeBtn);
+  closeBtn.addEventListener("click", () => {
+    sectionTools.style.display = "none";
+  });
+  const table = document.createElement("table");
+  for (let i = 0; i < 6; i++) {
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    switch (i) {
+      case 0:
+        td.id = "message__tools--delete";
+        td.textContent = "حذف";
+        td.addEventListener("click", () => {
+          if (dataID) {
+            let submitBtn = createPopup("پیام حذف شود؟", "single");
+            submitBtn.addEventListener("click", () => {
+              deleteMessageBox(messageBox);
+            });
+          }
+          sectionTools.style.display = "none";
+        });
+        break;
+      case 1:
+        td.id = "message__tools--edit";
+        td.textContent = "ویرایش";
+        td.addEventListener("click", () => {
+          if (dataID) {
+            updateMessage(messageBox);
+          }
+          sectionTools.style.display = "none";
+        });
+        break;
+      case 2:
+        td.id = "message__tools--forward";
+        td.textContent = "هدایت";
+        break;
+      case 3:
+        td.id = "message__tools--response";
+        td.textContent = "پاسخ";
+        break;
+      case 4:
+        td.id = "message__tools--copy";
+        td.textContent = "کپی";
+        break;
+      case 5:
+        td.id = "message__tools--pin";
+        td.textContent = "سنجاق";
+        break;
+    }
+    tr.appendChild(td);
+    table.appendChild(tr);
+  }
+  sectionTools.appendChild(table);
+  return sectionTools;
+}
+
+//! fetch data from database
+
+let uploaded = 0;
+
+const uploadMessage = async () => {
+  await $.ajax({
+    type: "get",
+    url: "Messages/get",
+    dataType: "json",
+    data: { uploaded: uploaded },
+    success: function (data) {
+      data = data["data"];
+      for (let i = 0; i < data.length; i++) {
+        let { id, text_message, user_id, send_time, chat_name } = data[i];
+        function getTime(send_time) {
+          const date = new Date(send_time * 1000);
+          const time = [date.getHours(), date.getMinutes()];
+          return time.join(":");
+        }
+        if (chat_name == activeChatlist) {
+          if (user_id == 191) {
+            sendMesseg(text_message, "text", 0, id, getTime(send_time));
+          } else {
+            sendMesseg(text_message, "text", 1, id, getTime(send_time));
+          }
+        } else {
+          continue;
+        }
+      }
+      uploaded += data.length;
+    },
+  });
+};
+
+$("#dialog__refresh").click(() => {
+  uploadMessage();
+});
+
+$(document).ready(function () {
+  setInterval(() => {
+    uploadMessage();
+  }, 3000);
+});

@@ -1,0 +1,20 @@
+{
+  "name": "fateme/project_messanger",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fateme Zaka",
+      "email": "ftmzaka.pr02@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "app\\": "app/"
+    }
+  },
+  "require": {
+    "gabordemooij/redbean": "^5.7"
+  }
+}
